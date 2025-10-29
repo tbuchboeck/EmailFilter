@@ -69,40 +69,37 @@ jobs:
               per_page: 1
             });
 
-            const issueBody = `# Weekly Email Analysis Report
+            const runDate = new Date().toISOString().split('T')[0];
+            const howToSection = `<details>
+            <summary>📚 How to add new rules</summary>
 
-Run date: ${new Date().toISOString().split('T')[0]}
+            ### For legitimate senders:
+            1. Copy the suggested JSON rule from above
+            2. Add it to email_rules.json in the "rules" array
+            3. Commit and push changes
+            4. Run python3 sort_emails.py to apply
 
-${formattedResults}
+            ### For spam:
+            1. Add the domain to spam_rules.json under "blacklist_domains"
+            2. Commit and push changes
+            3. Run python3 sort_emails.py to apply
 
----
+            ### Using GitHub UI:
+            - Click "Edit file" on email_rules.json or spam_rules.json
+            - Make your changes
+            - Commit directly to main branch
+            - The changes will take effect on next email sort
 
-<details>
-<summary>📚 How to add new rules</summary>
+            </details>`;
 
-### For legitimate senders:
-1. Copy the suggested JSON rule from above
-2. Add it to \`email_rules.json\` in the \`"rules"\` array
-3. Commit and push changes
-4. Run \`python3 sort_emails.py\` to apply
-
-### For spam:
-1. Add the domain to \`spam_rules.json\` under \`"blacklist_domains"\`
-2. Commit and push changes
-3. Run \`python3 sort_emails.py\` to apply
-
-### Using GitHub UI:
-- Click "Edit file" on \`email_rules.json\` or \`spam_rules.json\`
-- Make your changes
-- Commit directly to main branch
-- The changes will take effect on next email sort
-
-</details>
-
----
-
-**Next analysis:** Next Sunday at 9:00 AM UTC
-**Manual trigger:** Go to Actions → Weekly Email Analysis → Run workflow`;
+            const issueBody = '# Weekly Email Analysis Report\n\n' +
+              'Run date: ' + runDate + '\n\n' +
+              formattedResults + '\n\n' +
+              '---\n\n' +
+              howToSection + '\n\n' +
+              '---\n\n' +
+              '**Next analysis:** Next Sunday at 9:00 AM UTC\n' +
+              '**Manual trigger:** Go to Actions → Weekly Email Analysis → Run workflow';
 
             if (issues.data.length > 0 && unfilteredCount > 0) {
               // Update existing issue if there are unfiltered emails
