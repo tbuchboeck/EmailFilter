@@ -42,3 +42,6 @@ env/
 # OS
 .DS_Store
 Thumbs.db
+
+# GitHub Actions (muss manuell hinzugefügt werden)
+.github/
