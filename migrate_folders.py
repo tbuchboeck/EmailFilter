@@ -40,17 +40,14 @@ FOLDER_MIGRATIONS = {
 
 print(f"🔒 Verbinde zu {imap_server}...")
 
-try:
-    with IMAPClient(imap_server, ssl=True) as client:
-        client.login(email_user, email_pass)
-        print("✅ Erfolgreich eingeloggt\n")
+total_moved = 0
 
-        total_moved = 0
-
-        for source, target in FOLDER_MIGRATIONS.items():
+for source, target in FOLDER_MIGRATIONS.items():
+    try:
+        # Create new connection for each folder to avoid disconnection issues
+        with IMAPClient(imap_server, ssl=True) as client:
+            client.login(email_user, email_pass)
             print(f"\n📂 Migriere: {source} → {target}")
-
-            try:
                 # Check if source folder exists
                 client.select_folder(source)
                 messages = client.search(['ALL'])
@@ -85,21 +82,14 @@ try:
                 total_moved += len(messages)
                 print(f"   ✅ {len(messages)} E-Mails verschoben")
 
-                # Delete empty source folder
-                try:
-                    client.delete_folder(source)
-                    print(f"   🗑️  Leerer Quellordner gelöscht")
-                except Exception as e:
-                    print(f"   ⚠️  Konnte Quellordner nicht löschen: {e}")
+            # Don't delete source folders - let them be cleaned up manually
+            # Deleting folders can cause IMAP disconnections
 
-            except Exception as e:
-                print(f"   ⚠️  Übersprungen: {e}")
+    except Exception as e:
+        print(f"   ⚠️  Übersprungen: {e}")
 
-        print(f"\n" + "="*60)
-        print(f"✅ Migration abgeschlossen!")
-        print(f"📊 Gesamt verschoben: {total_moved} E-Mails")
-        print("="*60)
-
-except Exception as e:
-    print(f"❌ Fehler: {e}")
-    sys.exit(1)
+print(f"\n" + "="*60)
+print(f"✅ Migration abgeschlossen!")
+print(f"📊 Gesamt verschoben: {total_moved} E-Mails")
+print(f"💡 Hinweis: Leere Quellordner können Sie manuell löschen")
+print("="*60)
