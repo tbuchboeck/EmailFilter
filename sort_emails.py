@@ -196,11 +196,19 @@ def is_spam(email_msg, email_data, spam_rules, whitelist):
     if domain and domain in whitelist:
         return False, None
 
+    # 2. Spam-Rules Whitelist mit Domain-Matching (inkl. Subdomains)
     for pattern in spam_rules.get('whitelist_domains', []):
-        if pattern.lower() in from_address.lower() or pattern.lower() == domain:
+        pattern = pattern.lower()
+        if not domain:
+            continue
+        # Exakte Domain-Match: paypal.com == paypal.com
+        if pattern == domain:
+            return False, None
+        # Subdomain-Match: email.paypal.com ends with .paypal.com
+        if domain.endswith('.' + pattern):
             return False, None
 
-    # 2. SpamAssassin Header-Check
+    # 3. SpamAssassin Header-Check
     if spam_rules.get('check_spamassassin_headers', True):
         is_spam_sa, reason = check_spamassassin_headers(
             email_msg,
@@ -209,7 +217,7 @@ def is_spam(email_msg, email_data, spam_rules, whitelist):
         if is_spam_sa:
             return True, reason
 
-    # 3. Blacklist Domains
+    # 4. Blacklist Domains
     for blacklist_domain in spam_rules.get('blacklist_domains', []):
         if blacklist_domain.startswith('*.'):
             # Wildcard Domain (z.B. *.ru)
@@ -219,13 +227,13 @@ def is_spam(email_msg, email_data, spam_rules, whitelist):
         elif blacklist_domain.lower() in domain:
             return True, f"Blacklisted domain: {blacklist_domain}"
 
-    # 4. Blacklist Keywords im Betreff
+    # 5. Blacklist Keywords im Betreff
     subject_upper = subject.upper()
     for keyword in spam_rules.get('blacklist_keywords_subject', []):
         if keyword.upper() in subject_upper:
             return True, f"Spam keyword in subject: {keyword}"
 
-    # 5. Verdächtige Betreff-Patterns
+    # 6. Verdächtige Betreff-Patterns
     for pattern in spam_rules.get('suspicious_subject_patterns', []):
         try:
             if re.search(pattern, subject):
@@ -233,7 +241,7 @@ def is_spam(email_msg, email_data, spam_rules, whitelist):
         except re.error:
             logger.warning(f"Invalid regex pattern: {pattern}")
 
-    # 6. Verdächtige From-Patterns
+    # 7. Verdächtige From-Patterns
     for pattern in spam_rules.get('suspicious_from_patterns', []):
         try:
             if re.search(pattern, from_address):
@@ -241,7 +249,7 @@ def is_spam(email_msg, email_data, spam_rules, whitelist):
         except re.error:
             logger.warning(f"Invalid regex pattern: {pattern}")
 
-    # 7. Fehlende wichtige Header
+    # 8. Fehlende wichtige Header
     for required_header in spam_rules.get('required_headers_missing', []):
         if not email_msg.get(required_header):
             return True, f"Missing required header: {required_header}"
