@@ -261,10 +261,16 @@ def create_folder_if_not_exists(client, folder_name):
     """Erstellt einen IMAP-Ordner, falls er nicht existiert"""
     try:
         folders = client.list_folders()
-        folder_exists = any(folder_name.encode() in folder[2] or folder_name in str(folder[2])
-                          for folder in folders)
 
-        if not folder_exists:
+        # Extract folder names and decode bytes to strings for comparison
+        existing_folders = set()
+        for folder_info in folders:
+            name = folder_info[2]
+            if isinstance(name, bytes):
+                name = name.decode('utf-8', errors='ignore')
+            existing_folders.add(name)
+
+        if folder_name not in existing_folders:
             logger.info(f"Creating folder: {folder_name}")
             client.create_folder(folder_name)
 
