@@ -101,54 +101,46 @@ jobs:
               '**Next analysis:** Next Sunday at 9:00 AM UTC\n' +
               '**Manual trigger:** Go to Actions → Weekly Email Analysis → Run workflow';
 
-            if (issues.data.length > 0 && unfilteredCount > 0) {
-              // Update existing issue if there are unfiltered emails
+            // Always create or update an issue (for weekly status reports)
+            if (issues.data.length > 0) {
+              // Update existing issue
               await github.rest.issues.update({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 issue_number: issues.data[0].number,
                 title: issueTitle,
-                body: issueBody
+                body: issueBody,
+                labels: unfilteredCount > 0 ? ['email-analysis', 'needs-review'] : ['email-analysis'],
+                state: 'open'
               });
 
-              // Add a comment
+              // Add a status comment
+              const statusEmoji = unfilteredCount > 0 ? '📧' : '✅';
+              const statusMsg = unfilteredCount > 0
+                ? `Found ${unfilteredCount} unfiltered email(s). See updated report above.`
+                : 'All emails are filtered! Inbox is clean. 🎉';
+
               await github.rest.issues.createComment({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 issue_number: issues.data[0].number,
-                body: `🔄 **Updated:** ${new Date().toISOString().split('T')[0]}\n\nFound ${unfilteredCount} unfiltered email(s). See updated report above.`
+                body: `${statusEmoji} **Weekly Update:** ${runDate}\n\n${statusMsg}`
               });
 
-              core.info(`Updated existing issue #${issues.data[0].number}`);
-            } else if (unfilteredCount > 0) {
-              // Create new issue if unfiltered emails found
+              core.info(`Updated issue #${issues.data[0].number} - ${unfilteredCount} unfiltered email(s)`);
+            } else {
+              // Create new issue (always, even if inbox is clean)
+              const labels = unfilteredCount > 0
+                ? ['email-analysis', 'needs-review']
+                : ['email-analysis'];
+
               const issue = await github.rest.issues.create({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 title: issueTitle,
                 body: issueBody,
-                labels: ['email-analysis', 'needs-review']
+                labels: labels
               });
 
-              core.info(`Created new issue #${issue.data.number}`);
-            } else if (issues.data.length > 0) {
-              // Close existing issue if all emails are filtered
-              await github.rest.issues.update({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: issues.data[0].number,
-                state: 'closed',
-                state_reason: 'completed'
-              });
-
-              await github.rest.issues.createComment({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: issues.data[0].number,
-                body: `✅ **All emails filtered!**\n\nNo unfiltered emails found in this week's analysis. Closing this issue.`
-              });
-
-              core.info(`Closed issue #${issues.data[0].number} - all emails filtered`);
-            } else {
-              core.info('No unfiltered emails and no open issues - nothing to do!');
+              core.info(`Created new issue #${issue.data.number} - ${unfilteredCount} unfiltered email(s)`);
             }

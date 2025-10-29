@@ -54,7 +54,7 @@ Results will appear as a GitHub Issue within ~2-3 minutes.
 
 ## 📋 Using the Analysis Results
 
-When the workflow finds unfiltered emails, it creates an issue like this:
+The workflow **always creates an issue** with your weekly status. Here's what it looks like:
 
 ```
 📧 Weekly Email Analysis - 5 unfiltered emails
@@ -121,10 +121,18 @@ If a domain looks suspicious (weird name, scam keywords):
 
 ## 🔔 What Happens to Issues?
 
-- **New unfiltered emails found** → Creates new issue with label `email-analysis`
-- **More unfiltered emails** → Updates existing open issue with new data
-- **All emails filtered** → Closes the issue automatically with success message
-- **No unfiltered emails** → No issue created (inbox is clean!)
+**You'll get a weekly status report every time the workflow runs!**
+
+- **First run** → Creates new issue with weekly status
+- **Unfiltered emails found** → Updates issue + adds `needs-review` label + posts comment
+- **All emails filtered** → Updates issue with "✅ All clear" message + removes `needs-review` label
+- **Every week** → Posts a new comment with current status
+
+**Benefits:**
+- ✅ Always know your email system is working
+- ✅ Get weekly confirmation even when inbox is clean
+- ✅ Historical tracking of your email filtering health
+- ✅ Never wonder "is the automation still running?"
 
 ## ⚙️ Customizing the Schedule
 
