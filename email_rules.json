@@ -1350,6 +1350,36 @@
           "no-reply@mail.yelp.com"
         ]
       }
+    },
+    {
+      "name": "Newsletter » Yahoo Fantasy",
+      "folder": "Newsletter/Yahoo_Fantasy",
+      "conditions": {
+        "from_contains": [
+          "newsletters.yahoo.net",
+          "get-to-the-points@newsletters.yahoo.net"
+        ]
+      }
+    },
+    {
+      "name": "Newsletter » CodeGym",
+      "folder": "Newsletter/CodeGym",
+      "conditions": {
+        "from_contains": [
+          "codegym.cc",
+          "support@codegym.cc"
+        ]
+      }
+    },
+    {
+      "name": "Shopping » SchuhSki",
+      "folder": "Shopping/SchuhSki",
+      "conditions": {
+        "from_contains": [
+          "schuhski.at",
+          "info@schuhski.at"
+        ]
+      }
     }
   ]
 }

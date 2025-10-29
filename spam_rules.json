@@ -7,9 +7,16 @@
   "blacklist_domains": [
     "*.ru",
     "*.cn",
+    "*.xyz",
+    "*.top",
+    "*.club",
+    "*.pw",
     "freemail.hu",
     "tempmail.com",
-    "guerrillamail.com"
+    "guerrillamail.com",
+    "throwaway.email",
+    "mailinator.com",
+    "10minutemail.com"
   ],
 
   "blacklist_keywords_subject": [
@@ -34,7 +41,29 @@
     "Kredit ohne Schufa",
     "Sie haben gewonnen",
     "Sofortkredit",
-    "Millionär werden"
+    "Millionär werden",
+    "Abnehmen",
+    "Gratis",
+    "Kostenlos",
+    "Geschenk für Sie",
+    "Exklusives Angebot",
+    "Nur heute",
+    "Jetzt bestellen",
+    "Letzte Chance",
+    "Dringend",
+    "Eilig",
+    "Wichtig",
+    "Unbedingt lesen",
+    "Millionen verdienen",
+    "Passives Einkommen",
+    "Reich werden",
+    "Schulden loswerden",
+    "Kredit sofort",
+    "Online Casino",
+    "Bitcoin Gewinn",
+    "Trading Bot",
+    "Geld zurück",
+    "100% Garantie"
   ],
 
   "suspicious_subject_patterns": [
@@ -51,7 +80,11 @@
     "^[0-9]+@",
     "^no-?reply[0-9]+@",
     "^admin[0-9]+@",
-    "^support[0-9]+@"
+    "^support[0-9]+@",
+    "^newsletter[0-9]+@",
+    "^promo[0-9]+@",
+    "^marketing[0-9]+@",
+    "^[a-z]{1,3}[0-9]{5,}@"
   ],
 
   "required_headers_missing": [
