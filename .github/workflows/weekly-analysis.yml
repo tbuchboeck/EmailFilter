@@ -1,0 +1,157 @@
+name: Weekly Email Analysis
+
+on:
+  schedule:
+    # Run every Sunday at 9:00 AM UTC
+    - cron: '0 9 * * 0'
+  workflow_dispatch:  # Allow manual trigger
+
+permissions:
+  issues: write
+  contents: read
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run email analysis
+        env:
+          IMAP_SERVER: ${{ secrets.IMAP_SERVER }}
+          EMAIL_USER: ${{ secrets.EMAIL_USER }}
+          EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
+        run: |
+          python3 analyze_inbox.py > analysis_output.txt 2>&1 || true
+
+      - name: Parse and format results
+        id: parse
+        run: |
+          python3 .github/scripts/format_analysis.py analysis_output.txt > formatted_results.md
+
+          # Check if there are unfiltered emails
+          UNFILTERED_COUNT=$(grep -o "Ungefiltert:.*E-Mails" analysis_output.txt | grep -o "[0-9]*" | head -1 || echo "0")
+          echo "unfiltered_count=$UNFILTERED_COUNT" >> $GITHUB_OUTPUT
+
+          # Set issue title
+          if [ "$UNFILTERED_COUNT" -eq "0" ]; then
+            echo "issue_title=✅ Weekly Email Analysis - All emails filtered!" >> $GITHUB_OUTPUT
+          else
+            echo "issue_title=📧 Weekly Email Analysis - $UNFILTERED_COUNT unfiltered emails" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create or update issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const formattedResults = fs.readFileSync('formatted_results.md', 'utf8');
+            const issueTitle = '${{ steps.parse.outputs.issue_title }}';
+            const unfilteredCount = parseInt('${{ steps.parse.outputs.unfiltered_count }}');
+
+            // Search for existing open issue
+            const issues = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: ['email-analysis'],
+              per_page: 1
+            });
+
+            const issueBody = `# Weekly Email Analysis Report
+
+Run date: ${new Date().toISOString().split('T')[0]}
+
+${formattedResults}
+
+---
+
+<details>
+<summary>📚 How to add new rules</summary>
+
+### For legitimate senders:
+1. Copy the suggested JSON rule from above
+2. Add it to \`email_rules.json\` in the \`"rules"\` array
+3. Commit and push changes
+4. Run \`python3 sort_emails.py\` to apply
+
+### For spam:
+1. Add the domain to \`spam_rules.json\` under \`"blacklist_domains"\`
+2. Commit and push changes
+3. Run \`python3 sort_emails.py\` to apply
+
+### Using GitHub UI:
+- Click "Edit file" on \`email_rules.json\` or \`spam_rules.json\`
+- Make your changes
+- Commit directly to main branch
+- The changes will take effect on next email sort
+
+</details>
+
+---
+
+**Next analysis:** Next Sunday at 9:00 AM UTC
+**Manual trigger:** Go to Actions → Weekly Email Analysis → Run workflow`;
+
+            if (issues.data.length > 0 && unfilteredCount > 0) {
+              // Update existing issue if there are unfiltered emails
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issues.data[0].number,
+                title: issueTitle,
+                body: issueBody
+              });
+
+              // Add a comment
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issues.data[0].number,
+                body: `🔄 **Updated:** ${new Date().toISOString().split('T')[0]}\n\nFound ${unfilteredCount} unfiltered email(s). See updated report above.`
+              });
+
+              core.info(`Updated existing issue #${issues.data[0].number}`);
+            } else if (unfilteredCount > 0) {
+              // Create new issue if unfiltered emails found
+              const issue = await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: issueTitle,
+                body: issueBody,
+                labels: ['email-analysis', 'needs-review']
+              });
+
+              core.info(`Created new issue #${issue.data.number}`);
+            } else if (issues.data.length > 0) {
+              // Close existing issue if all emails are filtered
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issues.data[0].number,
+                state: 'closed',
+                state_reason: 'completed'
+              });
+
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issues.data[0].number,
+                body: `✅ **All emails filtered!**\n\nNo unfiltered emails found in this week's analysis. Closing this issue.`
+              });
+
+              core.info(`Closed issue #${issues.data[0].number} - all emails filtered`);
+            } else {
+              core.info('No unfiltered emails and no open issues - nothing to do!');
+            }
