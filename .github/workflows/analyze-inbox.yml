@@ -1,24 +1,11 @@
-name: Email Sorter
+name: Analyze Inbox
 
 on:
-  # Zeitgesteuerte Ausführung - alle 30 Minuten
-  schedule:
-    - cron: '*/30 * * * *'
-
-  # Manuelles Auslösen über GitHub UI
+  # Nur manuelles Auslösen
   workflow_dispatch:
-    inputs:
-      dry_run:
-        description: 'Dry run (no actual moving of emails)'
-        required: false
-        default: 'false'
-        type: choice
-        options:
-          - 'true'
-          - 'false'
 
 jobs:
-  sort-emails:
+  analyze:
     runs-on: ubuntu-latest
 
     steps:
@@ -36,19 +23,18 @@ jobs:
           pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run email sorter
+      - name: Run inbox analysis
         env:
           IMAP_SERVER: ${{ secrets.IMAP_SERVER }}
           EMAIL_USER: ${{ secrets.EMAIL_USER }}
           EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
-          DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
-        run: python sort_emails.py
+        run: python analyze_inbox.py
 
-      - name: Upload logs (on failure)
-        if: failure()
+      - name: Upload analysis results
+        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: email-sorter-logs
+          name: inbox-analysis
           path: |
             *.log
           retention-days: 7
