@@ -6,10 +6,13 @@ Ein automatisches Email-Sortier-System, das über GitHub Actions läuft und Emai
 
 - Läuft automatisch alle 30 Minuten auf GitHub Actions (kostenlos!)
 - Sortiert Emails basierend auf konfigurierbaren Regeln
+- **Intelligente Spam-Erkennung** (Hybrid: SpamAssassin + Regelbasiert)
 - Unterstützt Filterung nach Absender und Betreff
+- **Erhält gelesen/ungelesen-Status** der Emails
 - Keine lokale Installation notwendig
 - Sichere Speicherung von Credentials über GitHub Secrets
 - Dry-Run Modus zum Testen
+- Automatische Whitelist für False-Positive-Vermeidung
 
 ## Setup
 
@@ -202,6 +205,26 @@ def check_rule_match(email_data, rule):
     return from_match and subject_match
 ```
 
+## Spam-Erkennung
+
+Das System enthält eine **intelligente Hybrid Spam-Erkennung**:
+
+- SpamAssassin Header-Analyse (wenn vorhanden)
+- Regelbasierte Erkennung (Blacklists, Keywords, Patterns)
+- Automatische Whitelist für bekannte Absender
+- Konfigurierbar über `spam_rules.json`
+
+**Siehe [SPAM_DETECTION.md](SPAM_DETECTION.md) für Details!**
+
+### Spam-Erkennung aktivieren/deaktivieren:
+
+```json
+{
+  "enabled": true,
+  "spam_folder": "Junk"
+}
+```
+
 ## Lizenz
 
 MIT License - Frei verwendbar!
@@ -223,14 +246,18 @@ Bei Problemen:
 2025-10-29 10:30:17 - INFO - Email matches rule 'Newsletter': From: newsletter@example.com, Subject: Weekly Update -> Moving to Newsletter
 2025-10-29 10:30:18 - INFO - Email matches rule 'Shopping': From: amazon.com, Subject: Your order has shipped -> Moving to Shopping
 ...
+2025-10-29 10:30:17 - INFO - SPAM DETECTED: From: scammer@spam.ru, Subject: YOU WON $$$, Reason: Blacklisted domain: spam.ru -> Moving to Junk
+...
 2025-10-29 10:30:25 - INFO - ==================================================
 2025-10-29 10:30:25 - INFO - Email Sorting Statistics:
 2025-10-29 10:30:25 - INFO -   Processed: 42
 2025-10-29 10:30:25 - INFO -   Moved: 15
+2025-10-29 10:30:25 - INFO -   Spam detected: 3
 2025-10-29 10:30:25 - INFO -   Errors: 0
 2025-10-29 10:30:25 - INFO -   By folder:
 2025-10-29 10:30:25 - INFO -     Newsletter: 8
 2025-10-29 10:30:25 - INFO -     Shopping: 4
+2025-10-29 10:30:25 - INFO -     Junk: 3
 2025-10-29 10:30:25 - INFO -     Social: 3
 2025-10-29 10:30:25 - INFO - ==================================================
 ```

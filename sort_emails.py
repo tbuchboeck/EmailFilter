@@ -7,10 +7,12 @@ Sortiert Emails basierend auf definierten Regeln in entsprechende Ordner
 import os
 import json
 import logging
+import re
 from datetime import datetime
 from imapclient import IMAPClient
 from email import message_from_bytes
 from email.header import decode_header
+from email.utils import parseaddr
 
 # Logging konfigurieren
 logging.basicConfig(
@@ -94,6 +96,138 @@ def check_rule_match(email_data, rule):
     return False
 
 
+def load_spam_rules(spam_rules_file='spam_rules.json'):
+    """Lädt Spam-Erkennungs-Regeln aus JSON-Datei"""
+    if not os.path.exists(spam_rules_file):
+        logger.warning(f"Spam rules file {spam_rules_file} not found. Spam detection disabled.")
+        return {"enabled": False}
+
+    with open(spam_rules_file, 'r', encoding='utf-8') as f:
+        return json.load(f)
+
+
+def build_whitelist_from_rules(rules_config):
+    """Erstellt Whitelist aus email_rules.json um False Positives zu vermeiden"""
+    whitelist = set()
+
+    for rule in rules_config.get('rules', []):
+        conditions = rule.get('conditions', {})
+        from_contains = conditions.get('from_contains', [])
+
+        for email_pattern in from_contains:
+            # Extrahiere Domain aus Email-Adressen oder verwende Pattern direkt
+            if '@' in email_pattern:
+                domain = email_pattern.split('@')[-1]
+                whitelist.add(domain.lower())
+            else:
+                whitelist.add(email_pattern.lower())
+
+    return whitelist
+
+
+def extract_email_domain(from_address):
+    """Extrahiert Domain aus Email-Adresse"""
+    if not from_address:
+        return ""
+
+    # Parse Email-Adresse
+    _, email = parseaddr(from_address)
+    if '@' in email:
+        return email.split('@')[-1].lower()
+    return ""
+
+
+def check_spamassassin_headers(email_msg, threshold=5.0):
+    """Prüft SpamAssassin Headers falls vorhanden"""
+    # X-Spam-Flag: YES/NO
+    spam_flag = email_msg.get('X-Spam-Flag', '').upper()
+    if spam_flag == 'YES':
+        return True, "SpamAssassin Flag: YES"
+
+    # X-Spam-Score
+    spam_score = email_msg.get('X-Spam-Score', '')
+    if spam_score:
+        try:
+            score = float(spam_score)
+            if score >= threshold:
+                return True, f"SpamAssassin Score: {score} >= {threshold}"
+        except ValueError:
+            pass
+
+    return False, None
+
+
+def is_spam(email_msg, email_data, spam_rules, whitelist):
+    """
+    Hauptfunktion zur Spam-Erkennung
+
+    Returns:
+        (is_spam, reason) - Tuple mit Boolean und Grund
+    """
+    if not spam_rules.get('enabled', False):
+        return False, None
+
+    from_address = email_data.get('from', '')
+    subject = email_data.get('subject', '')
+    domain = extract_email_domain(from_address)
+
+    # 1. Whitelist-Check: Bekannte Absender sind NIEMALS Spam
+    if domain and domain in whitelist:
+        return False, None
+
+    for pattern in spam_rules.get('whitelist_domains', []):
+        if pattern.lower() in from_address.lower() or pattern.lower() == domain:
+            return False, None
+
+    # 2. SpamAssassin Header-Check
+    if spam_rules.get('check_spamassassin_headers', True):
+        is_spam_sa, reason = check_spamassassin_headers(
+            email_msg,
+            spam_rules.get('spam_score_threshold', 5.0)
+        )
+        if is_spam_sa:
+            return True, reason
+
+    # 3. Blacklist Domains
+    for blacklist_domain in spam_rules.get('blacklist_domains', []):
+        if blacklist_domain.startswith('*.'):
+            # Wildcard Domain (z.B. *.ru)
+            tld = blacklist_domain[2:]
+            if domain.endswith(tld):
+                return True, f"Blacklisted domain: {domain}"
+        elif blacklist_domain.lower() in domain:
+            return True, f"Blacklisted domain: {blacklist_domain}"
+
+    # 4. Blacklist Keywords im Betreff
+    subject_upper = subject.upper()
+    for keyword in spam_rules.get('blacklist_keywords_subject', []):
+        if keyword.upper() in subject_upper:
+            return True, f"Spam keyword in subject: {keyword}"
+
+    # 5. Verdächtige Betreff-Patterns
+    for pattern in spam_rules.get('suspicious_subject_patterns', []):
+        try:
+            if re.search(pattern, subject):
+                return True, f"Suspicious subject pattern: {pattern}"
+        except re.error:
+            logger.warning(f"Invalid regex pattern: {pattern}")
+
+    # 6. Verdächtige From-Patterns
+    for pattern in spam_rules.get('suspicious_from_patterns', []):
+        try:
+            if re.search(pattern, from_address):
+                return True, f"Suspicious from pattern: {pattern}"
+        except re.error:
+            logger.warning(f"Invalid regex pattern: {pattern}")
+
+    # 7. Fehlende wichtige Header
+    for required_header in spam_rules.get('required_headers_missing', []):
+        if not email_msg.get(required_header):
+            return True, f"Missing required header: {required_header}"
+
+    return False, None
+
+
 def create_folder_if_not_exists(client, folder_name):
     """Erstellt einen IMAP-Ordner, falls er nicht existiert"""
     try:
@@ -124,9 +258,23 @@ def sort_emails(imap_server, email_user, email_pass, rules_config, dry_run=False
         rules_config: Dictionary mit Sortier-Regeln
         dry_run: Wenn True, werden keine Emails verschoben (nur Simulation)
     """
+    # Spam-Regeln laden
+    spam_rules = load_spam_rules()
+    spam_enabled = spam_rules.get('enabled', False)
+
+    # Whitelist aus email_rules.json erstellen
+    whitelist = build_whitelist_from_rules(rules_config)
+    logger.info(f"Built whitelist with {len(whitelist)} entries")
+
+    if spam_enabled:
+        logger.info("Spam detection enabled")
+    else:
+        logger.info("Spam detection disabled")
+
     stats = {
         'processed': 0,
         'moved': 0,
+        'spam_detected': 0,
         'errors': 0,
         'by_folder': {}
     }
@@ -179,7 +327,38 @@ def sort_emails(imap_server, email_user, email_pass, rules_config, dry_run=False
                         'date': email_msg.get('Date', '')
                     }
 
-                    # Regeln durchgehen
+                    # SPAM-CHECK ZUERST! (vor normalen Regeln)
+                    if spam_enabled:
+                        spam_detected, spam_reason = is_spam(email_msg, email_data, spam_rules, whitelist)
+
+                        if spam_detected:
+                            spam_folder = spam_rules.get('spam_folder', 'Junk')
+                            logger.info(
+                                f"SPAM DETECTED: "
+                                f"From: {email_data['from'][:50]}, "
+                                f"Subject: {email_data['subject'][:50]}, "
+                                f"Reason: {spam_reason} "
+                                f"-> Moving to {spam_folder}"
+                            )
+
+                            if not dry_run:
+                                create_folder_if_not_exists(client, spam_folder)
+                                client.copy([msg_id], spam_folder)
+                                client.delete_messages([msg_id])
+                                client.expunge()
+
+                                stats['spam_detected'] += 1
+                                stats['moved'] += 1
+                                stats['by_folder'][spam_folder] = stats['by_folder'].get(spam_folder, 0) + 1
+                            else:
+                                logger.info(f"[DRY RUN] Would move spam to {spam_folder}")
+                                stats['spam_detected'] += 1
+                                stats['moved'] += 1
+                                stats['by_folder'][spam_folder] = stats['by_folder'].get(spam_folder, 0) + 1
+
+                            continue  # Nächste Email
+
+                    # Normale Regeln durchgehen (nur wenn nicht als Spam erkannt)
                     matched_rule = None
                     for rule in rules_config.get('rules', []):
                         if check_rule_match(email_data, rule):
@@ -254,6 +433,7 @@ def main():
         logger.info("Email Sorting Statistics:")
         logger.info(f"  Processed: {stats['processed']}")
         logger.info(f"  Moved: {stats['moved']}")
+        logger.info(f"  Spam detected: {stats['spam_detected']}")
         logger.info(f"  Errors: {stats['errors']}")
         logger.info("  By folder:")
         for folder, count in stats['by_folder'].items():

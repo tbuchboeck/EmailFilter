@@ -1,0 +1,72 @@
+{
+  "enabled": true,
+  "spam_folder": "Junk",
+  "spam_score_threshold": 5.0,
+  "check_spamassassin_headers": true,
+
+  "blacklist_domains": [
+    "*.ru",
+    "*.cn",
+    "freemail.hu",
+    "tempmail.com",
+    "guerrillamail.com"
+  ],
+
+  "blacklist_keywords_subject": [
+    "GEWINN",
+    "VIAGRA",
+    "CIALIS",
+    "LOTTERY",
+    "PRINCE",
+    "INHERITANCE",
+    "CLAIM YOUR",
+    "YOU'VE WON",
+    "CONGRATULATIONS",
+    "ACT NOW",
+    "LIMITED TIME",
+    "CLICK HERE NOW",
+    "FREE MONEY",
+    "MAKE MONEY FAST",
+    "WORK FROM HOME",
+    "LOSE WEIGHT",
+    "CREDIT REPAIR",
+    "DEBT CONSOLIDATION",
+    "Kredit ohne Schufa",
+    "Sie haben gewonnen",
+    "Sofortkredit",
+    "Millionär werden"
+  ],
+
+  "suspicious_subject_patterns": [
+    "^[A-ZÄÖÜ\\s!?]+$",
+    "!!!+",
+    "\\$\\$\\$+",
+    "FREE!!+",
+    ">>>+",
+    "RE:.*RE:.*RE:",
+    "FW:.*FW:.*FW:"
+  ],
+
+  "suspicious_from_patterns": [
+    "^[0-9]+@",
+    "^no-?reply[0-9]+@",
+    "^admin[0-9]+@",
+    "^support[0-9]+@"
+  ],
+
+  "required_headers_missing": [
+    "Message-ID",
+    "Date"
+  ],
+
+  "whitelist_domains": [
+    "amazon.com",
+    "amazon.de",
+    "paypal.com",
+    "paypal.at",
+    "google.com",
+    "microsoft.com",
+    "apple.com",
+    "github.com"
+  ]
+}
