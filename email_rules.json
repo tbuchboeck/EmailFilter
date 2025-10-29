@@ -2,7 +2,7 @@
   "rules": [
     {
       "name": "Games",
-      "folder": "Games",
+      "folder": "INBOX/Games",
       "conditions": {
         "from_contains": [
           "newsletter@levelup-salzburg.at",
@@ -17,7 +17,7 @@
     },
     {
       "name": "Shopping » Amazon",
-      "folder": "Shopping/Amazon",
+      "folder": "INBOX/Shopping/Amazon",
       "conditions": {
         "from_contains": [
           "amazon.de",
@@ -28,7 +28,7 @@
     },
     {
       "name": "Shopping » Ebay",
-      "folder": "Shopping/Ebay",
+      "folder": "INBOX/Shopping/Ebay",
       "conditions": {
         "from_contains": [
           "ebay.com",
@@ -39,7 +39,7 @@
     },
     {
       "name": "Shopping » CampingWagner",
-      "folder": "Shopping/CampingWagner",
+      "folder": "INBOX/Shopping/CampingWagner",
       "conditions": {
         "from_contains": [
           "news@email.campingwagner.de"
@@ -48,7 +48,7 @@
     },
     {
       "name": "Shopping » Dygma",
-      "folder": "Shopping/Dygma",
+      "folder": "INBOX/Shopping/Dygma",
       "conditions": {
         "from_contains": [
           "contact@dygma.com"
@@ -57,7 +57,7 @@
     },
     {
       "name": "Shopping » Eventim",
-      "folder": "Shopping/Eventim",
+      "folder": "INBOX/Shopping/Eventim",
       "conditions": {
         "from_contains": [
           "info@eventim.pl"
@@ -66,7 +66,7 @@
     },
     {
       "name": "Shopping » GEA",
-      "folder": "Shopping/GEA",
+      "folder": "INBOX/Shopping/GEA",
       "conditions": {
         "from_contains": [
           "gea@gea.at"
@@ -75,7 +75,7 @@
     },
     {
       "name": "Shopping » WirKaufenDeinAuto",
-      "folder": "Shopping/WirKaufenDeinAuto",
+      "folder": "INBOX/Shopping/WirKaufenDeinAuto",
       "conditions": {
         "from_contains": [
           "n@info.wirkaufendeinauto.at",
@@ -86,7 +86,7 @@
     },
     {
       "name": "Shopping » Etsy",
-      "folder": "Shopping/Etsy",
+      "folder": "INBOX/Shopping/Etsy",
       "conditions": {
         "from_contains": [
           "transaction@etsy.com"
@@ -95,7 +95,7 @@
     },
     {
       "name": "Shopping » MediaMarkt",
-      "folder": "Shopping/MediaMarkt",
+      "folder": "INBOX/Shopping/MediaMarkt",
       "conditions": {
         "from_contains": [
           "noreply@gls-group.eu"
@@ -104,7 +104,7 @@
     },
     {
       "name": "Shopping » Shop-Apotheke",
-      "folder": "Shopping/Shop-Apotheke",
+      "folder": "INBOX/Shopping/Shop-Apotheke",
       "conditions": {
         "from_contains": [
           "noreply@shop-apotheke.at",
@@ -117,7 +117,7 @@
     },
     {
       "name": "Shopping » Koro",
-      "folder": "Shopping/Koro",
+      "folder": "INBOX/Shopping/Koro",
       "conditions": {
         "from_contains": [
           "noreply@korodrogerie.de",
@@ -127,7 +127,7 @@
     },
     {
       "name": "Shopping » Dynafit",
-      "folder": "Shopping/Dynafit",
+      "folder": "INBOX/Shopping/Dynafit",
       "conditions": {
         "from_contains": [
           "e-commerce@dynafit.com",
@@ -137,7 +137,7 @@
     },
     {
       "name": "Shopping » UPS",
-      "folder": "Shopping/UPS",
+      "folder": "INBOX/Shopping/UPS",
       "conditions": {
         "from_contains": [
           "pkginfo@ups.com"
@@ -146,7 +146,7 @@
     },
     {
       "name": "Shopping » GoreWear",
-      "folder": "Shopping/GoreWear",
+      "folder": "INBOX/Shopping/GoreWear",
       "conditions": {
         "from_contains": [
           "gorewear@email.gorewear.com"
@@ -155,7 +155,7 @@
     },
     {
       "name": "Shopping » Löffler",
-      "folder": "Shopping/Löffler",
+      "folder": "INBOX/Shopping/Löffler",
       "conditions": {
         "from_contains": [
           "onlineshop@loeffler.at",
@@ -165,7 +165,7 @@
     },
     {
       "name": "Shopping » Garmin",
-      "folder": "Shopping/Garmin",
+      "folder": "INBOX/Shopping/Garmin",
       "conditions": {
         "from_contains": [
           "garmin@inside.garmin.com"
@@ -174,7 +174,7 @@
     },
     {
       "name": "Shopping » Oceanpharma",
-      "folder": "Shopping/Oceanpharma",
+      "folder": "INBOX/Shopping/Oceanpharma",
       "conditions": {
         "from_contains": [
           "shop@ocean-pharma.de"
@@ -183,7 +183,7 @@
     },
     {
       "name": "Shopping » Ikea",
-      "folder": "Shopping/Ikea",
+      "folder": "INBOX/Shopping/Ikea",
       "conditions": {
         "from_contains": [
           "do-not-reply@ikea.com"
@@ -192,7 +192,7 @@
     },
     {
       "name": "Shopping » 5-Elemente",
-      "folder": "Shopping/5-Elemente",
+      "folder": "INBOX/Shopping/5-Elemente",
       "conditions": {
         "from_contains": [
           "info@5elemente-versand.de"
@@ -201,7 +201,7 @@
     },
     {
       "name": "Shopping » funko-pop",
-      "folder": "Shopping/funko-pop",
+      "folder": "INBOX/Shopping/funko-pop",
       "conditions": {
         "from_contains": [
           "donotreply@funko.com",
@@ -214,7 +214,7 @@
     },
     {
       "name": "Shopping » Gammon",
-      "folder": "Shopping/Gammon",
+      "folder": "INBOX/Shopping/Gammon",
       "conditions": {
         "from_contains": [
           "info@gammon.de"
@@ -223,7 +223,7 @@
     },
     {
       "name": "Shopping » Qwertee",
-      "folder": "Shopping/Qwertee",
+      "folder": "INBOX/Shopping/Qwertee",
       "conditions": {
         "from_contains": [
           "help@qwertee.com",
@@ -234,7 +234,7 @@
     },
     {
       "name": "Shopping » 220Grad",
-      "folder": "Shopping/220Grad",
+      "folder": "INBOX/Shopping/220Grad",
       "conditions": {
         "from_contains": [
           "office@220grad.com"
@@ -243,7 +243,7 @@
     },
     {
       "name": "Shopping » Zauner",
-      "folder": "Shopping/Zauner",
+      "folder": "INBOX/Shopping/Zauner",
       "conditions": {
         "from_contains": [
           "info@zauner.at"
@@ -252,7 +252,7 @@
     },
     {
       "name": "Shopping » RedBull",
-      "folder": "Shopping/RedBull",
+      "folder": "INBOX/Shopping/RedBull",
       "conditions": {
         "from_contains": [
           "order@racing-eyewear.com",
@@ -262,7 +262,7 @@
     },
     {
       "name": "Shopping » TB-QuickFilters",
-      "folder": "Shopping/TB-QuickFilters",
+      "folder": "INBOX/Shopping/TB-QuickFilters",
       "conditions": {
         "from_contains": [
           "mailer@fastspring.com"
@@ -271,7 +271,7 @@
     },
     {
       "name": "Shopping » Rewe",
-      "folder": "Shopping/Rewe",
+      "folder": "INBOX/Shopping/Rewe",
       "conditions": {
         "from_contains": [
           "newsletter@merkur.co.at",
@@ -281,7 +281,7 @@
     },
     {
       "name": "Shopping » Jooooo",
-      "folder": "Shopping/Jooooo",
+      "folder": "INBOX/Shopping/Jooooo",
       "conditions": {
         "from_contains": [
           "newsletter@reply.joe-club.at",
@@ -291,7 +291,7 @@
     },
     {
       "name": "Shopping » Flexi",
-      "folder": "Shopping/Flexi",
+      "folder": "INBOX/Shopping/Flexi",
       "conditions": {
         "from_contains": [
           "shop@flexi.de"
@@ -300,7 +300,7 @@
     },
     {
       "name": "Shopping » Bergzeit",
-      "folder": "Shopping/Bergzeit",
+      "folder": "INBOX/Shopping/Bergzeit",
       "conditions": {
         "from_contains": [
           "no-reply@bergzeit.de",
@@ -311,7 +311,7 @@
     },
     {
       "name": "Shopping » Audible",
-      "folder": "Shopping/Audible",
+      "folder": "INBOX/Shopping/Audible",
       "conditions": {
         "from_contains": [
           "info@audible.de",
@@ -321,7 +321,7 @@
     },
     {
       "name": "Shopping » Zooplus",
-      "folder": "Shopping/Zooplus",
+      "folder": "INBOX/Shopping/Zooplus",
       "conditions": {
         "from_contains": [
           "service@zooplus.de",
@@ -335,7 +335,7 @@
     },
     {
       "name": "Shopping » Zoologo",
-      "folder": "Shopping/Zoologo",
+      "folder": "INBOX/Shopping/Zoologo",
       "conditions": {
         "from_contains": [
           "info@zoologo.de",
@@ -345,7 +345,7 @@
     },
     {
       "name": "Shopping » Saturn",
-      "folder": "Shopping/Saturn",
+      "folder": "INBOX/Shopping/Saturn",
       "conditions": {
         "from_contains": [
           "bestellung@saturn.at",
@@ -355,7 +355,7 @@
     },
     {
       "name": "Shopping » Pralinen",
-      "folder": "Shopping/Pralinen",
+      "folder": "INBOX/Shopping/Pralinen",
       "conditions": {
         "from_contains": [
           "info@pralinenwerkzeug.de"
@@ -364,7 +364,7 @@
     },
     {
       "name": "Shopping » DHL",
-      "folder": "Shopping/DHL",
+      "folder": "INBOX/Shopping/DHL",
       "conditions": {
         "from_contains": [
           "noreply@dhl.de",
@@ -374,7 +374,7 @@
     },
     {
       "name": "Shopping » Messen",
-      "folder": "Shopping/Messen",
+      "folder": "INBOX/Shopping/Messen",
       "conditions": {
         "from_contains": [
           "info@messe-wels.com"
@@ -383,7 +383,7 @@
     },
     {
       "name": "Shopping » Westbahn",
-      "folder": "Shopping/Westbahn",
+      "folder": "INBOX/Shopping/Westbahn",
       "conditions": {
         "from_contains": [
           "newsletter@news.westbahn.at",
@@ -393,7 +393,7 @@
     },
     {
       "name": "Shopping » LogoIX",
-      "folder": "Shopping/LogoIX",
+      "folder": "INBOX/Shopping/LogoIX",
       "conditions": {
         "from_contains": [
           "office@logoix.com"
@@ -402,7 +402,7 @@
     },
     {
       "name": "Shopping » Nespresso",
-      "folder": "Shopping/Nespresso",
+      "folder": "INBOX/Shopping/Nespresso",
       "conditions": {
         "from_contains": [
           "nespresso@emailing.nespresso.com",
@@ -412,7 +412,7 @@
     },
     {
       "name": "Shopping » Swarovski",
-      "folder": "Shopping/Swarovski",
+      "folder": "INBOX/Shopping/Swarovski",
       "conditions": {
         "from_contains": [
           "send@newsletter.swarovski-newsletter.com"
@@ -421,7 +421,7 @@
     },
     {
       "name": "Shopping » Shpock",
-      "folder": "Shopping/Shpock",
+      "folder": "INBOX/Shopping/Shpock",
       "conditions": {
         "from_contains": [
           "no-reply@shpock.com"
@@ -430,7 +430,7 @@
     },
     {
       "name": "Shopping » Zalando",
-      "folder": "Shopping/Zalando",
+      "folder": "INBOX/Shopping/Zalando",
       "conditions": {
         "from_contains": [
           "zalando.at",
@@ -440,7 +440,7 @@
     },
     {
       "name": "Streaming",
-      "folder": "Streaming",
+      "folder": "INBOX/Streaming",
       "conditions": {
         "from_contains": [
           "newsletter@reply.canalplus.at",
@@ -450,7 +450,7 @@
     },
     {
       "name": "Streaming » DisneyPlus",
-      "folder": "Streaming/DisneyPlus",
+      "folder": "INBOX/Streaming/DisneyPlus",
       "conditions": {
         "from_contains": [
           "disneyplus@mail.disneyplus.com",
@@ -460,7 +460,7 @@
     },
     {
       "name": "Streaming » Netflix",
-      "folder": "Streaming/Netflix",
+      "folder": "INBOX/Streaming/Netflix",
       "conditions": {
         "from_contains": [
           "netflix.com"
@@ -469,7 +469,7 @@
     },
     {
       "name": "Streaming » Dazn",
-      "folder": "Streaming/Dazn",
+      "folder": "INBOX/Streaming/Dazn",
       "conditions": {
         "from_contains": [
           "dazn.com"
@@ -478,7 +478,7 @@
     },
     {
       "name": "Contracts » Oeamtc",
-      "folder": "Contracts/Oeamtc",
+      "folder": "INBOX/Contracts/Oeamtc",
       "conditions": {
         "from_contains": [
           "clubmail@donotreply.oeamtc.at",
@@ -488,7 +488,7 @@
     },
     {
       "name": "Contracts » Verbund",
-      "folder": "Contracts/Verbund",
+      "folder": "INBOX/Contracts/Verbund",
       "conditions": {
         "from_contains": [
           "noreply@verbund.at",
@@ -500,7 +500,7 @@
     },
     {
       "name": "Contracts » HoT",
-      "folder": "Contracts/HoT",
+      "folder": "INBOX/Contracts/HoT",
       "conditions": {
         "from_contains": [
           "noreply@hot.at",
@@ -510,7 +510,7 @@
     },
     {
       "name": "Contracts » DM",
-      "folder": "Contracts/DM",
+      "folder": "INBOX/Contracts/DM",
       "conditions": {
         "from_contains": [
           "info@shop.dm.at"
@@ -519,7 +519,7 @@
     },
     {
       "name": "Contracts » ORF",
-      "folder": "Contracts/ORF",
+      "folder": "INBOX/Contracts/ORF",
       "conditions": {
         "from_contains": [
           "kundenportal@orf.at"
@@ -528,7 +528,7 @@
     },
     {
       "name": "Contracts » Billa",
-      "folder": "Contracts/Billa",
+      "folder": "INBOX/Contracts/Billa",
       "conditions": {
         "from_contains": [
           "noreply.service@joe-club.at",
@@ -538,7 +538,7 @@
     },
     {
       "name": "Contracts » Uniqa",
-      "folder": "Contracts/Uniqa",
+      "folder": "INBOX/Contracts/Uniqa",
       "conditions": {
         "from_contains": [
           "automailer@uniqa.at",
@@ -549,7 +549,7 @@
     },
     {
       "name": "Contracts » Sky",
-      "folder": "Contracts/Sky",
+      "folder": "INBOX/Contracts/Sky",
       "conditions": {
         "from_contains": [
           "skyx@news.sky.at"
@@ -558,7 +558,7 @@
     },
     {
       "name": "Contracts » TVNow",
-      "folder": "Contracts/TVNow",
+      "folder": "INBOX/Contracts/TVNow",
       "conditions": {
         "from_contains": [
           "support@tvnow.de",
@@ -568,7 +568,7 @@
     },
     {
       "name": "Contracts » Wahlkarten",
-      "folder": "Contracts/Wahlkarten",
+      "folder": "INBOX/Contracts/Wahlkarten",
       "conditions": {
         "from_contains": [
           "service@wahlkartenantrag.at",
@@ -578,7 +578,7 @@
     },
     {
       "name": "Contracts » MacriumCloneTool",
-      "folder": "Contracts/MacriumCloneTool",
+      "folder": "INBOX/Contracts/MacriumCloneTool",
       "conditions": {
         "from_contains": [
           "no-reply@cleverbridge.com",
@@ -589,7 +589,7 @@
     },
     {
       "name": "Contracts » RaiBa",
-      "folder": "Contracts/RaiBa",
+      "folder": "INBOX/Contracts/RaiBa",
       "conditions": {
         "from_contains": [
           "mailbox@raiffeisen.at",
@@ -599,7 +599,7 @@
     },
     {
       "name": "Contracts » FinanzOnline",
-      "folder": "Contracts/FinanzOnline",
+      "folder": "INBOX/Contracts/FinanzOnline",
       "conditions": {
         "from_contains": [
           "finanzonline@bmf.gv.at"
@@ -608,7 +608,7 @@
     },
     {
       "name": "Contracts » A1",
-      "folder": "Contracts/A1",
+      "folder": "INBOX/Contracts/A1",
       "conditions": {
         "from_contains": [
           "noreply@a1.net",
@@ -626,7 +626,7 @@
     },
     {
       "name": "Contracts » Asfinag",
-      "folder": "Contracts/Asfinag",
+      "folder": "INBOX/Contracts/Asfinag",
       "conditions": {
         "from_contains": [
           "shop@asfinag.at",
@@ -636,7 +636,7 @@
     },
     {
       "name": "Contracts » DREI",
-      "folder": "Contracts/DREI",
+      "folder": "INBOX/Contracts/DREI",
       "conditions": {
         "from_contains": [
           "no-reply@drei.at",
@@ -649,7 +649,7 @@
     },
     {
       "name": "Contracts » EasyName",
-      "folder": "Contracts/EasyName",
+      "folder": "INBOX/Contracts/EasyName",
       "conditions": {
         "from_contains": [
           "support@easyname.com",
@@ -661,7 +661,7 @@
     },
     {
       "name": "Contracts » PayPal",
-      "folder": "Contracts/PayPal",
+      "folder": "INBOX/Contracts/PayPal",
       "conditions": {
         "from_contains": [
           "service@paypal.at",
@@ -672,7 +672,7 @@
     },
     {
       "name": "Contracts » Kreditkarte",
-      "folder": "Contracts/Kreditkarte",
+      "folder": "INBOX/Contracts/Kreditkarte",
       "conditions": {
         "from_contains": [
           "noreply_meine_abrechnung@paylife.at",
@@ -682,7 +682,7 @@
     },
     {
       "name": "Contracts",
-      "folder": "Contracts",
+      "folder": "INBOX/Contracts",
       "conditions": {
         "from_contains": [
           "owl.support@beonex.com"
@@ -691,7 +691,7 @@
     },
     {
       "name": "Finanzen » Parqet",
-      "folder": "Finanzen/Parqet",
+      "folder": "INBOX/Finanzen/Parqet",
       "conditions": {
         "from_contains": [
           "team@parqet.com"
@@ -700,7 +700,7 @@
     },
     {
       "name": "Finanzen » Etrade",
-      "folder": "Finanzen/Etrade",
+      "folder": "INBOX/Finanzen/Etrade",
       "conditions": {
         "from_contains": [
           "etrade_stmt_mbox@statement.etradefinancial.com",
@@ -712,7 +712,7 @@
     },
     {
       "name": "Finanzen » Flatex",
-      "folder": "Finanzen/Flatex",
+      "folder": "INBOX/Finanzen/Flatex",
       "conditions": {
         "from_contains": [
           "info@flatex.at"
@@ -721,7 +721,7 @@
     },
     {
       "name": "Finanzen » Kursinfos",
-      "folder": "Finanzen/Kursinfos",
+      "folder": "INBOX/Finanzen/Kursinfos",
       "conditions": {
         "from_contains": [
           "quotemail@teletrader.com",
@@ -731,7 +731,7 @@
     },
     {
       "name": "Sport » Runme",
-      "folder": "Sport/Runme",
+      "folder": "INBOX/Sport/Runme",
       "conditions": {
         "from_contains": [
           "mail@runmenetwork.com"
@@ -740,7 +740,7 @@
     },
     {
       "name": "Sport » Strava",
-      "folder": "Sport/Strava",
+      "folder": "INBOX/Sport/Strava",
       "conditions": {
         "from_contains": [
           "no-reply@strava.com",
@@ -750,7 +750,7 @@
     },
     {
       "name": "Sport » Loser",
-      "folder": "Sport/Loser",
+      "folder": "INBOX/Sport/Loser",
       "conditions": {
         "from_contains": [
           "marketing@loser.at"
@@ -759,7 +759,7 @@
     },
     {
       "name": "Sport » Suunto",
-      "folder": "Sport/Suunto",
+      "folder": "INBOX/Sport/Suunto",
       "conditions": {
         "from_contains": [
           "noreply@email.suunto.com",
@@ -770,7 +770,7 @@
     },
     {
       "name": "Sport » Komoot",
-      "folder": "Sport/Komoot",
+      "folder": "INBOX/Sport/Komoot",
       "conditions": {
         "from_contains": [
           "komoot.de"
@@ -779,7 +779,7 @@
     },
     {
       "name": "Sport » Fitbit",
-      "folder": "Sport/Fitbit",
+      "folder": "INBOX/Sport/Fitbit",
       "conditions": {
         "from_contains": [
           "fitbit.com"
@@ -788,7 +788,7 @@
     },
     {
       "name": "Sport » GoPro",
-      "folder": "Sport/GoPro",
+      "folder": "INBOX/Sport/GoPro",
       "conditions": {
         "from_contains": [
           "GoPro@newsletter.gopro.com",
@@ -799,7 +799,7 @@
     },
     {
       "name": "Sport",
-      "folder": "Sport",
+      "folder": "INBOX/Sport",
       "conditions": {
         "from_contains": [
           "info@postalm.ski"
@@ -808,7 +808,7 @@
     },
     {
       "name": "0Buchi » Arzt",
-      "folder": "0Buchi/Arzt",
+      "folder": "INBOX/0Buchi/Arzt",
       "conditions": {
         "from_contains": [
           "ordination@lungenarzt-maurer.at"
@@ -817,7 +817,7 @@
     },
     {
       "name": "0Buchi » corona",
-      "folder": "0Buchi/corona",
+      "folder": "INBOX/0Buchi/corona",
       "conditions": {
         "from_contains": [
           "service@lead-horizon.org"
@@ -826,7 +826,7 @@
     },
     {
       "name": "0Buchi » GMAIL",
-      "folder": "0Buchi/GMAIL",
+      "folder": "INBOX/0Buchi/GMAIL",
       "conditions": {
         "from_contains": [
           "roadrunneronroute66@googlemail.com"
@@ -835,7 +835,7 @@
     },
     {
       "name": "0Buchi",
-      "folder": "0Buchi",
+      "folder": "INBOX/0Buchi",
       "conditions": {
         "from_contains": [
           "info@pati-versand.de",
@@ -848,7 +848,7 @@
     },
     {
       "name": "Beer » Maisel",
-      "folder": "Beer/Maisel",
+      "folder": "INBOX/Beer/Maisel",
       "conditions": {
         "from_contains": [
           "auth@maisel.com",
@@ -859,7 +859,7 @@
     },
     {
       "name": "Beer » Flaschenfreund",
-      "folder": "Beer/Flaschenfreund",
+      "folder": "INBOX/Beer/Flaschenfreund",
       "conditions": {
         "from_contains": [
           "lunas@flaschenfreund.de"
@@ -868,7 +868,7 @@
     },
     {
       "name": "Beer » Beertasting",
-      "folder": "Beer/Beertasting",
+      "folder": "INBOX/Beer/Beertasting",
       "conditions": {
         "from_contains": [
           "info@beertasting.club",
@@ -880,7 +880,7 @@
     },
     {
       "name": "Beer » Beerlovers",
-      "folder": "Beer/Beerlovers",
+      "folder": "INBOX/Beer/Beerlovers",
       "conditions": {
         "from_contains": [
           "office@beerlovers.at",
@@ -891,7 +891,7 @@
     },
     {
       "name": "News_SocialMedia » ServusTV",
-      "folder": "News_SocialMedia/ServusTV",
+      "folder": "INBOX/News_SocialMedia/ServusTV",
       "conditions": {
         "from_contains": [
           "no-reply@servustv.com"
@@ -900,7 +900,7 @@
     },
     {
       "name": "News_SocialMedia » StackOverflow",
-      "folder": "News_SocialMedia/StackOverflow",
+      "folder": "INBOX/News_SocialMedia/StackOverflow",
       "conditions": {
         "from_contains": [
           "do-not-reply@stackoverflow.email"
@@ -909,7 +909,7 @@
     },
     {
       "name": "News_SocialMedia » Twitter",
-      "folder": "News_SocialMedia/Twitter",
+      "folder": "INBOX/News_SocialMedia/Twitter",
       "conditions": {
         "from_contains": [
           "twitter.com"
@@ -918,7 +918,7 @@
     },
     {
       "name": "News_SocialMedia » Facebook",
-      "folder": "News_SocialMedia/Facebook",
+      "folder": "INBOX/News_SocialMedia/Facebook",
       "conditions": {
         "from_contains": [
           "@facebookmail.com",
@@ -928,7 +928,7 @@
     },
     {
       "name": "News_SocialMedia » Instagram",
-      "folder": "News_SocialMedia/Instagram",
+      "folder": "INBOX/News_SocialMedia/Instagram",
       "conditions": {
         "from_contains": [
           "@mail.instagram.com"
@@ -937,7 +937,7 @@
     },
     {
       "name": "News_SocialMedia » derStandard",
-      "folder": "News_SocialMedia/derStandard",
+      "folder": "INBOX/News_SocialMedia/derStandard",
       "conditions": {
         "from_contains": [
           "noreply@communitymail.derstandard.at"
@@ -946,7 +946,7 @@
     },
     {
       "name": "News_SocialMedia » Pinterest",
-      "folder": "News_SocialMedia/Pinterest",
+      "folder": "INBOX/News_SocialMedia/Pinterest",
       "conditions": {
         "from_contains": [
           "pinterest.com",
@@ -956,7 +956,7 @@
     },
     {
       "name": "News_SocialMedia » Willhaben",
-      "folder": "News_SocialMedia/Willhaben",
+      "folder": "INBOX/News_SocialMedia/Willhaben",
       "conditions": {
         "from_contains": [
           "willhaben.at"
@@ -965,7 +965,7 @@
     },
     {
       "name": "Companies » 1Password",
-      "folder": "Companies/1Password",
+      "folder": "INBOX/Companies/1Password",
       "conditions": {
         "from_contains": [
           "info@email.1password.com",
@@ -976,7 +976,7 @@
     },
     {
       "name": "Companies » Mozilla",
-      "folder": "Companies/Mozilla",
+      "folder": "INBOX/Companies/Mozilla",
       "conditions": {
         "from_contains": [
           "accounts@firefox.com"
@@ -985,7 +985,7 @@
     },
     {
       "name": "Companies » BMW",
-      "folder": "Companies/BMW",
+      "folder": "INBOX/Companies/BMW",
       "conditions": {
         "from_contains": [
           "noreply@qemailserver.com"
@@ -994,7 +994,7 @@
     },
     {
       "name": "Companies » Garmin",
-      "folder": "Companies/Garmin",
+      "folder": "INBOX/Companies/Garmin",
       "conditions": {
         "from_contains": [
           "garmin@mails.garmin.com"
@@ -1003,7 +1003,7 @@
     },
     {
       "name": "Companies » Hashicorp",
-      "folder": "Companies/Hashicorp",
+      "folder": "INBOX/Companies/Hashicorp",
       "conditions": {
         "from_contains": [
           "no-reply-auth@hashicorp.com",
@@ -1015,7 +1015,7 @@
     },
     {
       "name": "DevOps » Slack",
-      "folder": "DevOps/Slack",
+      "folder": "INBOX/DevOps/Slack",
       "conditions": {
         "from_contains": [
           "notification@slack.com",
@@ -1026,7 +1026,7 @@
     },
     {
       "name": "DevOps » DevOpsCon",
-      "folder": "DevOps/DevOpsCon",
+      "folder": "INBOX/DevOps/DevOpsCon",
       "conditions": {
         "from_contains": [
           "no-reply@sandsmedia.com"
@@ -1035,7 +1035,7 @@
     },
     {
       "name": "Immobilien » Grundbuchauszuege",
-      "folder": "Immobilien/Grundbuchauszuege",
+      "folder": "INBOX/Immobilien/Grundbuchauszuege",
       "conditions": {
         "from_contains": [
           "office@auszug.at"
@@ -1044,7 +1044,7 @@
     },
     {
       "name": "Immobilien » Küchen",
-      "folder": "Immobilien/Küchen",
+      "folder": "INBOX/Immobilien/Küchen",
       "conditions": {
         "from_contains": [
           "servicemail@kueche-co.de",
@@ -1054,7 +1054,7 @@
     },
     {
       "name": "Immobilien » VarioHaus",
-      "folder": "Immobilien/VarioHaus",
+      "folder": "INBOX/Immobilien/VarioHaus",
       "conditions": {
         "from_contains": [
           "info@variobau.at"
@@ -1063,7 +1063,7 @@
     },
     {
       "name": "Immobilien » Grundstücke",
-      "folder": "Immobilien/Grundstücke",
+      "folder": "INBOX/Immobilien/Grundstücke",
       "conditions": {
         "from_contains": [
           "h.hofer@comfort4you.at",
@@ -1074,7 +1074,7 @@
     },
     {
       "name": "Immobilien",
-      "folder": "Immobilien",
+      "folder": "INBOX/Immobilien",
       "conditions": {
         "from_contains": [
           "m.foidl@remax-bad-ischl.at"
@@ -1086,7 +1086,7 @@
     },
     {
       "name": "Hotel_Travel » OEBB",
-      "folder": "Hotel_Travel/OEBB",
+      "folder": "INBOX/Hotel_Travel/OEBB",
       "conditions": {
         "from_contains": [
           "tickets@oebb.at"
@@ -1095,7 +1095,7 @@
     },
     {
       "name": "Hotel_Travel » Airbnb",
-      "folder": "Hotel_Travel/Airbnb",
+      "folder": "INBOX/Hotel_Travel/Airbnb",
       "conditions": {
         "from_contains": [
           "discover@airbnb.com",
@@ -1105,7 +1105,7 @@
     },
     {
       "name": "Hotel_Travel » MotelOne",
-      "folder": "Hotel_Travel/MotelOne",
+      "folder": "INBOX/Hotel_Travel/MotelOne",
       "conditions": {
         "from_contains": [
           "@motel-one.com"
@@ -1114,7 +1114,7 @@
     },
     {
       "name": "Career",
-      "folder": "Career",
+      "folder": "INBOX/Career",
       "conditions": {
         "from_contains": [
           "voquz.recruiting@gmail.com"
@@ -1123,7 +1123,7 @@
     },
     {
       "name": "Career » Vorsorgekassen",
-      "folder": "Career/Vorsorgekassen",
+      "folder": "INBOX/Career/Vorsorgekassen",
       "conditions": {
         "from_contains": [
           "noevk@vorsorgekasse.at",
@@ -1135,7 +1135,7 @@
     },
     {
       "name": "Career » LinkedIn",
-      "folder": "Career/LinkedIn",
+      "folder": "INBOX/Career/LinkedIn",
       "conditions": {
         "from_contains": [
           "linkedin.com"
@@ -1144,7 +1144,7 @@
     },
     {
       "name": "Career » Xing",
-      "folder": "Career/Xing",
+      "folder": "INBOX/Career/Xing",
       "conditions": {
         "from_contains": [
           "xing.com"
@@ -1153,7 +1153,7 @@
     },
     {
       "name": "Career » KarriereAT",
-      "folder": "Career/KarriereAT",
+      "folder": "INBOX/Career/KarriereAT",
       "conditions": {
         "from_contains": [
           "karriere.at"
@@ -1162,7 +1162,7 @@
     },
     {
       "name": "Dog » BARF",
-      "folder": "Dog/BARF",
+      "folder": "INBOX/Dog/BARF",
       "conditions": {
         "from_contains": [
           "info@tirol-barf.at",
@@ -1173,7 +1173,7 @@
     },
     {
       "name": "Dog » Futterkoerberl",
-      "folder": "Dog/Futterkoerberl",
+      "folder": "INBOX/Dog/Futterkoerberl",
       "conditions": {
         "from_contains": [
           "friedl@futterkoerberl.at"
@@ -1182,7 +1182,7 @@
     },
     {
       "name": "Linux_and_IT » Qnap",
-      "folder": "Linux_and_IT/Qnap",
+      "folder": "INBOX/Linux_and_IT/Qnap",
       "conditions": {
         "from_contains": [
           "helpdesk@qnap.com",
@@ -1192,7 +1192,7 @@
     },
     {
       "name": "Linux_and_IT » Google",
-      "folder": "Linux_and_IT/Google",
+      "folder": "INBOX/Linux_and_IT/Google",
       "conditions": {
         "from_contains": [
           "google.com"
@@ -1201,7 +1201,7 @@
     },
     {
       "name": "Linux_and_IT » Github",
-      "folder": "Linux_and_IT/Github",
+      "folder": "INBOX/Linux_and_IT/Github",
       "conditions": {
         "from_contains": [
           "github.com"
@@ -1210,7 +1210,7 @@
     },
     {
       "name": "Linux_and_IT » Homeoffix",
-      "folder": "Linux_and_IT/Homeoffix",
+      "folder": "INBOX/Linux_and_IT/Homeoffix",
       "conditions": {
         "subject_contains": [
           "homeoffix"
@@ -1219,7 +1219,7 @@
     },
     {
       "name": "Linux_and_IT",
-      "folder": "Linux_and_IT",
+      "folder": "INBOX/Linux_and_IT",
       "conditions": {
         "from_contains": [
           "@linuxfoundation.org",
@@ -1230,7 +1230,7 @@
     },
     {
       "name": "Vereine » Naturfreunde",
-      "folder": "Vereine/Naturfreunde",
+      "folder": "INBOX/Vereine/Naturfreunde",
       "conditions": {
         "from_contains": [
           "@newsletter.naturfreunde.at",
@@ -1241,7 +1241,7 @@
     },
     {
       "name": "Vereine » AV",
-      "folder": "Vereine/AV",
+      "folder": "INBOX/Vereine/AV",
       "conditions": {
         "from_contains": [
           "alpenvereinaktiv.com",
@@ -1253,7 +1253,7 @@
     },
     {
       "name": "Freunde » Pierre",
-      "folder": "Freunde/Pierre",
+      "folder": "INBOX/Freunde/Pierre",
       "conditions": {
         "from_contains": [
           "ps@datensegler.at"
@@ -1262,7 +1262,7 @@
     },
     {
       "name": "Freunde » Harry",
-      "folder": "Freunde/Harry",
+      "folder": "INBOX/Freunde/Harry",
       "conditions": {
         "from_contains": [
           "harald@sommerer.me",
@@ -1272,7 +1272,7 @@
     },
     {
       "name": "Freunde",
-      "folder": "Freunde",
+      "folder": "INBOX/Freunde",
       "conditions": {
         "from_contains": [
           "jl@lafuente.me"
@@ -1281,7 +1281,7 @@
     },
     {
       "name": "Neli",
-      "folder": "Neli",
+      "folder": "INBOX/Neli",
       "conditions": {
         "from_contains": [
           "neli@buchboeck.at"
@@ -1290,7 +1290,7 @@
     },
     {
       "name": "Honza",
-      "folder": "Honza",
+      "folder": "INBOX/Honza",
       "conditions": {
         "from_contains": [
           "jankozel@yahoo.com"
@@ -1299,7 +1299,7 @@
     },
     {
       "name": "JoergLemmerer",
-      "folder": "JoergLemmerer",
+      "folder": "INBOX/JoergLemmerer",
       "conditions": {
         "from_contains": [
           "lemmerer.34545@raiffeisen-ooe.at"
@@ -1308,7 +1308,7 @@
     },
     {
       "name": "ErichSchymonski",
-      "folder": "ErichSchymonski",
+      "folder": "INBOX/ErichSchymonski",
       "conditions": {
         "from_contains": [
           "erich@schymonski.at"
@@ -1317,7 +1317,7 @@
     },
     {
       "name": "RaGroesswang",
-      "folder": "RaGroesswang",
+      "folder": "INBOX/RaGroesswang",
       "conditions": {
         "from_contains": [
           "groesswang@hitzenberger.at"
@@ -1326,7 +1326,7 @@
     },
     {
       "name": "BadIschl",
-      "folder": "BadIschl",
+      "folder": "INBOX/BadIschl",
       "conditions": {
         "from_contains": [
           "d.laimer@badischl.at",
@@ -1337,7 +1337,7 @@
     },
     {
       "name": "0_origiNELLi » origiNELLI",
-      "folder": "0_origiNELLi/origiNELLI",
+      "folder": "INBOX/0_origiNELLi/origiNELLI",
       "conditions": {
         "from_contains": [
           "office@originelli.at"
@@ -1346,7 +1346,7 @@
     },
     {
       "name": "0_origiNELLi",
-      "folder": "0_origiNELLi",
+      "folder": "INBOX/0_origiNELLi",
       "conditions": {
         "from_contains": [
           "no-reply@mail.yelp.com"
@@ -1355,7 +1355,7 @@
     },
     {
       "name": "Newsletter » Yahoo Fantasy",
-      "folder": "Newsletter/Yahoo_Fantasy",
+      "folder": "INBOX/Newsletter/Yahoo_Fantasy",
       "conditions": {
         "from_contains": [
           "newsletters.yahoo.net",
@@ -1365,7 +1365,7 @@
     },
     {
       "name": "Newsletter » CodeGym",
-      "folder": "Newsletter/CodeGym",
+      "folder": "INBOX/Newsletter/CodeGym",
       "conditions": {
         "from_contains": [
           "codegym.cc",
@@ -1375,7 +1375,7 @@
     },
     {
       "name": "Shopping » SchuhSki",
-      "folder": "Shopping/SchuhSki",
+      "folder": "INBOX/Shopping/SchuhSki",
       "conditions": {
         "from_contains": [
           "schuhski.at",
@@ -1385,7 +1385,7 @@
     },
     {
       "name": "Finanzen » Free Mastercard",
-      "folder": "Contracts/Kreditkarte",
+      "folder": "INBOX/Contracts/Kreditkarte",
       "conditions": {
         "from_contains": [
           "free.at",
@@ -1395,7 +1395,7 @@
     },
     {
       "name": "Finanzen » Wikifolio",
-      "folder": "Finanzen/Wikifolio",
+      "folder": "INBOX/Finanzen/Wikifolio",
       "conditions": {
         "from_contains": [
           "wikifolio.com"
@@ -1404,7 +1404,7 @@
     },
     {
       "name": "Games » Stardock",
-      "folder": "Games/Stardock",
+      "folder": "INBOX/Games/Stardock",
       "conditions": {
         "from_contains": [
           "stardockentertainment.info"
@@ -1413,7 +1413,7 @@
     },
     {
       "name": "Hotel_Travel » Aminess",
-      "folder": "Hotel_Travel/Aminess",
+      "folder": "INBOX/Hotel_Travel/Aminess",
       "conditions": {
         "from_contains": [
           "email.aminess.com"
@@ -1422,7 +1422,7 @@
     },
     {
       "name": "Shopping » Ofenersatzteileshop",
-      "folder": "Shopping/Ofenersatzteileshop",
+      "folder": "INBOX/Shopping/Ofenersatzteileshop",
       "conditions": {
         "from_contains": [
           "ofenersatzteileshop.de"
@@ -1431,7 +1431,7 @@
     },
     {
       "name": "Sport » Outdooractive",
-      "folder": "Sport/Outdooractive",
+      "folder": "INBOX/Sport/Outdooractive",
       "conditions": {
         "from_contains": [
           "news.outdooractive.com"
@@ -1440,7 +1440,7 @@
     },
     {
       "name": "Contracts » EcoFlow",
-      "folder": "Contracts/EcoFlow",
+      "folder": "INBOX/Contracts/EcoFlow",
       "conditions": {
         "from_contains": [
           "service.ecoflow.com"
@@ -1449,7 +1449,7 @@
     },
     {
       "name": "Career » WerLiefertWas",
-      "folder": "Career/WerLiefertWas",
+      "folder": "INBOX/Career/WerLiefertWas",
       "conditions": {
         "from_contains": [
           "notifications.wlw.com"
@@ -1458,7 +1458,7 @@
     },
     {
       "name": "Shopping » Penoblo",
-      "folder": "Shopping/Penoblo",
+      "folder": "INBOX/Shopping/Penoblo",
       "conditions": {
         "from_contains": [
           "penoblo.de"
@@ -1467,7 +1467,7 @@
     },
     {
       "name": "Shopping » E9",
-      "folder": "Shopping/E9",
+      "folder": "INBOX/Shopping/E9",
       "conditions": {
         "from_contains": [
           "enove.it"
@@ -1476,7 +1476,7 @@
     },
     {
       "name": "Finanzen » MorganStanley",
-      "folder": "Finanzen/Etrade",
+      "folder": "INBOX/Finanzen/Etrade",
       "conditions": {
         "from_contains": [
           "morganstanley.com",
@@ -1486,7 +1486,7 @@
     },
     {
       "name": "DevOps » UptimeRobot",
-      "folder": "DevOps/UptimeRobot",
+      "folder": "INBOX/DevOps/UptimeRobot",
       "conditions": {
         "from_contains": [
           "user.uptimerobot.com"
@@ -1495,7 +1495,7 @@
     },
     {
       "name": "Shopping » E-Tec",
-      "folder": "Shopping/E-Tec",
+      "folder": "INBOX/Shopping/E-Tec",
       "conditions": {
         "from_contains": [
           "e-tec.at"
