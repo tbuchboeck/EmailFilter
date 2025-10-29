@@ -328,7 +328,8 @@
           "kundenservice@service.zooplus.de",
           "newsletter@service.zooplus.de",
           "service@service.zooplus.de",
-          "service@mail.zooplus.at"
+          "service@mail.zooplus.at",
+          "my.zooplus.at"
         ]
       }
     },
@@ -432,7 +433,8 @@
       "folder": "Shopping/Zalando",
       "conditions": {
         "from_contains": [
-          "zalando.at"
+          "zalando.at",
+          "zalando.slgnt.eu"
         ]
       }
     },
@@ -1378,6 +1380,125 @@
         "from_contains": [
           "schuhski.at",
           "info@schuhski.at"
+        ]
+      }
+    },
+    {
+      "name": "Finanzen » Free Mastercard",
+      "folder": "Contracts/Kreditkarte",
+      "conditions": {
+        "from_contains": [
+          "free.at",
+          "service@free.at"
+        ]
+      }
+    },
+    {
+      "name": "Finanzen » Wikifolio",
+      "folder": "Finanzen/Wikifolio",
+      "conditions": {
+        "from_contains": [
+          "wikifolio.com"
+        ]
+      }
+    },
+    {
+      "name": "Games » Stardock",
+      "folder": "Games/Stardock",
+      "conditions": {
+        "from_contains": [
+          "stardockentertainment.info"
+        ]
+      }
+    },
+    {
+      "name": "Hotel_Travel » Aminess",
+      "folder": "Hotel_Travel/Aminess",
+      "conditions": {
+        "from_contains": [
+          "email.aminess.com"
+        ]
+      }
+    },
+    {
+      "name": "Shopping » Ofenersatzteileshop",
+      "folder": "Shopping/Ofenersatzteileshop",
+      "conditions": {
+        "from_contains": [
+          "ofenersatzteileshop.de"
+        ]
+      }
+    },
+    {
+      "name": "Sport » Outdooractive",
+      "folder": "Sport/Outdooractive",
+      "conditions": {
+        "from_contains": [
+          "news.outdooractive.com"
+        ]
+      }
+    },
+    {
+      "name": "Contracts » EcoFlow",
+      "folder": "Contracts/EcoFlow",
+      "conditions": {
+        "from_contains": [
+          "service.ecoflow.com"
+        ]
+      }
+    },
+    {
+      "name": "Career » WerLiefertWas",
+      "folder": "Career/WerLiefertWas",
+      "conditions": {
+        "from_contains": [
+          "notifications.wlw.com"
+        ]
+      }
+    },
+    {
+      "name": "Shopping » Penoblo",
+      "folder": "Shopping/Penoblo",
+      "conditions": {
+        "from_contains": [
+          "penoblo.de"
+        ]
+      }
+    },
+    {
+      "name": "Shopping » E9",
+      "folder": "Shopping/E9",
+      "conditions": {
+        "from_contains": [
+          "enove.it"
+        ]
+      }
+    },
+    {
+      "name": "Finanzen » MorganStanley",
+      "folder": "Finanzen/Etrade",
+      "conditions": {
+        "from_contains": [
+          "morganstanley.com",
+          "morganstanleyatwork@morganstanley.com"
+        ]
+      }
+    },
+    {
+      "name": "DevOps » UptimeRobot",
+      "folder": "DevOps/UptimeRobot",
+      "conditions": {
+        "from_contains": [
+          "user.uptimerobot.com"
+        ]
+      }
+    },
+    {
+      "name": "Shopping » E-Tec",
+      "folder": "Shopping/E-Tec",
+      "conditions": {
+        "from_contains": [
+          "e-tec.at"
         ]
       }
     }
