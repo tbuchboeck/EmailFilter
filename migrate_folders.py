@@ -48,39 +48,40 @@ for source, target in FOLDER_MIGRATIONS.items():
         with IMAPClient(imap_server, ssl=True) as client:
             client.login(email_user, email_pass)
             print(f"\n📂 Migriere: {source} → {target}")
-                # Check if source folder exists
-                client.select_folder(source)
-                messages = client.search(['ALL'])
 
-                if not messages:
-                    print(f"   ℹ️  Keine E-Mails in {source}")
-                    continue
+            # Check if source folder exists
+            client.select_folder(source)
+            messages = client.search(['ALL'])
 
-                print(f"   📧 {len(messages)} E-Mails gefunden")
+            if not messages:
+                print(f"   ℹ️  Keine E-Mails in {source}")
+                continue
 
-                # Create target folder if it doesn't exist
-                try:
-                    client.select_folder(target)
-                except:
-                    print(f"   🔨 Erstelle Zielordner: {target}")
-                    # Create parent folders
-                    parts = target.split('/')
-                    for i in range(len(parts)):
-                        partial = '/'.join(parts[:i+1])
-                        try:
-                            client.create_folder(partial)
-                            client.subscribe_folder(partial)
-                        except:
-                            pass  # Folder might already exist
+            print(f"   📧 {len(messages)} E-Mails gefunden")
 
-                # Move all emails
-                client.select_folder(source)
-                client.copy(messages, target)
-                client.delete_messages(messages)
-                client.expunge()
+            # Create target folder if it doesn't exist
+            try:
+                client.select_folder(target)
+            except:
+                print(f"   🔨 Erstelle Zielordner: {target}")
+                # Create parent folders
+                parts = target.split('/')
+                for i in range(len(parts)):
+                    partial = '/'.join(parts[:i+1])
+                    try:
+                        client.create_folder(partial)
+                        client.subscribe_folder(partial)
+                    except:
+                        pass  # Folder might already exist
 
-                total_moved += len(messages)
-                print(f"   ✅ {len(messages)} E-Mails verschoben")
+            # Move all emails
+            client.select_folder(source)
+            client.copy(messages, target)
+            client.delete_messages(messages)
+            client.expunge()
+
+            total_moved += len(messages)
+            print(f"   ✅ {len(messages)} E-Mails verschoben")
 
             # Don't delete source folders - let them be cleaned up manually
             # Deleting folders can cause IMAP disconnections
