@@ -442,8 +442,8 @@
       "folder": "INBOX/Streaming",
       "conditions": {
         "from_contains": [
-          "newsletter@reply.canalplus.at",
-          "highlights@news.joyn.at"
+          "canalplus.at",
+          "joyn.at"
         ]
       }
     },
@@ -788,9 +788,8 @@
       "folder": "INBOX/Sport/GoPro",
       "conditions": {
         "from_contains": [
-          "GoPro@newsletter.gopro.com",
-          "GoPro@email.gopro.com",
-          "news@camforpro.com"
+          "gopro.com",
+          "camforpro.com"
         ]
       }
     },
@@ -1568,6 +1567,114 @@
       "conditions": {
         "from_contains": [
           "grafana.com"
+        ]
+      }
+    },
+    {
+      "name": "DevOps » Vercel",
+      "folder": "INBOX/DevOps/Vercel",
+      "conditions": {
+        "from_contains": [
+          "vercel.com"
+        ]
+      }
+    },
+    {
+      "name": "DevOps » Infracost",
+      "folder": "INBOX/DevOps/Infracost",
+      "conditions": {
+        "from_contains": [
+          "infracost.io"
+        ]
+      }
+    },
+    {
+      "name": "DevOps » Nightwatch",
+      "folder": "INBOX/DevOps/Nightwatch",
+      "conditions": {
+        "from_contains": [
+          "nightwatch.io"
+        ]
+      }
+    },
+    {
+      "name": "Hotel_Travel » Forellencamp",
+      "folder": "INBOX/Hotel_Travel/Forellencamp",
+      "conditions": {
+        "from_contains": [
+          "forellencamp.com"
+        ]
+      }
+    },
+    {
+      "name": "Shopping » Dehner",
+      "folder": "INBOX/Shopping/Dehner",
+      "conditions": {
+        "from_contains": [
+          "meindehner.com"
+        ]
+      }
+    },
+    {
+      "name": "Shopping » oeticket",
+      "folder": "INBOX/Shopping/oeticket",
+      "conditions": {
+        "from_contains": [
+          "oeticket.com"
+        ]
+      }
+    },
+    {
+      "name": "Shopping » INSTADRIVE",
+      "folder": "INBOX/Shopping/INSTADRIVE",
+      "conditions": {
+        "from_contains": [
+          "insta-drive.com"
+        ]
+      }
+    },
+    {
+      "name": "Shopping » Restaurants",
+      "folder": "INBOX/Shopping/Restaurants",
+      "conditions": {
+        "from_contains": [
+          "teburio.de"
+        ]
+      }
+    },
+    {
+      "name": "Streaming » Sportdeutschland",
+      "folder": "INBOX/Streaming/Sportdeutschland",
+      "conditions": {
+        "from_contains": [
+          "sportdeutschland.tv"
+        ]
+      }
+    },
+    {
+      "name": "Streaming » JustWatch",
+      "folder": "INBOX/Streaming/JustWatch",
+      "conditions": {
+        "from_contains": [
+          "justwatch.com"
+        ]
+      }
+    },
+    {
+      "name": "0Buchi » Arzt",
+      "folder": "INBOX/0Buchi/Arzt",
+      "conditions": {
+        "from_contains": [
+          "derma-point.at"
+        ]
+      }
+    },
+    {
+      "name": "Freunde » Christian Zellot",
+      "folder": "INBOX/Freunde/Christian",
+      "conditions": {
+        "from_contains": [
+          "zellot.at"
         ]
       }
     }
