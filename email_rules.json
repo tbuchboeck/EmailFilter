@@ -1,0 +1,87 @@
+{
+  "rules": [
+    {
+      "name": "Newsletter",
+      "folder": "Newsletter",
+      "conditions": {
+        "from_contains": [
+          "newsletter",
+          "info@",
+          "noreply@"
+        ],
+        "subject_contains": [
+          "newsletter",
+          "weekly digest",
+          "monthly update"
+        ]
+      }
+    },
+    {
+      "name": "Social Media",
+      "folder": "Social",
+      "conditions": {
+        "from_contains": [
+          "facebook.com",
+          "twitter.com",
+          "linkedin.com",
+          "instagram.com",
+          "tiktok.com",
+          "reddit.com"
+        ]
+      }
+    },
+    {
+      "name": "Shopping",
+      "folder": "Shopping",
+      "conditions": {
+        "from_contains": [
+          "amazon",
+          "ebay",
+          "shop",
+          "store",
+          "paypal"
+        ],
+        "subject_contains": [
+          "order",
+          "shipped",
+          "delivery",
+          "tracking",
+          "payment",
+          "invoice",
+          "receipt"
+        ]
+      }
+    },
+    {
+      "name": "Notifications",
+      "folder": "Notifications",
+      "conditions": {
+        "from_contains": [
+          "notification",
+          "alert",
+          "no-reply"
+        ],
+        "subject_contains": [
+          "notification",
+          "alert",
+          "reminder"
+        ]
+      }
+    },
+    {
+      "name": "Promotions",
+      "folder": "Promotions",
+      "conditions": {
+        "subject_contains": [
+          "sale",
+          "discount",
+          "offer",
+          "deal",
+          "promo",
+          "%",
+          "save"
+        ]
+      }
+    }
+  ]
+}
