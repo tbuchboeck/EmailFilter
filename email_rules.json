@@ -60,7 +60,8 @@
       "folder": "INBOX/Shopping/Eventim",
       "conditions": {
         "from_contains": [
-          "info@eventim.pl"
+          "eventim.pl",
+          "eventim.de"
         ]
       }
     },
@@ -107,11 +108,7 @@
       "folder": "INBOX/Shopping/Shop-Apotheke",
       "conditions": {
         "from_contains": [
-          "noreply@shop-apotheke.at",
-          "redpoints@info.shop-apotheke.at",
-          "empfehlungen@info.shop-apotheke.at",
-          "info@shop-apotheke.at",
-          "kontakt@shop-apotheke.at"
+          "shop-apotheke.at"
         ]
       }
     },
@@ -1043,8 +1040,8 @@
       "folder": "INBOX/Immobilien/Küchen",
       "conditions": {
         "from_contains": [
-          "servicemail@kueche-co.de",
-          "info@kuecheco.at"
+          "kueche-co.de",
+          "kuecheco.at"
         ]
       }
     },
@@ -1485,7 +1482,7 @@
       "folder": "INBOX/DevOps/UptimeRobot",
       "conditions": {
         "from_contains": [
-          "user.uptimerobot.com"
+          "uptimerobot.com"
         ]
       }
     },
@@ -1557,7 +1554,7 @@
       "folder": "INBOX/Shopping/OBI",
       "conditions": {
         "from_contains": [
-          "shop.obi.at"
+          "obi.at"
         ]
       }
     },
@@ -1675,6 +1672,24 @@
       "conditions": {
         "from_contains": [
           "zellot.at"
+        ]
+      }
+    },
+    {
+      "name": "DevOps » Cursor",
+      "folder": "INBOX/DevOps/Cursor",
+      "conditions": {
+        "from_contains": [
+          "cursor.com"
+        ]
+      }
+    },
+    {
+      "name": "Shopping » myProduct",
+      "folder": "INBOX/Shopping/myProduct",
+      "conditions": {
+        "from_contains": [
+          "myproduct.at"
         ]
       }
     }
