@@ -43,5 +43,5 @@ env/
 .DS_Store
 Thumbs.db
 
-# GitHub Actions (must be added manually via GitHub UI due to security restrictions)
-.github/workflows/
+# GitHub Actions (we need to commit workflow changes)
+# .github/workflows/

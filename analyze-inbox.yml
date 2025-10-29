@@ -1,11 +1,14 @@
-name: Analyze Inbox
+name: Sort Emails
 
 on:
-  # Nur manuelles Auslösen
+  # Automatisch alle 30 Minuten ausführen
+  schedule:
+    - cron: '*/30 * * * *'
+  # Auch manuelles Auslösen erlauben
   workflow_dispatch:
 
 jobs:
-  analyze:
+  sort-emails:
     runs-on: ubuntu-latest
 
     steps:
@@ -23,18 +26,18 @@ jobs:
           pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run inbox analysis
+      - name: Sort emails into folders
         env:
           IMAP_SERVER: ${{ secrets.IMAP_SERVER }}
           EMAIL_USER: ${{ secrets.EMAIL_USER }}
           EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
-        run: python analyze_inbox.py
+        run: python sort_emails.py
 
-      - name: Upload analysis results
+      - name: Upload sorting logs
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: inbox-analysis
+          name: email-sorting-logs
           path: |
             *.log
           retention-days: 7
