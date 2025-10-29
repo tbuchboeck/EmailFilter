@@ -67,6 +67,9 @@ Prüft auf fehlende wichtige Email-Header (Message-ID, Date)
 1. **Whitelist-Check** (ZUERST!):
    - Alle Absender aus `email_rules.json` → KEIN Spam
    - Alle Domains aus `whitelist_domains` → KEIN Spam
+   - **NEU**: Intelligentes Domain-Matching mit Subdomain-Support
+     - `paypal.com` → whitelistet auch `email.paypal.com`, `mail.paypal.com`
+     - Verhindert Display-Name-Spoofing: `"PayPal.com <scam@evil.ru>"` wird NICHT whitelistet
 
 2. **SpamAssassin-Check**:
    - Falls Server SpamAssassin nutzt, werden die Header ausgewertet
@@ -119,6 +122,14 @@ Email Sorting Statistics:
   ]
 }
 ```
+
+**Wichtig**: Das System unterstützt automatisch Subdomains! Wenn du `paypal.com` hinzufügst, werden auch automatisch `email.paypal.com`, `mail.paypal.com`, etc. whitelistet.
+
+**Bereits inkludierte PayPal-Domains**:
+- paypal.com (inkl. Subdomains)
+- paypal.at, paypal.de, paypal.ch
+- paypal.fr, paypal.es, paypal.it
+- paypal.nl, paypal.be
 
 ### Spam-Erkennung temporär deaktivieren:
 
