@@ -19,7 +19,12 @@
     "10minutemail.com",
     "bobsbonsai.com",
     "howtomeasurecobb.com",
-    "manuelpadrino.com"
+    "manuelpadrino.com",
+    "todoenconcretogt.com",
+    "stcecyten.org",
+    "rondocouro.com.br",
+    "mybluehost.me",
+    "kakinienterprises.com"
   ],
 
   "blacklist_keywords_subject": [
@@ -66,7 +71,29 @@
     "Bitcoin Gewinn",
     "Trading Bot",
     "Geld zurück",
-    "100% Garantie"
+    "100% Garantie",
+    "rezeptfrei",
+    "reze-ptfrei",
+    "r-ezeptfrei",
+    "r_ezeptfrei",
+    "rezept-frei",
+    "rezept frei",
+    "Medikamente ordern",
+    "Medikamente anfordern",
+    "Medikamente kaufen",
+    "Herrenmeds",
+    "Potenz",
+    "Erektion",
+    "Blaue Helfer",
+    "Geld verdienen",
+    "wie Geld verdienen",
+    "mit KI Geld",
+    "KI handeln",
+    "Dividende",
+    "ETF Sparplan",
+    "Trading",
+    "Höhepunkt zu früh",
+    "Höhepunkt zu frueh"
   ],
 
   "suspicious_subject_patterns": [

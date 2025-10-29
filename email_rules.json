@@ -42,7 +42,7 @@
       "folder": "INBOX/Shopping/CampingWagner",
       "conditions": {
         "from_contains": [
-          "news@email.campingwagner.de"
+          "campingwagner.de"
         ]
       }
     },
@@ -204,11 +204,9 @@
       "folder": "INBOX/Shopping/funko-pop",
       "conditions": {
         "from_contains": [
-          "donotreply@funko.com",
-          "info@n.popinabox.co.uk",
-          "do-not-reply@funko.com",
-          "service@t.popinabox.co.uk",
-          "do-not-reply@global-e.com"
+          "funko.com",
+          "popinabox.co.uk",
+          "global-e.com"
         ]
       }
     },
@@ -377,7 +375,8 @@
       "folder": "INBOX/Shopping/Messen",
       "conditions": {
         "from_contains": [
-          "info@messe-wels.com"
+          "messe-wels.com",
+          "messe-wels.at"
         ]
       }
     },
@@ -541,9 +540,7 @@
       "folder": "INBOX/Contracts/Uniqa",
       "conditions": {
         "from_contains": [
-          "automailer@uniqa.at",
-          "angebot@uniqa.at",
-          "natalie.mittendorfer@uniqa.at"
+          "uniqa.at"
         ]
       }
     },
@@ -1358,8 +1355,8 @@
       "folder": "INBOX/Newsletter/Yahoo_Fantasy",
       "conditions": {
         "from_contains": [
-          "newsletters.yahoo.net",
-          "get-to-the-points@newsletters.yahoo.net"
+          "yahooinc.com",
+          "newsletters.yahoo.net"
         ]
       }
     },
@@ -1499,6 +1496,78 @@
       "conditions": {
         "from_contains": [
           "e-tec.at"
+        ]
+      }
+    },
+    {
+      "name": "Hotel_Travel » Camping Rosental",
+      "folder": "INBOX/Hotel_Travel/Camping_Rosental",
+      "conditions": {
+        "from_contains": [
+          "roz.at"
+        ]
+      }
+    },
+    {
+      "name": "Shopping » Bluefin SUP",
+      "folder": "INBOX/Shopping/Bluefin",
+      "conditions": {
+        "from_contains": [
+          "bluefintrading.co.uk"
+        ]
+      }
+    },
+    {
+      "name": "Shopping » Displate",
+      "folder": "INBOX/Shopping/Displate",
+      "conditions": {
+        "from_contains": [
+          "displate.com"
+        ]
+      }
+    },
+    {
+      "name": "Shopping » X-Sense",
+      "folder": "INBOX/Shopping/X-Sense",
+      "conditions": {
+        "from_contains": [
+          "x-sense.com"
+        ]
+      }
+    },
+    {
+      "name": "Shopping » Bazaarvoice Reviews",
+      "folder": "INBOX/Shopping/CampingWagner",
+      "conditions": {
+        "from_contains": [
+          "bazaarvoice-cgc.com"
+        ]
+      }
+    },
+    {
+      "name": "Shopping » Thomas Sabo",
+      "folder": "INBOX/Shopping/ThomasSabo",
+      "conditions": {
+        "from_contains": [
+          "thomassabo.com"
+        ]
+      }
+    },
+    {
+      "name": "Shopping » OBI",
+      "folder": "INBOX/Shopping/OBI",
+      "conditions": {
+        "from_contains": [
+          "shop.obi.at"
+        ]
+      }
+    },
+    {
+      "name": "DevOps » Grafana",
+      "folder": "INBOX/DevOps/Grafana",
+      "conditions": {
+        "from_contains": [
+          "grafana.com"
         ]
       }
     }
