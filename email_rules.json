@@ -1,85 +1,1353 @@
 {
   "rules": [
     {
-      "name": "Newsletter",
-      "folder": "Newsletter",
+      "name": "Games",
+      "folder": "Games",
       "conditions": {
         "from_contains": [
-          "newsletter",
-          "info@",
-          "noreply@"
+          "newsletter@levelup-salzburg.at",
+          "do_not_reply@email.gog.com",
+          "help@epicgames.com",
+          "newsletter@email2.gog.com",
+          "do-not-reply@email.gog.com",
+          "no-reply@email.gog.com",
+          "help@accts.epicgames.com"
+        ]
+      }
+    },
+    {
+      "name": "Shopping » Amazon",
+      "folder": "Shopping/Amazon",
+      "conditions": {
+        "from_contains": [
+          "amazon.de",
+          "amazon.com",
+          "noreply@audible.de"
+        ]
+      }
+    },
+    {
+      "name": "Shopping » Ebay",
+      "folder": "Shopping/Ebay",
+      "conditions": {
+        "from_contains": [
+          "ebay.com",
+          "ebay.de",
+          "ebay@ebay.at"
+        ]
+      }
+    },
+    {
+      "name": "Shopping » CampingWagner",
+      "folder": "Shopping/CampingWagner",
+      "conditions": {
+        "from_contains": [
+          "news@email.campingwagner.de"
+        ]
+      }
+    },
+    {
+      "name": "Shopping » Dygma",
+      "folder": "Shopping/Dygma",
+      "conditions": {
+        "from_contains": [
+          "contact@dygma.com"
+        ]
+      }
+    },
+    {
+      "name": "Shopping » Eventim",
+      "folder": "Shopping/Eventim",
+      "conditions": {
+        "from_contains": [
+          "info@eventim.pl"
+        ]
+      }
+    },
+    {
+      "name": "Shopping » GEA",
+      "folder": "Shopping/GEA",
+      "conditions": {
+        "from_contains": [
+          "gea@gea.at"
+        ]
+      }
+    },
+    {
+      "name": "Shopping » WirKaufenDeinAuto",
+      "folder": "Shopping/WirKaufenDeinAuto",
+      "conditions": {
+        "from_contains": [
+          "n@info.wirkaufendeinauto.at",
+          "mail@info.wirkaufendeinauto.at",
+          "moritz@service.wirkaufendeinauto.at"
+        ]
+      }
+    },
+    {
+      "name": "Shopping » Etsy",
+      "folder": "Shopping/Etsy",
+      "conditions": {
+        "from_contains": [
+          "transaction@etsy.com"
+        ]
+      }
+    },
+    {
+      "name": "Shopping » MediaMarkt",
+      "folder": "Shopping/MediaMarkt",
+      "conditions": {
+        "from_contains": [
+          "noreply@gls-group.eu"
+        ]
+      }
+    },
+    {
+      "name": "Shopping » Shop-Apotheke",
+      "folder": "Shopping/Shop-Apotheke",
+      "conditions": {
+        "from_contains": [
+          "noreply@shop-apotheke.at",
+          "redpoints@info.shop-apotheke.at",
+          "empfehlungen@info.shop-apotheke.at",
+          "info@shop-apotheke.at",
+          "kontakt@shop-apotheke.at"
+        ]
+      }
+    },
+    {
+      "name": "Shopping » Koro",
+      "folder": "Shopping/Koro",
+      "conditions": {
+        "from_contains": [
+          "noreply@korodrogerie.de",
+          "service@korodrogerie.de"
+        ]
+      }
+    },
+    {
+      "name": "Shopping » Dynafit",
+      "folder": "Shopping/Dynafit",
+      "conditions": {
+        "from_contains": [
+          "e-commerce@dynafit.com",
+          "news@cm.dynafit.com"
+        ]
+      }
+    },
+    {
+      "name": "Shopping » UPS",
+      "folder": "Shopping/UPS",
+      "conditions": {
+        "from_contains": [
+          "pkginfo@ups.com"
+        ]
+      }
+    },
+    {
+      "name": "Shopping » GoreWear",
+      "folder": "Shopping/GoreWear",
+      "conditions": {
+        "from_contains": [
+          "gorewear@email.gorewear.com"
+        ]
+      }
+    },
+    {
+      "name": "Shopping » Löffler",
+      "folder": "Shopping/Löffler",
+      "conditions": {
+        "from_contains": [
+          "onlineshop@loeffler.at",
+          "newsletter@loeffler.at"
+        ]
+      }
+    },
+    {
+      "name": "Shopping » Garmin",
+      "folder": "Shopping/Garmin",
+      "conditions": {
+        "from_contains": [
+          "garmin@inside.garmin.com"
+        ]
+      }
+    },
+    {
+      "name": "Shopping » Oceanpharma",
+      "folder": "Shopping/Oceanpharma",
+      "conditions": {
+        "from_contains": [
+          "shop@ocean-pharma.de"
+        ]
+      }
+    },
+    {
+      "name": "Shopping » Ikea",
+      "folder": "Shopping/Ikea",
+      "conditions": {
+        "from_contains": [
+          "do-not-reply@ikea.com"
+        ]
+      }
+    },
+    {
+      "name": "Shopping » 5-Elemente",
+      "folder": "Shopping/5-Elemente",
+      "conditions": {
+        "from_contains": [
+          "info@5elemente-versand.de"
+        ]
+      }
+    },
+    {
+      "name": "Shopping » funko-pop",
+      "folder": "Shopping/funko-pop",
+      "conditions": {
+        "from_contains": [
+          "donotreply@funko.com",
+          "info@n.popinabox.co.uk",
+          "do-not-reply@funko.com",
+          "service@t.popinabox.co.uk",
+          "do-not-reply@global-e.com"
+        ]
+      }
+    },
+    {
+      "name": "Shopping » Gammon",
+      "folder": "Shopping/Gammon",
+      "conditions": {
+        "from_contains": [
+          "info@gammon.de"
+        ]
+      }
+    },
+    {
+      "name": "Shopping » Qwertee",
+      "folder": "Shopping/Qwertee",
+      "conditions": {
+        "from_contains": [
+          "help@qwertee.com",
+          "newsletter@qwertee.com",
+          "newsletter@qwerteemail.com"
+        ]
+      }
+    },
+    {
+      "name": "Shopping » 220Grad",
+      "folder": "Shopping/220Grad",
+      "conditions": {
+        "from_contains": [
+          "office@220grad.com"
+        ]
+      }
+    },
+    {
+      "name": "Shopping » Zauner",
+      "folder": "Shopping/Zauner",
+      "conditions": {
+        "from_contains": [
+          "info@zauner.at"
+        ]
+      }
+    },
+    {
+      "name": "Shopping » RedBull",
+      "folder": "Shopping/RedBull",
+      "conditions": {
+        "from_contains": [
+          "order@racing-eyewear.com",
+          "info@racing-eyewear.com"
+        ]
+      }
+    },
+    {
+      "name": "Shopping » TB-QuickFilters",
+      "folder": "Shopping/TB-QuickFilters",
+      "conditions": {
+        "from_contains": [
+          "mailer@fastspring.com"
+        ]
+      }
+    },
+    {
+      "name": "Shopping » Rewe",
+      "folder": "Shopping/Rewe",
+      "conditions": {
+        "from_contains": [
+          "newsletter@merkur.co.at",
+          "newsletter@reply.billa.at"
+        ]
+      }
+    },
+    {
+      "name": "Shopping » Jooooo",
+      "folder": "Shopping/Jooooo",
+      "conditions": {
+        "from_contains": [
+          "newsletter@reply.joe-club.at",
+          "verification@noreply.joe-club.at"
+        ]
+      }
+    },
+    {
+      "name": "Shopping » Flexi",
+      "folder": "Shopping/Flexi",
+      "conditions": {
+        "from_contains": [
+          "shop@flexi.de"
+        ]
+      }
+    },
+    {
+      "name": "Shopping » Bergzeit",
+      "folder": "Shopping/Bergzeit",
+      "conditions": {
+        "from_contains": [
+          "no-reply@bergzeit.de",
+          "newsletter@news.bergzeit.de",
+          "newsletter@bergzeit.de"
+        ]
+      }
+    },
+    {
+      "name": "Shopping » Audible",
+      "folder": "Shopping/Audible",
+      "conditions": {
+        "from_contains": [
+          "info@audible.de",
+          "donotreply@audible.de"
+        ]
+      }
+    },
+    {
+      "name": "Shopping » Zooplus",
+      "folder": "Shopping/Zooplus",
+      "conditions": {
+        "from_contains": [
+          "service@zooplus.de",
+          "kundenservice@service.zooplus.de",
+          "newsletter@service.zooplus.de",
+          "service@service.zooplus.de",
+          "service@mail.zooplus.at"
+        ]
+      }
+    },
+    {
+      "name": "Shopping » Zoologo",
+      "folder": "Shopping/Zoologo",
+      "conditions": {
+        "from_contains": [
+          "info@zoologo.de",
+          "noreply@zoologo.de"
+        ]
+      }
+    },
+    {
+      "name": "Shopping » Saturn",
+      "folder": "Shopping/Saturn",
+      "conditions": {
+        "from_contains": [
+          "bestellung@saturn.at",
+          "zufriedenheitsumfrage@saturn-survey.com"
+        ]
+      }
+    },
+    {
+      "name": "Shopping » Pralinen",
+      "folder": "Shopping/Pralinen",
+      "conditions": {
+        "from_contains": [
+          "info@pralinenwerkzeug.de"
+        ]
+      }
+    },
+    {
+      "name": "Shopping » DHL",
+      "folder": "Shopping/DHL",
+      "conditions": {
+        "from_contains": [
+          "noreply@dhl.de",
+          "no-reply@deutschepost.de"
+        ]
+      }
+    },
+    {
+      "name": "Shopping » Messen",
+      "folder": "Shopping/Messen",
+      "conditions": {
+        "from_contains": [
+          "info@messe-wels.com"
+        ]
+      }
+    },
+    {
+      "name": "Shopping » Westbahn",
+      "folder": "Shopping/Westbahn",
+      "conditions": {
+        "from_contains": [
+          "newsletter@news.westbahn.at",
+          "meinenachricht@westbahn.at"
+        ]
+      }
+    },
+    {
+      "name": "Shopping » LogoIX",
+      "folder": "Shopping/LogoIX",
+      "conditions": {
+        "from_contains": [
+          "office@logoix.com"
+        ]
+      }
+    },
+    {
+      "name": "Shopping » Nespresso",
+      "folder": "Shopping/Nespresso",
+      "conditions": {
+        "from_contains": [
+          "nespresso@emailing.nespresso.com",
+          "orders@nespresso.com"
+        ]
+      }
+    },
+    {
+      "name": "Shopping » Swarovski",
+      "folder": "Shopping/Swarovski",
+      "conditions": {
+        "from_contains": [
+          "send@newsletter.swarovski-newsletter.com"
+        ]
+      }
+    },
+    {
+      "name": "Shopping » Shpock",
+      "folder": "Shopping/Shpock",
+      "conditions": {
+        "from_contains": [
+          "no-reply@shpock.com"
+        ]
+      }
+    },
+    {
+      "name": "Shopping » Zalando",
+      "folder": "Shopping/Zalando",
+      "conditions": {
+        "from_contains": [
+          "zalando.at"
+        ]
+      }
+    },
+    {
+      "name": "Streaming",
+      "folder": "Streaming",
+      "conditions": {
+        "from_contains": [
+          "newsletter@reply.canalplus.at",
+          "highlights@news.joyn.at"
+        ]
+      }
+    },
+    {
+      "name": "Streaming » DisneyPlus",
+      "folder": "Streaming/DisneyPlus",
+      "conditions": {
+        "from_contains": [
+          "disneyplus@mail.disneyplus.com",
+          "disneyplus@mail2.disneyplus.com"
+        ]
+      }
+    },
+    {
+      "name": "Streaming » Netflix",
+      "folder": "Streaming/Netflix",
+      "conditions": {
+        "from_contains": [
+          "netflix.com"
+        ]
+      }
+    },
+    {
+      "name": "Streaming » Dazn",
+      "folder": "Streaming/Dazn",
+      "conditions": {
+        "from_contains": [
+          "dazn.com"
+        ]
+      }
+    },
+    {
+      "name": "Contracts » Oeamtc",
+      "folder": "Contracts/Oeamtc",
+      "conditions": {
+        "from_contains": [
+          "clubmail@donotreply.oeamtc.at",
+          "clubinfo@donotreply.oeamtc.at"
+        ]
+      }
+    },
+    {
+      "name": "Contracts » Verbund",
+      "folder": "Contracts/Verbund",
+      "conditions": {
+        "from_contains": [
+          "noreply@verbund.at",
+          "noreply@info.verbund.com",
+          "service@info.verbund.at",
+          "noreply@verbund.com"
+        ]
+      }
+    },
+    {
+      "name": "Contracts » HoT",
+      "folder": "Contracts/HoT",
+      "conditions": {
+        "from_contains": [
+          "noreply@hot.at",
+          "rufnummer@hot.at"
+        ]
+      }
+    },
+    {
+      "name": "Contracts » DM",
+      "folder": "Contracts/DM",
+      "conditions": {
+        "from_contains": [
+          "info@shop.dm.at"
+        ]
+      }
+    },
+    {
+      "name": "Contracts » ORF",
+      "folder": "Contracts/ORF",
+      "conditions": {
+        "from_contains": [
+          "kundenportal@orf.at"
+        ]
+      }
+    },
+    {
+      "name": "Contracts » Billa",
+      "folder": "Contracts/Billa",
+      "conditions": {
+        "from_contains": [
+          "noreply.service@joe-club.at",
+          "hotline@billa.at"
+        ]
+      }
+    },
+    {
+      "name": "Contracts » Uniqa",
+      "folder": "Contracts/Uniqa",
+      "conditions": {
+        "from_contains": [
+          "automailer@uniqa.at",
+          "angebot@uniqa.at",
+          "natalie.mittendorfer@uniqa.at"
+        ]
+      }
+    },
+    {
+      "name": "Contracts » Sky",
+      "folder": "Contracts/Sky",
+      "conditions": {
+        "from_contains": [
+          "skyx@news.sky.at"
+        ]
+      }
+    },
+    {
+      "name": "Contracts » TVNow",
+      "folder": "Contracts/TVNow",
+      "conditions": {
+        "from_contains": [
+          "support@tvnow.de",
+          "support@my.tvnow.de"
+        ]
+      }
+    },
+    {
+      "name": "Contracts » Wahlkarten",
+      "folder": "Contracts/Wahlkarten",
+      "conditions": {
+        "from_contains": [
+          "service@wahlkartenantrag.at",
+          "noreply@oesterreich.gv.at"
+        ]
+      }
+    },
+    {
+      "name": "Contracts » MacriumCloneTool",
+      "folder": "Contracts/MacriumCloneTool",
+      "conditions": {
+        "from_contains": [
+          "no-reply@cleverbridge.com",
+          "no-reply@macrium.com",
+          "saul.g.painter@macrium.com"
+        ]
+      }
+    },
+    {
+      "name": "Contracts » RaiBa",
+      "folder": "Contracts/RaiBa",
+      "conditions": {
+        "from_contains": [
+          "mailbox@raiffeisen.at",
+          "m.schulz.34545@raiffeisen-ooe.at"
+        ]
+      }
+    },
+    {
+      "name": "Contracts » FinanzOnline",
+      "folder": "Contracts/FinanzOnline",
+      "conditions": {
+        "from_contains": [
+          "finanzonline@bmf.gv.at"
+        ]
+      }
+    },
+    {
+      "name": "Contracts » A1",
+      "folder": "Contracts/A1",
+      "conditions": {
+        "from_contains": [
+          "noreply@a1.net",
+          "a1team@a1.net",
+          "rechnung@service.a1.net",
+          "a1smile@a1.net",
+          "a1life@a1.net",
+          "a1team@email.a1.net",
+          "a1life@email.a1.net",
+          "noreply@a1.at",
+          "shop@a1.net",
+          "service@a1.net"
+        ]
+      }
+    },
+    {
+      "name": "Contracts » Asfinag",
+      "folder": "Contracts/Asfinag",
+      "conditions": {
+        "from_contains": [
+          "shop@asfinag.at",
+          "noreply@asfinag.at"
+        ]
+      }
+    },
+    {
+      "name": "Contracts » DREI",
+      "folder": "Contracts/DREI",
+      "conditions": {
+        "from_contains": [
+          "no-reply@drei.at",
+          "rechnung@drei.at",
+          "3info@drei.at",
+          "drei-kundenbefragung@reply.marketmind.com",
+          "mnp-gw@drei.com"
+        ]
+      }
+    },
+    {
+      "name": "Contracts » EasyName",
+      "folder": "Contracts/EasyName",
+      "conditions": {
+        "from_contains": [
+          "support@easyname.com",
+          "newsletter@easyname.eu",
+          "newsletter@easyname.com",
+          "no-reply@easyname.com"
+        ]
+      }
+    },
+    {
+      "name": "Contracts » PayPal",
+      "folder": "Contracts/PayPal",
+      "conditions": {
+        "from_contains": [
+          "service@paypal.at",
+          "service@paypal.com",
+          "paypal@mail.paypal.at"
+        ]
+      }
+    },
+    {
+      "name": "Contracts » Kreditkarte",
+      "folder": "Contracts/Kreditkarte",
+      "conditions": {
+        "from_contains": [
+          "noreply_meine_abrechnung@paylife.at",
+          "@r-card-service.at"
+        ]
+      }
+    },
+    {
+      "name": "Contracts",
+      "folder": "Contracts",
+      "conditions": {
+        "from_contains": [
+          "owl.support@beonex.com"
+        ]
+      }
+    },
+    {
+      "name": "Finanzen » Parqet",
+      "folder": "Finanzen/Parqet",
+      "conditions": {
+        "from_contains": [
+          "team@parqet.com"
+        ]
+      }
+    },
+    {
+      "name": "Finanzen » Etrade",
+      "folder": "Finanzen/Etrade",
+      "conditions": {
+        "from_contains": [
+          "etrade_stmt_mbox@statement.etradefinancial.com",
+          "etrade_conf_mbox@statement.etradefinancial.com",
+          "e-tradealerts-donotreply@etrade.com",
+          "edelivery@etradefrommorganstanley.com"
+        ]
+      }
+    },
+    {
+      "name": "Finanzen » Flatex",
+      "folder": "Finanzen/Flatex",
+      "conditions": {
+        "from_contains": [
+          "info@flatex.at"
+        ]
+      }
+    },
+    {
+      "name": "Finanzen » Kursinfos",
+      "folder": "Finanzen/Kursinfos",
+      "conditions": {
+        "from_contains": [
+          "quotemail@teletrader.com",
+          "quotemail@baha.com"
+        ]
+      }
+    },
+    {
+      "name": "Sport » Runme",
+      "folder": "Sport/Runme",
+      "conditions": {
+        "from_contains": [
+          "mail@runmenetwork.com"
+        ]
+      }
+    },
+    {
+      "name": "Sport » Strava",
+      "folder": "Sport/Strava",
+      "conditions": {
+        "from_contains": [
+          "no-reply@strava.com",
+          "mail@update.strava.com"
+        ]
+      }
+    },
+    {
+      "name": "Sport » Loser",
+      "folder": "Sport/Loser",
+      "conditions": {
+        "from_contains": [
+          "marketing@loser.at"
+        ]
+      }
+    },
+    {
+      "name": "Sport » Suunto",
+      "folder": "Sport/Suunto",
+      "conditions": {
+        "from_contains": [
+          "noreply@email.suunto.com",
+          "app@suunto.com",
+          "notification@sports-tracker.com"
+        ]
+      }
+    },
+    {
+      "name": "Sport » Komoot",
+      "folder": "Sport/Komoot",
+      "conditions": {
+        "from_contains": [
+          "komoot.de"
+        ]
+      }
+    },
+    {
+      "name": "Sport » Fitbit",
+      "folder": "Sport/Fitbit",
+      "conditions": {
+        "from_contains": [
+          "fitbit.com"
+        ]
+      }
+    },
+    {
+      "name": "Sport » GoPro",
+      "folder": "Sport/GoPro",
+      "conditions": {
+        "from_contains": [
+          "GoPro@newsletter.gopro.com",
+          "GoPro@email.gopro.com",
+          "news@camforpro.com"
+        ]
+      }
+    },
+    {
+      "name": "Sport",
+      "folder": "Sport",
+      "conditions": {
+        "from_contains": [
+          "info@postalm.ski"
+        ]
+      }
+    },
+    {
+      "name": "0Buchi » Arzt",
+      "folder": "0Buchi/Arzt",
+      "conditions": {
+        "from_contains": [
+          "ordination@lungenarzt-maurer.at"
+        ]
+      }
+    },
+    {
+      "name": "0Buchi » corona",
+      "folder": "0Buchi/corona",
+      "conditions": {
+        "from_contains": [
+          "service@lead-horizon.org"
+        ]
+      }
+    },
+    {
+      "name": "0Buchi » GMAIL",
+      "folder": "0Buchi/GMAIL",
+      "conditions": {
+        "from_contains": [
+          "roadrunneronroute66@googlemail.com"
+        ]
+      }
+    },
+    {
+      "name": "0Buchi",
+      "folder": "0Buchi",
+      "conditions": {
+        "from_contains": [
+          "info@pati-versand.de",
+          "online.versand@zotter.at",
+          "meinesendung@post.at",
+          "updates@email.enpass.io",
+          "info@mail.miele.at"
+        ]
+      }
+    },
+    {
+      "name": "Beer » Maisel",
+      "folder": "Beer/Maisel",
+      "conditions": {
+        "from_contains": [
+          "auth@maisel.com",
+          "s.opel@maisel.com",
+          "onlineshop@maiselandfriends.com"
+        ]
+      }
+    },
+    {
+      "name": "Beer » Flaschenfreund",
+      "folder": "Beer/Flaschenfreund",
+      "conditions": {
+        "from_contains": [
+          "lunas@flaschenfreund.de"
+        ]
+      }
+    },
+    {
+      "name": "Beer » Beertasting",
+      "folder": "Beer/Beertasting",
+      "conditions": {
+        "from_contains": [
+          "info@beertasting.club",
+          "sabine.pojer@kalea.at",
+          "info@beertasting.shop",
+          "biernews@kalea.at"
+        ]
+      }
+    },
+    {
+      "name": "Beer » Beerlovers",
+      "folder": "Beer/Beerlovers",
+      "conditions": {
+        "from_contains": [
+          "office@beerlovers.at",
+          "newsletter@beerlovers.at",
+          "michael.steiger@ammersin.at"
+        ]
+      }
+    },
+    {
+      "name": "News_SocialMedia » ServusTV",
+      "folder": "News_SocialMedia/ServusTV",
+      "conditions": {
+        "from_contains": [
+          "no-reply@servustv.com"
+        ]
+      }
+    },
+    {
+      "name": "News_SocialMedia » StackOverflow",
+      "folder": "News_SocialMedia/StackOverflow",
+      "conditions": {
+        "from_contains": [
+          "do-not-reply@stackoverflow.email"
+        ]
+      }
+    },
+    {
+      "name": "News_SocialMedia » Twitter",
+      "folder": "News_SocialMedia/Twitter",
+      "conditions": {
+        "from_contains": [
+          "twitter.com"
+        ]
+      }
+    },
+    {
+      "name": "News_SocialMedia » Facebook",
+      "folder": "News_SocialMedia/Facebook",
+      "conditions": {
+        "from_contains": [
+          "@facebookmail.com",
+          "@support.facebook.com"
+        ]
+      }
+    },
+    {
+      "name": "News_SocialMedia » Instagram",
+      "folder": "News_SocialMedia/Instagram",
+      "conditions": {
+        "from_contains": [
+          "@mail.instagram.com"
+        ]
+      }
+    },
+    {
+      "name": "News_SocialMedia » derStandard",
+      "folder": "News_SocialMedia/derStandard",
+      "conditions": {
+        "from_contains": [
+          "noreply@communitymail.derstandard.at"
+        ]
+      }
+    },
+    {
+      "name": "News_SocialMedia » Pinterest",
+      "folder": "News_SocialMedia/Pinterest",
+      "conditions": {
+        "from_contains": [
+          "pinterest.com",
+          "pinterest.de"
+        ]
+      }
+    },
+    {
+      "name": "News_SocialMedia » Willhaben",
+      "folder": "News_SocialMedia/Willhaben",
+      "conditions": {
+        "from_contains": [
+          "willhaben.at"
+        ]
+      }
+    },
+    {
+      "name": "Companies » 1Password",
+      "folder": "Companies/1Password",
+      "conditions": {
+        "from_contains": [
+          "info@email.1password.com",
+          "hello@1password.eu",
+          "no-reply@1password.eu"
+        ]
+      }
+    },
+    {
+      "name": "Companies » Mozilla",
+      "folder": "Companies/Mozilla",
+      "conditions": {
+        "from_contains": [
+          "accounts@firefox.com"
+        ]
+      }
+    },
+    {
+      "name": "Companies » BMW",
+      "folder": "Companies/BMW",
+      "conditions": {
+        "from_contains": [
+          "noreply@qemailserver.com"
+        ]
+      }
+    },
+    {
+      "name": "Companies » Garmin",
+      "folder": "Companies/Garmin",
+      "conditions": {
+        "from_contains": [
+          "garmin@mails.garmin.com"
+        ]
+      }
+    },
+    {
+      "name": "Companies » Hashicorp",
+      "folder": "Companies/Hashicorp",
+      "conditions": {
+        "from_contains": [
+          "no-reply-auth@hashicorp.com",
+          "jana@hashicorp.com",
+          "hashiconf@hashicorp.com",
+          "newsletter@hashicorp.com"
+        ]
+      }
+    },
+    {
+      "name": "DevOps » Slack",
+      "folder": "DevOps/Slack",
+      "conditions": {
+        "from_contains": [
+          "notification@slack.com",
+          "feedback@slack.com",
+          "no-reply-nctdcfbwfcjid0lrmfzasryo@slack.com"
+        ]
+      }
+    },
+    {
+      "name": "DevOps » DevOpsCon",
+      "folder": "DevOps/DevOpsCon",
+      "conditions": {
+        "from_contains": [
+          "no-reply@sandsmedia.com"
+        ]
+      }
+    },
+    {
+      "name": "Immobilien » Grundbuchauszuege",
+      "folder": "Immobilien/Grundbuchauszuege",
+      "conditions": {
+        "from_contains": [
+          "office@auszug.at"
+        ]
+      }
+    },
+    {
+      "name": "Immobilien » Küchen",
+      "folder": "Immobilien/Küchen",
+      "conditions": {
+        "from_contains": [
+          "servicemail@kueche-co.de",
+          "info@kuecheco.at"
+        ]
+      }
+    },
+    {
+      "name": "Immobilien » VarioHaus",
+      "folder": "Immobilien/VarioHaus",
+      "conditions": {
+        "from_contains": [
+          "info@variobau.at"
+        ]
+      }
+    },
+    {
+      "name": "Immobilien » Grundstücke",
+      "folder": "Immobilien/Grundstücke",
+      "conditions": {
+        "from_contains": [
+          "h.hofer@comfort4you.at",
+          "noreply@immobilienscout24.at",
+          "no-reply@immobilienscout24.at"
+        ]
+      }
+    },
+    {
+      "name": "Immobilien",
+      "folder": "Immobilien",
+      "conditions": {
+        "from_contains": [
+          "m.foidl@remax-bad-ischl.at"
         ],
         "subject_contains": [
-          "newsletter",
-          "weekly digest",
-          "monthly update"
+          "Tipps zum optimalen Suchprofil für Ihre Wunschimmobilie"
         ]
       }
     },
     {
-      "name": "Social Media",
-      "folder": "Social",
+      "name": "Hotel_Travel » OEBB",
+      "folder": "Hotel_Travel/OEBB",
       "conditions": {
         "from_contains": [
-          "facebook.com",
-          "twitter.com",
-          "linkedin.com",
-          "instagram.com",
-          "tiktok.com",
-          "reddit.com"
+          "tickets@oebb.at"
         ]
       }
     },
     {
-      "name": "Shopping",
-      "folder": "Shopping",
+      "name": "Hotel_Travel » Airbnb",
+      "folder": "Hotel_Travel/Airbnb",
       "conditions": {
         "from_contains": [
-          "amazon",
-          "ebay",
-          "shop",
-          "store",
-          "paypal"
-        ],
-        "subject_contains": [
-          "order",
-          "shipped",
-          "delivery",
-          "tracking",
-          "payment",
-          "invoice",
-          "receipt"
+          "discover@airbnb.com",
+          "automated@airbnb.com"
         ]
       }
     },
     {
-      "name": "Notifications",
-      "folder": "Notifications",
+      "name": "Hotel_Travel » MotelOne",
+      "folder": "Hotel_Travel/MotelOne",
       "conditions": {
         "from_contains": [
-          "notification",
-          "alert",
-          "no-reply"
-        ],
-        "subject_contains": [
-          "notification",
-          "alert",
-          "reminder"
+          "@motel-one.com"
         ]
       }
     },
     {
-      "name": "Promotions",
-      "folder": "Promotions",
+      "name": "Career",
+      "folder": "Career",
+      "conditions": {
+        "from_contains": [
+          "voquz.recruiting@gmail.com"
+        ]
+      }
+    },
+    {
+      "name": "Career » Vorsorgekassen",
+      "folder": "Career/Vorsorgekassen",
+      "conditions": {
+        "from_contains": [
+          "noevk@vorsorgekasse.at",
+          "nachricht@noevk.at",
+          "noreply@allianz.at",
+          "noreply@vk-service.at"
+        ]
+      }
+    },
+    {
+      "name": "Career » LinkedIn",
+      "folder": "Career/LinkedIn",
+      "conditions": {
+        "from_contains": [
+          "linkedin.com"
+        ]
+      }
+    },
+    {
+      "name": "Career » Xing",
+      "folder": "Career/Xing",
+      "conditions": {
+        "from_contains": [
+          "xing.com"
+        ]
+      }
+    },
+    {
+      "name": "Career » KarriereAT",
+      "folder": "Career/KarriereAT",
+      "conditions": {
+        "from_contains": [
+          "karriere.at"
+        ]
+      }
+    },
+    {
+      "name": "Dog » BARF",
+      "folder": "Dog/BARF",
+      "conditions": {
+        "from_contains": [
+          "info@tirol-barf.at",
+          "office@phytoaustria.at",
+          "echthundgerecht@gmail.com"
+        ]
+      }
+    },
+    {
+      "name": "Dog » Futterkoerberl",
+      "folder": "Dog/Futterkoerberl",
+      "conditions": {
+        "from_contains": [
+          "friedl@futterkoerberl.at"
+        ]
+      }
+    },
+    {
+      "name": "Linux_and_IT » Qnap",
+      "folder": "Linux_and_IT/Qnap",
+      "conditions": {
+        "from_contains": [
+          "helpdesk@qnap.com",
+          "desupport@qnapsecurity.com.tw"
+        ]
+      }
+    },
+    {
+      "name": "Linux_and_IT » Google",
+      "folder": "Linux_and_IT/Google",
+      "conditions": {
+        "from_contains": [
+          "google.com"
+        ]
+      }
+    },
+    {
+      "name": "Linux_and_IT » Github",
+      "folder": "Linux_and_IT/Github",
+      "conditions": {
+        "from_contains": [
+          "github.com"
+        ]
+      }
+    },
+    {
+      "name": "Linux_and_IT » Homeoffix",
+      "folder": "Linux_and_IT/Homeoffix",
       "conditions": {
         "subject_contains": [
-          "sale",
-          "discount",
-          "offer",
-          "deal",
-          "promo",
-          "%",
-          "save"
+          "homeoffix"
+        ]
+      }
+    },
+    {
+      "name": "Linux_and_IT",
+      "folder": "Linux_and_IT",
+      "conditions": {
+        "from_contains": [
+          "@linuxfoundation.org",
+          "@engage.linuxfoundation.org",
+          "no-reply@email.thelinuxfoundation.org"
+        ]
+      }
+    },
+    {
+      "name": "Vereine » Naturfreunde",
+      "folder": "Vereine/Naturfreunde",
+      "conditions": {
+        "from_contains": [
+          "@newsletter.naturfreunde.at",
+          "office@naturfreunde-badischl.at",
+          "info@naturfreunde.at"
+        ]
+      }
+    },
+    {
+      "name": "Vereine » AV",
+      "folder": "Vereine/AV",
+      "conditions": {
+        "from_contains": [
+          "alpenvereinaktiv.com",
+          "franz.kranabitl@speed.at",
+          "office.badischl@sektion.alpenverein.at",
+          "office.salzkammergut@sektion.alpenverein.at"
+        ]
+      }
+    },
+    {
+      "name": "Freunde » Pierre",
+      "folder": "Freunde/Pierre",
+      "conditions": {
+        "from_contains": [
+          "ps@datensegler.at"
+        ]
+      }
+    },
+    {
+      "name": "Freunde » Harry",
+      "folder": "Freunde/Harry",
+      "conditions": {
+        "from_contains": [
+          "harald@sommerer.me",
+          "harald.sommerer@chargepoint.com"
+        ]
+      }
+    },
+    {
+      "name": "Freunde",
+      "folder": "Freunde",
+      "conditions": {
+        "from_contains": [
+          "jl@lafuente.me"
+        ]
+      }
+    },
+    {
+      "name": "Neli",
+      "folder": "Neli",
+      "conditions": {
+        "from_contains": [
+          "neli@buchboeck.at"
+        ]
+      }
+    },
+    {
+      "name": "Honza",
+      "folder": "Honza",
+      "conditions": {
+        "from_contains": [
+          "jankozel@yahoo.com"
+        ]
+      }
+    },
+    {
+      "name": "JoergLemmerer",
+      "folder": "JoergLemmerer",
+      "conditions": {
+        "from_contains": [
+          "lemmerer.34545@raiffeisen-ooe.at"
+        ]
+      }
+    },
+    {
+      "name": "ErichSchymonski",
+      "folder": "ErichSchymonski",
+      "conditions": {
+        "from_contains": [
+          "erich@schymonski.at"
+        ]
+      }
+    },
+    {
+      "name": "RaGroesswang",
+      "folder": "RaGroesswang",
+      "conditions": {
+        "from_contains": [
+          "groesswang@hitzenberger.at"
+        ]
+      }
+    },
+    {
+      "name": "BadIschl",
+      "folder": "BadIschl",
+      "conditions": {
+        "from_contains": [
+          "d.laimer@badischl.at",
+          "mysliwietz@badischl.at",
+          "stampfl@badischl.at"
+        ]
+      }
+    },
+    {
+      "name": "0_origiNELLi » origiNELLI",
+      "folder": "0_origiNELLi/origiNELLI",
+      "conditions": {
+        "from_contains": [
+          "office@originelli.at"
+        ]
+      }
+    },
+    {
+      "name": "0_origiNELLi",
+      "folder": "0_origiNELLi",
+      "conditions": {
+        "from_contains": [
+          "no-reply@mail.yelp.com"
         ]
       }
     }
