@@ -107,10 +107,31 @@ def load_spam_rules(spam_rules_file='spam_rules.json'):
 
 
 def build_whitelist_from_rules(rules_config):
-    """Erstellt Whitelist aus email_rules.json um False Positives zu vermeiden"""
+    """
+    Erstellt Whitelist aus email_rules.json um False Positives zu vermeiden
+
+    WICHTIG: Ignoriert Regeln, die in Spam/Trash/Junk-Ordner verschieben!
+    """
     whitelist = set()
 
+    # Ordner die NICHT auf die Whitelist kommen sollen
+    spam_folders = {
+        'junk', 'spam', 'trash', 'deleted', 'gelöscht',
+        'papierkorb', 'spamverdacht', 'quarantine'
+    }
+
     for rule in rules_config.get('rules', []):
+        # Prüfe Zielordner - wenn Spam/Trash/Junk -> NICHT whitelisten!
+        target_folder = rule.get('folder', '').lower()
+
+        # Prüfe ob Zielordner ein Spam/Trash-Ordner ist
+        is_spam_folder = any(spam_word in target_folder for spam_word in spam_folders)
+
+        if is_spam_folder:
+            logger.debug(f"Skipping whitelist for spam/trash folder: {rule.get('folder')}")
+            continue  # Diese Absender NICHT whitelisten!
+
+        # Nur "gute" Ordner (Shopping, Newsletter, etc.) whitelisten
         conditions = rule.get('conditions', {})
         from_contains = conditions.get('from_contains', [])
 
