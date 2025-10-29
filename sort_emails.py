@@ -301,6 +301,12 @@ def create_folder_if_not_exists(client, folder_name):
                 try:
                     client.create_folder(partial_path)
                     existing_folders.add(partial_path)
+                    # Subscribe to folder so it's visible in webmail
+                    try:
+                        client.subscribe_folder(partial_path)
+                        logger.info(f"Subscribed to folder: {partial_path}")
+                    except Exception as sub_error:
+                        logger.warning(f"Could not subscribe to {partial_path}: {sub_error}")
                 except Exception as create_error:
                     logger.warning(f"Could not create folder {partial_path}: {create_error}")
                     # Continue anyway - maybe it exists but wasn't in the list
