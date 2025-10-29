@@ -258,11 +258,26 @@ def is_spam(email_msg, email_data, spam_rules, whitelist):
 
 
 def create_folder_if_not_exists(client, folder_name):
-    """Erstellt einen IMAP-Ordner, falls er nicht existiert"""
+    """
+    Erstellt einen IMAP-Ordner, falls er nicht existiert.
+    Erstellt automatisch auch Parent-Ordner falls nötig.
+    """
     try:
         folders = client.list_folders()
 
-        # Extract folder names and decode bytes to strings for comparison
+        # Get the folder separator from the server
+        separator = '/'  # Default
+        if folders:
+            # Extract separator from first folder info
+            first_folder = folders[0]
+            if len(first_folder) >= 2 and first_folder[1]:
+                sep = first_folder[1]
+                if isinstance(sep, bytes):
+                    sep = sep.decode('utf-8', errors='ignore')
+                if sep:  # Only use if not empty
+                    separator = sep
+
+        # Extract existing folder names
         existing_folders = set()
         for folder_info in folders:
             name = folder_info[2]
@@ -270,9 +285,25 @@ def create_folder_if_not_exists(client, folder_name):
                 name = name.decode('utf-8', errors='ignore')
             existing_folders.add(name)
 
-        if folder_name not in existing_folders:
-            logger.info(f"Creating folder: {folder_name}")
-            client.create_folder(folder_name)
+        # Check if folder already exists
+        if folder_name in existing_folders:
+            return True
+
+        # Split folder path and create parent folders first
+        parts = folder_name.split('/')
+
+        # Create each level of the hierarchy
+        for i in range(len(parts)):
+            partial_path = separator.join(parts[:i+1])
+
+            if partial_path not in existing_folders:
+                logger.info(f"Creating folder: {partial_path}")
+                try:
+                    client.create_folder(partial_path)
+                    existing_folders.add(partial_path)
+                except Exception as create_error:
+                    logger.warning(f"Could not create folder {partial_path}: {create_error}")
+                    # Continue anyway - maybe it exists but wasn't in the list
 
         return True
     except Exception as e:
