@@ -115,6 +115,8 @@ def sort_emails(imap_server, email_user, email_pass, rules_config, dry_run=False
     """
     Hauptfunktion zum Sortieren von Emails
 
+    WICHTIG: Verwendet BODY.PEEK[] um den gelesen/ungelesen-Status zu erhalten!
+
     Args:
         imap_server: IMAP Server-Adresse
         email_user: Email-Benutzername
@@ -154,14 +156,16 @@ def sort_emails(imap_server, email_user, email_pass, rules_config, dry_run=False
                 try:
                     stats['processed'] += 1
 
-                    # Email-Daten abrufen
-                    fetch_data = client.fetch([msg_id], ['ENVELOPE', 'RFC822'])
+                    # Email-Daten abrufen (PEEK um Flags nicht zu ändern!)
+                    # FLAGS holen für späteren Restore
+                    fetch_data = client.fetch([msg_id], ['FLAGS', 'BODY.PEEK[]'])
 
                     if msg_id not in fetch_data:
                         continue
 
-                    envelope = fetch_data[msg_id].get(b'ENVELOPE')
-                    raw_email = fetch_data[msg_id].get(b'RFC822')
+                    # Flags speichern für später
+                    msg_flags = fetch_data[msg_id].get(b'FLAGS', ())
+                    raw_email = fetch_data[msg_id].get(b'BODY[]')
 
                     if not raw_email:
                         continue
@@ -196,7 +200,10 @@ def sort_emails(imap_server, email_user, email_pass, rules_config, dry_run=False
                             create_folder_if_not_exists(client, target_folder)
 
                             # Email verschieben
-                            client.copy([msg_id], target_folder)
+                            # copy() übernimmt automatisch die Flags
+                            result = client.copy([msg_id], target_folder)
+
+                            # Original aus INBOX löschen
                             client.delete_messages([msg_id])
                             client.expunge()
 
