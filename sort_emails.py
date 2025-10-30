@@ -96,6 +96,16 @@ def check_rule_match(email_data, rule):
     return False
 
 
+def load_accounts(accounts_file='accounts.json'):
+    """Lädt Account-Konfiguration aus JSON-Datei"""
+    if not os.path.exists(accounts_file):
+        logger.error(f"Accounts file {accounts_file} not found.")
+        return {"accounts": []}
+
+    with open(accounts_file, 'r', encoding='utf-8') as f:
+        return json.load(f)
+
+
 def load_spam_rules(spam_rules_file='spam_rules.json'):
     """Lädt Spam-Erkennungs-Regeln aus JSON-Datei"""
     if not os.path.exists(spam_rules_file):
@@ -317,7 +327,8 @@ def create_folder_if_not_exists(client, folder_name):
         return False
 
 
-def sort_emails(imap_server, email_user, email_pass, rules_config, dry_run=False):
+def sort_emails(imap_server, email_user, email_pass, rules_config, dry_run=False,
+                spam_rules_file='spam_rules.json', spam_filtering_only=False):
     """
     Hauptfunktion zum Sortieren von Emails
 
@@ -329,9 +340,11 @@ def sort_emails(imap_server, email_user, email_pass, rules_config, dry_run=False
         email_pass: Email-Passwort
         rules_config: Dictionary mit Sortier-Regeln
         dry_run: Wenn True, werden keine Emails verschoben (nur Simulation)
+        spam_rules_file: Pfad zur Spam-Regeln-Datei
+        spam_filtering_only: Wenn True, werden nur Spam-Regeln angewendet (keine normalen Regeln)
     """
     # Spam-Regeln laden
-    spam_rules = load_spam_rules()
+    spam_rules = load_spam_rules(spam_rules_file)
     spam_enabled = spam_rules.get('enabled', False)
 
     # Whitelist aus email_rules.json erstellen
@@ -430,40 +443,41 @@ def sort_emails(imap_server, email_user, email_pass, rules_config, dry_run=False
 
                             continue  # Nächste Email
 
-                    # Normale Regeln durchgehen (nur wenn nicht als Spam erkannt)
-                    matched_rule = None
-                    for rule in rules_config.get('rules', []):
-                        if check_rule_match(email_data, rule):
-                            matched_rule = rule
-                            break
+                    # Normale Regeln durchgehen (nur wenn nicht als Spam erkannt und wenn nicht spam_filtering_only)
+                    if not spam_filtering_only:
+                        matched_rule = None
+                        for rule in rules_config.get('rules', []):
+                            if check_rule_match(email_data, rule):
+                                matched_rule = rule
+                                break
 
-                    if matched_rule:
-                        target_folder = matched_rule['folder']
-                        logger.info(
-                            f"Email matches rule '{matched_rule['name']}': "
-                            f"From: {email_data['from'][:50]}, "
-                            f"Subject: {email_data['subject'][:50]} "
-                            f"-> Moving to {target_folder}"
-                        )
+                        if matched_rule:
+                            target_folder = matched_rule['folder']
+                            logger.info(
+                                f"Email matches rule '{matched_rule['name']}': "
+                                f"From: {email_data['from'][:50]}, "
+                                f"Subject: {email_data['subject'][:50]} "
+                                f"-> Moving to {target_folder}"
+                            )
 
-                        if not dry_run:
-                            # Zielordner erstellen falls nötig
-                            create_folder_if_not_exists(client, target_folder)
+                            if not dry_run:
+                                # Zielordner erstellen falls nötig
+                                create_folder_if_not_exists(client, target_folder)
 
-                            # Email verschieben
-                            # copy() übernimmt automatisch die Flags
-                            result = client.copy([msg_id], target_folder)
+                                # Email verschieben
+                                # copy() übernimmt automatisch die Flags
+                                result = client.copy([msg_id], target_folder)
 
-                            # Original aus INBOX löschen
-                            client.delete_messages([msg_id])
-                            client.expunge()
+                                # Original aus INBOX löschen
+                                client.delete_messages([msg_id])
+                                client.expunge()
 
-                            stats['moved'] += 1
-                            stats['by_folder'][target_folder] = stats['by_folder'].get(target_folder, 0) + 1
-                        else:
-                            logger.info(f"[DRY RUN] Would move to {target_folder}")
-                            stats['moved'] += 1
-                            stats['by_folder'][target_folder] = stats['by_folder'].get(target_folder, 0) + 1
+                                stats['moved'] += 1
+                                stats['by_folder'][target_folder] = stats['by_folder'].get(target_folder, 0) + 1
+                            else:
+                                logger.info(f"[DRY RUN] Would move to {target_folder}")
+                                stats['moved'] += 1
+                                stats['by_folder'][target_folder] = stats['by_folder'].get(target_folder, 0) + 1
 
                 except Exception as e:
                     logger.error(f"Error processing email {msg_id}: {e}")
@@ -480,43 +494,135 @@ def sort_emails(imap_server, email_user, email_pass, rules_config, dry_run=False
 
 
 def main():
-    """Hauptfunktion"""
-    # Konfiguration aus Umgebungsvariablen
-    imap_server = os.getenv('IMAP_SERVER', 'imap.gmail.com')
-    email_user = os.getenv('EMAIL_USER')
-    email_pass = os.getenv('EMAIL_PASS')
+    """Hauptfunktion - verarbeitet alle konfigurierten Accounts"""
     dry_run = os.getenv('DRY_RUN', 'false').lower() == 'true'
 
-    # Validierung
-    if not email_user or not email_pass:
-        logger.error("EMAIL_USER and EMAIL_PASS environment variables must be set")
+    # Lade Account-Konfiguration
+    accounts_config = load_accounts()
+    accounts = accounts_config.get('accounts', [])
+
+    if not accounts:
+        logger.error("No accounts configured in accounts.json")
         return 1
 
-    # Regeln laden
-    rules_config = load_rules()
-    logger.info(f"Loaded {len(rules_config.get('rules', []))} sorting rules")
+    logger.info(f"Found {len(accounts)} configured account(s)")
 
-    # Email-Sortierung durchführen
-    try:
-        stats = sort_emails(imap_server, email_user, email_pass, rules_config, dry_run)
+    overall_stats = {
+        'total_processed': 0,
+        'total_moved': 0,
+        'total_spam_detected': 0,
+        'total_errors': 0,
+        'accounts_processed': 0,
+        'accounts_skipped': 0
+    }
 
-        # Statistiken ausgeben
-        logger.info("=" * 50)
-        logger.info("Email Sorting Statistics:")
-        logger.info(f"  Processed: {stats['processed']}")
-        logger.info(f"  Moved: {stats['moved']}")
-        logger.info(f"  Spam detected: {stats['spam_detected']}")
-        logger.info(f"  Errors: {stats['errors']}")
-        logger.info("  By folder:")
-        for folder, count in stats['by_folder'].items():
-            logger.info(f"    {folder}: {count}")
-        logger.info("=" * 50)
+    # Verarbeite jeden Account
+    for account in accounts:
+        account_id = account.get('id', 'unknown')
+        account_name = account.get('name', account_id)
 
-        return 0
+        # Überspringe deaktivierte Accounts
+        if not account.get('enabled', False):
+            logger.info(f"Skipping disabled account: {account_name}")
+            overall_stats['accounts_skipped'] += 1
+            continue
 
-    except Exception as e:
-        logger.error(f"Email sorting failed: {e}")
-        return 1
+        logger.info("=" * 70)
+        logger.info(f"Processing account: {account_name} ({account_id})")
+        logger.info(f"Description: {account.get('description', 'N/A')}")
+        logger.info("=" * 70)
+
+        # Hole Credentials aus Environment Variables
+        email_user_secret = account.get('email_user_secret')
+        email_pass_secret = account.get('email_pass_secret')
+
+        if not email_user_secret or not email_pass_secret:
+            logger.error(f"Account {account_id}: Missing credential secret names")
+            overall_stats['accounts_skipped'] += 1
+            continue
+
+        email_user = os.getenv(email_user_secret)
+        email_pass = os.getenv(email_pass_secret)
+
+        if not email_user or not email_pass:
+            logger.error(f"Account {account_id}: Credentials not found in environment ({email_user_secret}, {email_pass_secret})")
+            overall_stats['accounts_skipped'] += 1
+            continue
+
+        # IMAP Server
+        imap_server = account.get('imap_server')
+        if not imap_server:
+            logger.error(f"Account {account_id}: No IMAP server specified")
+            overall_stats['accounts_skipped'] += 1
+            continue
+
+        # Spam filtering only?
+        spam_filtering_only = account.get('spam_filtering_only', False)
+
+        # Regeln laden (nur wenn nicht spam_filtering_only)
+        rules_config = {"rules": []}
+        if not spam_filtering_only:
+            rules_file = account.get('rules_file')
+            if rules_file:
+                rules_config = load_rules(rules_file)
+                logger.info(f"Loaded {len(rules_config.get('rules', []))} sorting rules from {rules_file}")
+            else:
+                logger.warning(f"Account {account_id}: No rules file specified, only spam filtering will be performed")
+        else:
+            logger.info(f"Account {account_id}: Spam filtering only mode")
+
+        # Spam rules file
+        spam_rules_file = account.get('spam_rules_file', 'spam_rules.json')
+
+        # Email-Sortierung durchführen
+        try:
+            stats = sort_emails(
+                imap_server=imap_server,
+                email_user=email_user,
+                email_pass=email_pass,
+                rules_config=rules_config,
+                dry_run=dry_run,
+                spam_rules_file=spam_rules_file,
+                spam_filtering_only=spam_filtering_only
+            )
+
+            # Statistiken für diesen Account ausgeben
+            logger.info("-" * 50)
+            logger.info(f"Statistics for {account_name}:")
+            logger.info(f"  Processed: {stats['processed']}")
+            logger.info(f"  Moved: {stats['moved']}")
+            logger.info(f"  Spam detected: {stats['spam_detected']}")
+            logger.info(f"  Errors: {stats['errors']}")
+            if stats['by_folder']:
+                logger.info("  By folder:")
+                for folder, count in stats['by_folder'].items():
+                    logger.info(f"    {folder}: {count}")
+            logger.info("-" * 50)
+
+            # Update overall stats
+            overall_stats['total_processed'] += stats['processed']
+            overall_stats['total_moved'] += stats['moved']
+            overall_stats['total_spam_detected'] += stats['spam_detected']
+            overall_stats['total_errors'] += stats['errors']
+            overall_stats['accounts_processed'] += 1
+
+        except Exception as e:
+            logger.error(f"Email sorting failed for account {account_name}: {e}")
+            overall_stats['accounts_skipped'] += 1
+            continue
+
+    # Gesamt-Statistiken ausgeben
+    logger.info("=" * 70)
+    logger.info("OVERALL STATISTICS (ALL ACCOUNTS):")
+    logger.info(f"  Accounts processed: {overall_stats['accounts_processed']}")
+    logger.info(f"  Accounts skipped: {overall_stats['accounts_skipped']}")
+    logger.info(f"  Total emails processed: {overall_stats['total_processed']}")
+    logger.info(f"  Total emails moved: {overall_stats['total_moved']}")
+    logger.info(f"  Total spam detected: {overall_stats['total_spam_detected']}")
+    logger.info(f"  Total errors: {overall_stats['total_errors']}")
+    logger.info("=" * 70)
+
+    return 0 if overall_stats['accounts_processed'] > 0 else 1
 
 
 if __name__ == '__main__':

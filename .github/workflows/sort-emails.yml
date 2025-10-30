@@ -38,9 +38,16 @@ jobs:
 
       - name: Run email sorter
         env:
-          IMAP_SERVER: ${{ secrets.IMAP_SERVER }}
+          # Easy Name Account (Primary)
           EMAIL_USER: ${{ secrets.EMAIL_USER }}
           EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
+          # Gmail Account
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_PASS: ${{ secrets.GMAIL_PASS }}
+          # Wife's Easy Name Account (Optional)
+          WIFE_EMAIL_USER: ${{ secrets.WIFE_EMAIL_USER }}
+          WIFE_EMAIL_PASS: ${{ secrets.WIFE_EMAIL_PASS }}
+          # Configuration
           DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
         run: python sort_emails.py
 
