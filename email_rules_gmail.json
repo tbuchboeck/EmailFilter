@@ -1,3 +1,158 @@
 {
-  "rules": []
+  "rules": [
+    {
+      "name": "Gaming » Steam",
+      "folder": "INBOX/Gaming/Steam",
+      "conditions": {
+        "from_contains": ["steampowered.com"]
+      }
+    },
+    {
+      "name": "Gaming » Nintendo",
+      "folder": "INBOX/Gaming/Nintendo",
+      "conditions": {
+        "from_contains": ["mail.nintendo-europe.com", "nintendo.com"]
+      }
+    },
+    {
+      "name": "Gaming » Ubisoft",
+      "folder": "INBOX/Gaming/Ubisoft",
+      "conditions": {
+        "from_contains": ["updates.ubisoft.com", "ubisoft.com"]
+      }
+    },
+    {
+      "name": "Gaming » Blizzard",
+      "folder": "INBOX/Gaming/Blizzard",
+      "conditions": {
+        "from_contains": ["e.blizzard.com", "blizzard.com"]
+      }
+    },
+    {
+      "name": "Tech » InfluxDB",
+      "folder": "INBOX/Tech/InfluxDB",
+      "conditions": {
+        "from_contains": ["influxdata.com"]
+      }
+    },
+    {
+      "name": "Tech » HashiCorp",
+      "folder": "INBOX/Tech/HashiCorp",
+      "conditions": {
+        "from_contains": ["reply.hashicorp.com", "hashicorp.com"]
+      }
+    },
+    {
+      "name": "Tech » 8x8",
+      "folder": "INBOX/Tech/8x8",
+      "conditions": {
+        "from_contains": ["information.8x8.com", "8x8.com"]
+      }
+    },
+    {
+      "name": "Tech » IconScout",
+      "folder": "INBOX/Tech/IconScout",
+      "conditions": {
+        "from_contains": ["iconscout.com"]
+      }
+    },
+    {
+      "name": "Google » Cloud Platform",
+      "folder": "INBOX/Google/Cloud",
+      "conditions": {
+        "from_contains": ["CloudPlatform-noreply@google.com"]
+      }
+    },
+    {
+      "name": "Google » Maps & Timeline",
+      "folder": "INBOX/Google/Maps",
+      "conditions": {
+        "from_contains": ["noreply-maps-timeline@google.com", "noreply-local-guides@google.com"]
+      }
+    },
+    {
+      "name": "Google » Accounts & Security",
+      "folder": "INBOX/Google/Accounts",
+      "conditions": {
+        "from_contains": ["no-reply@accounts.google.com"]
+      }
+    },
+    {
+      "name": "Google » Sonstige",
+      "folder": "INBOX/Google/Other",
+      "conditions": {
+        "from_contains": ["google.com"]
+      }
+    },
+    {
+      "name": "Microsoft » Bing Places",
+      "folder": "INBOX/Microsoft/Bing",
+      "conditions": {
+        "from_contains": ["bp-norep@microsoft.com"]
+      }
+    },
+    {
+      "name": "Microsoft » Start Daily News",
+      "folder": "INBOX/News/Microsoft-Start",
+      "conditions": {
+        "from_contains": ["microsoft.start@email2.microsoft.com"]
+      }
+    },
+    {
+      "name": "Newsletter » Medium",
+      "folder": "INBOX/Newsletter/Medium",
+      "conditions": {
+        "from_contains": ["medium.com"]
+      }
+    },
+    {
+      "name": "Newsletter » Rotten Tomatoes",
+      "folder": "INBOX/Newsletter/RottenTomatoes",
+      "conditions": {
+        "from_contains": ["movies.rottentomatoes.com", "rottentomatoes.com"]
+      }
+    },
+    {
+      "name": "Sport » FantasyPros",
+      "folder": "INBOX/Sport/FantasyPros",
+      "conditions": {
+        "from_contains": ["mail.fantasypros.com", "fantasypros.com"]
+      }
+    },
+    {
+      "name": "Shopping » Blinkist",
+      "folder": "INBOX/Shopping/Blinkist",
+      "conditions": {
+        "from_contains": ["mail.blinkist.com", "blinkist.com"]
+      }
+    },
+    {
+      "name": "Travel » Komoot",
+      "folder": "INBOX/Travel/Komoot",
+      "conditions": {
+        "from_contains": ["komoot.de"]
+      }
+    },
+    {
+      "name": "Auto » INSTADRIVE",
+      "folder": "INBOX/Auto/INSTADRIVE",
+      "conditions": {
+        "from_contains": ["insta-drive.com"]
+      }
+    },
+    {
+      "name": "Personal » Datensegler",
+      "folder": "INBOX/Personal/Datensegler",
+      "conditions": {
+        "from_contains": ["datensegler.at"]
+      }
+    },
+    {
+      "name": "Pets » Dogorama",
+      "folder": "INBOX/Pets/Dogorama",
+      "conditions": {
+        "from_contains": ["dogorama.de"]
+      }
+    }
+  ]
 }
