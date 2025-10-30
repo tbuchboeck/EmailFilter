@@ -1,0 +1,40 @@
+{
+  "accounts": [
+    {
+      "id": "easyname",
+      "name": "Easy Name Primary Account",
+      "enabled": true,
+      "imap_server": "imap.easyname.com",
+      "email_user_secret": "EMAIL_USER",
+      "email_pass_secret": "EMAIL_PASS",
+      "rules_file": "email_rules_easyname.json",
+      "spam_rules_file": "spam_rules.json",
+      "spam_filtering_only": false,
+      "description": "Main Easy Name account with full rule-based filtering and spam detection"
+    },
+    {
+      "id": "gmail",
+      "name": "Gmail Account",
+      "enabled": true,
+      "imap_server": "imap.gmail.com",
+      "email_user_secret": "GMAIL_USER",
+      "email_pass_secret": "GMAIL_PASS",
+      "rules_file": "email_rules_gmail.json",
+      "spam_rules_file": "spam_rules.json",
+      "spam_filtering_only": false,
+      "description": "Gmail account - rules will be learned using analyze_inbox.py"
+    },
+    {
+      "id": "easyname_wife",
+      "name": "Easy Name Wife's Account",
+      "enabled": false,
+      "imap_server": "imap.easyname.com",
+      "email_user_secret": "WIFE_EMAIL_USER",
+      "email_pass_secret": "WIFE_EMAIL_PASS",
+      "rules_file": null,
+      "spam_rules_file": "spam_rules.json",
+      "spam_filtering_only": true,
+      "description": "Wife's Easy Name account - spam filtering only, no rule-based sorting"
+    }
+  ]
+}

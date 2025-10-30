@@ -3,6 +3,17 @@ name: Analyze Inbox
 on:
   # Nur manuelles Auslösen
   workflow_dispatch:
+    inputs:
+      account:
+        description: 'Account to analyze (leave empty for all enabled accounts)'
+        required: false
+        default: ''
+        type: choice
+        options:
+          - ''
+          - 'easyname'
+          - 'gmail'
+          - 'easyname_wife'
 
 jobs:
   analyze:
@@ -25,10 +36,16 @@ jobs:
 
       - name: Run inbox analysis
         env:
-          IMAP_SERVER: ${{ secrets.IMAP_SERVER }}
+          # Easy Name Account (Primary)
           EMAIL_USER: ${{ secrets.EMAIL_USER }}
           EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
-        run: python analyze_inbox.py
+          # Gmail Account
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_PASS: ${{ secrets.GMAIL_PASS }}
+          # Wife's Easy Name Account (Optional)
+          WIFE_EMAIL_USER: ${{ secrets.WIFE_EMAIL_USER }}
+          WIFE_EMAIL_PASS: ${{ secrets.WIFE_EMAIL_PASS }}
+        run: python analyze_inbox.py ${{ github.event.inputs.account }}
 
       - name: Upload analysis results
         if: always()

@@ -5,6 +5,7 @@ Ein automatisches Email-Sortier-System, das über GitHub Actions läuft und Emai
 ## Features
 
 - Läuft automatisch alle 30 Minuten auf GitHub Actions (kostenlos!)
+- **Multi-Account-Unterstützung** (Gmail, Outlook, Easy Name, etc.)
 - Sortiert Emails basierend auf konfigurierbaren Regeln
 - **Intelligente Spam-Erkennung** (Hybrid: SpamAssassin + Regelbasiert)
 - Unterstützt Filterung nach Absender und Betreff
@@ -13,6 +14,7 @@ Ein automatisches Email-Sortier-System, das über GitHub Actions läuft und Emai
 - Sichere Speicherung von Credentials über GitHub Secrets
 - Dry-Run Modus zum Testen
 - Automatische Whitelist für False-Positive-Vermeidung
+- **Spam-only-Modus** für Accounts ohne Regel-Sortierung
 
 ## Setup
 
@@ -83,6 +85,113 @@ Wenn du Gmail verwendest:
 | GMX | `imap.gmx.net` |
 | Web.de | `imap.web.de` |
 
+## Multi-Account Setup (NEU! 🎉)
+
+Du kannst jetzt mehrere Email-Konten gleichzeitig verwalten! Jedes Konto kann seine eigenen Regeln haben oder nur Spam-Filterung verwenden.
+
+### Account-Konfiguration (`accounts.json`)
+
+Alle Accounts werden in `accounts.json` konfiguriert:
+
+```json
+{
+  "accounts": [
+    {
+      "id": "easyname",
+      "name": "Easy Name Primary Account",
+      "enabled": true,
+      "imap_server": "imap.easyname.com",
+      "email_user_secret": "EMAIL_USER",
+      "email_pass_secret": "EMAIL_PASS",
+      "rules_file": "email_rules_easyname.json",
+      "spam_rules_file": "spam_rules.json",
+      "spam_filtering_only": false
+    },
+    {
+      "id": "gmail",
+      "name": "Gmail Account",
+      "enabled": true,
+      "imap_server": "imap.gmail.com",
+      "email_user_secret": "GMAIL_USER",
+      "email_pass_secret": "GMAIL_PASS",
+      "rules_file": "email_rules_gmail.json",
+      "spam_rules_file": "spam_rules.json",
+      "spam_filtering_only": false
+    },
+    {
+      "id": "wife_account",
+      "name": "Wife's Account (Spam Only)",
+      "enabled": false,
+      "imap_server": "imap.easyname.com",
+      "email_user_secret": "WIFE_EMAIL_USER",
+      "email_pass_secret": "WIFE_EMAIL_PASS",
+      "rules_file": null,
+      "spam_rules_file": "spam_rules.json",
+      "spam_filtering_only": true
+    }
+  ]
+}
+```
+
+### Account-Felder erklärt:
+
+- **id**: Eindeutige ID für den Account (verwendet in Logs und CLI)
+- **name**: Beschreibender Name
+- **enabled**: `true` = Account wird verarbeitet, `false` = Account wird übersprungen
+- **imap_server**: IMAP-Server-Adresse
+- **email_user_secret**: Name des GitHub Secrets für den Benutzernamen
+- **email_pass_secret**: Name des GitHub Secrets für das Passwort
+- **rules_file**: Pfad zur Regeldatei (oder `null` für Spam-only)
+- **spam_rules_file**: Pfad zur Spam-Regeldatei
+- **spam_filtering_only**: `true` = Nur Spam-Filterung, keine Regel-Sortierung
+
+### GitHub Secrets für Multi-Account
+
+Füge für jeden Account separate Secrets hinzu:
+
+| Account | Secret Name | Beispiel |
+|---------|-------------|----------|
+| Easy Name | `EMAIL_USER` | `deine@easyname.com` |
+| Easy Name | `EMAIL_PASS` | `dein-passwort` |
+| Gmail | `GMAIL_USER` | `deine@gmail.com` |
+| Gmail | `GMAIL_PASS` | `dein-app-passwort` |
+| Wife's Account | `WIFE_EMAIL_USER` | `frau@easyname.com` |
+| Wife's Account | `WIFE_EMAIL_PASS` | `frau-passwort` |
+
+### Separate Regeln pro Account
+
+Jedes Konto kann seine eigene Regeldatei haben:
+
+- `email_rules_easyname.json` - Regeln für Easy Name Account
+- `email_rules_gmail.json` - Regeln für Gmail Account
+- etc.
+
+Du kannst auch die gleiche Regeldatei für mehrere Accounts verwenden!
+
+### Neue Regeln für Gmail lernen
+
+Um Regeln für dein Gmail-Konto zu lernen:
+
+```bash
+# Lokal testen (optional)
+export GMAIL_USER="deine@gmail.com"
+export GMAIL_PASS="dein-app-passwort"
+python analyze_inbox.py gmail
+
+# Oder via GitHub Actions:
+# Actions → Analyze Inbox → Run workflow → Wähle "gmail" aus
+```
+
+Das Script analysiert deine Gmail Inbox und schlägt automatisch Regeln vor, die du in `email_rules_gmail.json` einfügen kannst!
+
+### Spam-Only-Modus
+
+Perfekt für Accounts, bei denen du nur Spam filtern willst:
+
+1. Setze `"spam_filtering_only": true`
+2. Setze `"rules_file": null`
+3. Der Account verwendet nur Spam-Filterung, keine Regel-Sortierung
+
 ## Verwendung
 
 ### Automatische Ausführung
@@ -127,14 +236,22 @@ Du kannst das Script auch lokal testen:
 # Dependencies installieren
 pip install -r requirements.txt
 
-# Umgebungsvariablen setzen
-export EMAIL_USER="deine.email@gmail.com"
-export EMAIL_PASS="dein-app-passwort"
-export IMAP_SERVER="imap.gmail.com"
+# Umgebungsvariablen für alle konfigurierten Accounts setzen
+export EMAIL_USER="deine@easyname.com"
+export EMAIL_PASS="dein-passwort"
+export GMAIL_USER="deine@gmail.com"
+export GMAIL_PASS="dein-app-passwort"
 export DRY_RUN="true"  # Optional: Nur simulieren
 
-# Script ausführen
+# Email-Sorter ausführen (alle enabled Accounts)
 python sort_emails.py
+
+# Inbox analysieren für spezifischen Account
+python analyze_inbox.py gmail
+python analyze_inbox.py easyname
+
+# Inbox analysieren für alle enabled Accounts
+python analyze_inbox.py
 ```
 
 ## Workflow-Zeitplan anpassen

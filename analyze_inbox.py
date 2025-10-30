@@ -62,6 +62,16 @@ def load_rules(rules_file='email_rules.json'):
         return {'rules': []}
 
 
+def load_accounts(accounts_file='accounts.json'):
+    """Lädt Account-Konfiguration aus JSON-Datei"""
+    try:
+        with open(accounts_file, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    except FileNotFoundError:
+        logger.error(f"Accounts file not found: {accounts_file}")
+        return {'accounts': []}
+
+
 def load_spam_rules(spam_file='spam_rules.json'):
     """Lädt die Spam-Erkennungsregeln"""
     try:
@@ -138,26 +148,21 @@ def is_spam_simple(email_data, spam_rules, whitelist_domains):
     return False
 
 
-def analyze_inbox():
-    """Hauptfunktion zur Inbox-Analyse"""
+def analyze_inbox_for_account(account_name, imap_server, email_user, email_pass, rules_file, spam_rules_file):
+    """
+    Hauptfunktion zur Inbox-Analyse für einen spezifischen Account
 
-    # Lade Konfiguration
-    imap_server = os.environ.get('IMAP_SERVER', 'imap.gmail.com')
-    email_user = os.environ.get('EMAIL_USER')
-    email_pass = os.environ.get('EMAIL_PASS')
-
-    if not email_user or not email_pass:
-        logger.error("❌ Fehlende Credentials! Bitte setze EMAIL_USER und EMAIL_PASS")
-        logger.info("\nUsage:")
-        logger.info("  export IMAP_SERVER='imap.example.com'")
-        logger.info("  export EMAIL_USER='user@example.com'")
-        logger.info("  export EMAIL_PASS='password'")
-        logger.info("  python analyze_inbox.py")
-        sys.exit(1)
-
+    Args:
+        account_name: Name des Accounts (für Logging)
+        imap_server: IMAP Server-Adresse
+        email_user: Email-Benutzername
+        email_pass: Email-Passwort
+        rules_file: Pfad zur Regeldatei
+        spam_rules_file: Pfad zur Spam-Regeldatei
+    """
     # Lade Regeln
-    rules_config = load_rules()
-    spam_rules = load_spam_rules()
+    rules_config = load_rules(rules_file) if rules_file else {'rules': []}
+    spam_rules = load_spam_rules(spam_rules_file)
     rules = rules_config.get('rules', [])
 
     logger.info(f"📋 {len(rules)} Sortierregeln geladen")
@@ -337,5 +342,105 @@ def suggest_category(domain, emails):
     return 'Newsletter'
 
 
+def main():
+    """Hauptfunktion - analysiert Inbox für einen oder alle konfigurierten Accounts"""
+
+    # Check ob ein spezifischer Account via Argument angegeben wurde
+    target_account_id = None
+    if len(sys.argv) > 1:
+        target_account_id = sys.argv[1]
+        logger.info(f"Analyzing only account: {target_account_id}")
+
+    # Lade Account-Konfiguration
+    accounts_config = load_accounts()
+    accounts = accounts_config.get('accounts', [])
+
+    if not accounts:
+        logger.error("❌ No accounts configured in accounts.json")
+        logger.info("\nUsage:")
+        logger.info("  python analyze_inbox.py [account_id]")
+        logger.info("\nExample:")
+        logger.info("  python analyze_inbox.py gmail")
+        logger.info("  python analyze_inbox.py easyname")
+        sys.exit(1)
+
+    # Filtere Accounts
+    accounts_to_analyze = []
+    if target_account_id:
+        # Suche nach spezifischem Account
+        for account in accounts:
+            if account.get('id') == target_account_id:
+                accounts_to_analyze.append(account)
+                break
+        if not accounts_to_analyze:
+            logger.error(f"❌ Account '{target_account_id}' not found in accounts.json")
+            logger.info("\nAvailable accounts:")
+            for acc in accounts:
+                logger.info(f"  - {acc.get('id')}: {acc.get('name')}")
+            sys.exit(1)
+    else:
+        # Analysiere alle enabled Accounts
+        accounts_to_analyze = [acc for acc in accounts if acc.get('enabled', False)]
+
+    if not accounts_to_analyze:
+        logger.error("❌ No enabled accounts found")
+        sys.exit(1)
+
+    # Analysiere jeden Account
+    for account in accounts_to_analyze:
+        account_id = account.get('id', 'unknown')
+        account_name = account.get('name', account_id)
+
+        logger.info("\n" + "=" * 80)
+        logger.info(f"📧 ANALYZING ACCOUNT: {account_name} ({account_id})")
+        logger.info("=" * 80)
+
+        # Hole Credentials aus Environment Variables
+        email_user_secret = account.get('email_user_secret')
+        email_pass_secret = account.get('email_pass_secret')
+
+        if not email_user_secret or not email_pass_secret:
+            logger.error(f"❌ Account {account_id}: Missing credential secret names")
+            continue
+
+        email_user = os.getenv(email_user_secret)
+        email_pass = os.getenv(email_pass_secret)
+
+        if not email_user or not email_pass:
+            logger.error(f"❌ Account {account_id}: Credentials not found in environment")
+            logger.error(f"   Please set: {email_user_secret} and {email_pass_secret}")
+            continue
+
+        # IMAP Server
+        imap_server = account.get('imap_server')
+        if not imap_server:
+            logger.error(f"❌ Account {account_id}: No IMAP server specified")
+            continue
+
+        # Rules Files
+        rules_file = account.get('rules_file')
+        spam_rules_file = account.get('spam_rules_file', 'spam_rules.json')
+
+        # Spam filtering only?
+        if account.get('spam_filtering_only', False):
+            logger.info("ℹ️  This account is configured for spam filtering only (no rule-based sorting)")
+
+        # Analysiere Inbox
+        try:
+            analyze_inbox_for_account(
+                account_name=account_name,
+                imap_server=imap_server,
+                email_user=email_user,
+                email_pass=email_pass,
+                rules_file=rules_file,
+                spam_rules_file=spam_rules_file
+            )
+        except Exception as e:
+            logger.error(f"❌ Analysis failed for account {account_name}: {e}")
+            continue
+
+    logger.info("\n✅ Analysis complete!")
+
+
 if __name__ == '__main__':
-    analyze_inbox()
+    main()
