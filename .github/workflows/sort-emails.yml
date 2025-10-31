@@ -1,9 +1,10 @@
 name: Email Sorter
 
 on:
-  # Zeitgesteuerte Ausführung - alle 30 Minuten
+  # Zeitgesteuerte Ausführung - täglich um 4:00 Uhr morgens (CET/CEST)
+  # 3:00 UTC = 4:00 CET (Winter) / 5:00 CEST (Sommer)
   schedule:
-    - cron: '*/30 * * * *'
+    - cron: '0 3 * * *'
 
   # Manuelles Auslösen über GitHub UI
   workflow_dispatch:
