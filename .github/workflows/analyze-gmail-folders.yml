@@ -1,0 +1,50 @@
+name: Analyze Gmail Folders
+
+on:
+  # Nur manuelles Auslösen
+  workflow_dispatch:
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run Gmail folder analysis
+        env:
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_PASS: ${{ secrets.GMAIL_PASS }}
+        run: python analyze_gmail_folders.py
+
+      - name: Upload analysis results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gmail-folder-analysis
+          path: |
+            gmail_folder_analysis.json
+          retention-days: 30
+
+      - name: Display summary
+        if: always()
+        run: |
+          echo "📊 Gmail Folder Analysis Complete!"
+          echo ""
+          echo "Download the 'gmail-folder-analysis' artifact to see:"
+          echo "  - Complete list of all folders with email counts"
+          echo "  - Duplicate folder detection"
+          echo "  - Empty/nearly empty folders"
+          echo "  - Consolidation recommendations"
