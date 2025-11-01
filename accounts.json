@@ -27,7 +27,7 @@
     {
       "id": "easyname_wife",
       "name": "Easy Name Wife's Account",
-      "enabled": false,
+      "enabled": true,
       "imap_server": "imap.easyname.com",
       "email_user_secret": "WIFE_EMAIL_USER",
       "email_pass_secret": "WIFE_EMAIL_PASS",
