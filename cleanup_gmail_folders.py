@@ -229,10 +229,17 @@ def main():
     else:
         print("⚠️  WARNUNG: Dies wird Ordner löschen und Emails verschieben!")
         print("    Stelle sicher, dass du ein Backup hast!\n")
-        response = input("Fortfahren? (yes/no): ")
-        if response.lower() != 'yes':
-            print("Abgebrochen.")
-            sys.exit(0)
+
+        # Skip confirmation in CI environment (GitHub Actions)
+        is_ci = os.getenv('CI') or os.getenv('GITHUB_ACTIONS')
+
+        if not is_ci:
+            response = input("Fortfahren? (yes/no): ")
+            if response.lower() != 'yes':
+                print("Abgebrochen.")
+                sys.exit(0)
+        else:
+            print("⚠️  CI-Modus erkannt - führe Bereinigung automatisch aus\n")
 
     # Lade Gmail-Konfiguration
     try:
