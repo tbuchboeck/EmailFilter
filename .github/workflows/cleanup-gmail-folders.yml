@@ -1,0 +1,56 @@
+name: Cleanup Gmail Folders
+
+on:
+  # Nur manuelles Auslösen
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run mode (true = no actual changes)'
+        required: true
+        default: 'true'
+        type: choice
+        options:
+          - 'true'
+          - 'false'
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run Gmail folder cleanup
+        env:
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_PASS: ${{ secrets.GMAIL_PASS }}
+          DRY_RUN: ${{ github.event.inputs.dry_run }}
+        run: python cleanup_gmail_folders.py
+
+      - name: Display completion message
+        if: always()
+        run: |
+          echo "🧹 Gmail Folder Cleanup Complete!"
+          echo ""
+          if [ "${{ github.event.inputs.dry_run }}" == "true" ]; then
+            echo "✅ DRY RUN completed - No changes were made"
+            echo "Review the output above to see what would be changed"
+            echo ""
+            echo "To actually cleanup, run again with dry_run=false"
+          else
+            echo "✅ Cleanup completed - Changes have been applied"
+            echo ""
+            echo "Run 'Analyze Gmail Folders' workflow to verify the results"
+          fi
