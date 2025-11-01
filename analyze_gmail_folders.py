@@ -138,6 +138,14 @@ def main():
                 if isinstance(name, bytes):
                     name = name.decode('utf-8', errors='ignore')
 
+                # Decode flags (convert from bytes to strings)
+                decoded_flags = []
+                for flag in flags:
+                    if isinstance(flag, bytes):
+                        decoded_flags.append(flag.decode('utf-8', errors='ignore'))
+                    else:
+                        decoded_flags.append(str(flag))
+
                 # Skip bestimmte System-Ordner
                 if name in ['[Gmail]', '[Google Mail]']:
                     continue
@@ -151,13 +159,13 @@ def main():
                     folder_data.append({
                         'name': name,
                         'count': count,
-                        'flags': flags
+                        'flags': decoded_flags
                     })
                 except Exception as e:
                     folder_data.append({
                         'name': name,
                         'count': 0,
-                        'flags': flags,
+                        'flags': decoded_flags,
                         'error': str(e)
                     })
 
