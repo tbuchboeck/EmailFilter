@@ -104,6 +104,7 @@ jobs:
           echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
 
       - name: Create Pull Request
+        id: create_pr
         if: steps.apply.outputs.has_changes == 'true'
         uses: actions/github-script@v7
         with:
@@ -139,6 +140,10 @@ jobs:
 
               core.info("✅ Created PR #" + pr.data.number + ": " + pr.data.html_url);
 
+              // Store PR number and URL for the issue
+              core.setOutput('pr_number', pr.data.number);
+              core.setOutput('pr_url', pr.data.html_url);
+
               // Add label
               await github.rest.issues.addLabels({
                 owner: context.repo.owner,
@@ -149,6 +154,8 @@ jobs:
             } catch (error) {
               if (error.message.includes('A pull request already exists')) {
                 core.warning('⚠️  A pull request already exists for this branch');
+                core.setOutput('pr_number', '');
+                core.setOutput('pr_url', '');
               } else {
                 throw error;
               }
@@ -174,12 +181,16 @@ jobs:
             });
 
             const runDate = new Date().toISOString().split('T')[0];
+            const prNumber = '${{ steps.create_pr.outputs.pr_number }}';
+            const prUrl = '${{ steps.create_pr.outputs.pr_url }}';
 
             // Update how-to section based on automation status
-            const howToSection = hasChanges
-              ? "## ✅ Automation Status\n\n" +
+            const howToSection = hasChanges && prUrl
+              ? "## ✅ Action Required\n\n" +
                 "**🤖 Rules applied automatically!** A Pull Request has been created with the suggested rules.\n\n" +
-                "👉 **Review and merge the PR** to apply the new rules.\n\n" +
+                "### 👉 Next Steps:\n" +
+                "**[Review and merge PR #" + prNumber + "](" + prUrl + ")**\n\n" +
+                "The issue will automatically close when the PR is merged.\n\n" +
                 "<details>\n" +
                 "<summary>📚 Manual rule management (if needed)</summary>\n\n" +
                 "### For legitimate senders:\n" +
@@ -190,8 +201,9 @@ jobs:
                 "1. Add the domain to spam_rules.json under \"blacklist_domains\"\n" +
                 "2. Commit and push changes\n\n" +
                 "</details>"
-              : "## ℹ️ No Changes Needed\n\n" +
-                "All emails are already filtered or no new unique rules were suggested.";
+              : "## ✅ All Clear!\n\n" +
+                "All emails are already filtered or no new unique rules were suggested.\n\n" +
+                "This issue will be updated next Sunday with new analysis results.";
 
             const issueBody = '# Weekly Email Analysis Report\n\n' +
               'Run date: ' + runDate + '\n\n' +
