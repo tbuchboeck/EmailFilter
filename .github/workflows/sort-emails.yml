@@ -50,6 +50,12 @@ jobs:
           WIFE_EMAIL_PASS: ${{ secrets.WIFE_EMAIL_PASS }}
           # Configuration
           DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
+          # Summary Email Configuration
+          SUMMARY_EMAIL_SMTP_SERVER: smtp.easyname.com
+          SUMMARY_EMAIL_SMTP_PORT: 587
+          SUMMARY_EMAIL_USER: ${{ secrets.EMAIL_USER }}
+          SUMMARY_EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
+          SUMMARY_EMAIL_RECIPIENT: thomas@buchboeck.at
         run: python sort_emails.py
 
       - name: Upload logs (on failure)
