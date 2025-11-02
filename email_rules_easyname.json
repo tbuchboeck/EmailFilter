@@ -11,7 +11,9 @@
           "newsletter@email2.gog.com",
           "do-not-reply@email.gog.com",
           "no-reply@email.gog.com",
-          "help@accts.epicgames.com"
+          "help@accts.epicgames.com",
+          "email3.gog.com",
+          "acct.epicgames.com"
         ]
       }
     },
@@ -165,7 +167,8 @@
       "folder": "INBOX/Shopping/Garmin",
       "conditions": {
         "from_contains": [
-          "garmin@inside.garmin.com"
+          "garmin@inside.garmin.com",
+          "emea.garmin.com"
         ]
       }
     },
@@ -300,7 +303,8 @@
         "from_contains": [
           "no-reply@bergzeit.de",
           "newsletter@news.bergzeit.de",
-          "newsletter@bergzeit.de"
+          "newsletter@bergzeit.de",
+          "newsletter@news.bergzeit.at"
         ]
       }
     },
@@ -1228,7 +1232,8 @@
         "from_contains": [
           "@newsletter.naturfreunde.at",
           "office@naturfreunde-badischl.at",
-          "info@naturfreunde.at"
+          "info@naturfreunde.at",
+          "noreply@naturfreunde.at"
         ]
       }
     },
@@ -1690,6 +1695,78 @@
       "conditions": {
         "from_contains": [
           "myproduct.at"
+        ]
+      }
+    },
+    {
+      "name": "DevOps » Render",
+      "folder": "INBOX/DevOps/Render",
+      "conditions": {
+        "from_contains": [
+          "render.com"
+        ]
+      }
+    },
+    {
+      "name": "Shopping » TISSO",
+      "folder": "INBOX/Shopping/TISSO",
+      "conditions": {
+        "from_contains": [
+          "tisso.de"
+        ]
+      }
+    },
+    {
+      "name": "Streaming » IMDB",
+      "folder": "INBOX/Streaming/IMDB",
+      "conditions": {
+        "from_contains": [
+          "imdb.com"
+        ]
+      }
+    },
+    {
+      "name": "Companies » TP-Link",
+      "folder": "INBOX/Companies/TP-Link",
+      "conditions": {
+        "from_contains": [
+          "newsletter.tp-link.com"
+        ]
+      }
+    },
+    {
+      "name": "Finanzen » TradeRepublic",
+      "folder": "INBOX/Finanzen/TradeRepublic",
+      "conditions": {
+        "from_contains": [
+          "traderepublic.com"
+        ]
+      }
+    },
+    {
+      "name": "Streaming » Prime Video",
+      "folder": "INBOX/Streaming/PrimeVideo",
+      "conditions": {
+        "from_contains": [
+          "primevideo.com"
+        ]
+      }
+    },
+    {
+      "name": "Companies » Edison Mail",
+      "folder": "INBOX/Companies/EdisonMail",
+      "conditions": {
+        "from_contains": [
+          "edisonmail.com"
+        ]
+      }
+    },
+    {
+      "name": "Finanzen » JustETF",
+      "folder": "INBOX/Finanzen/JustETF",
+      "conditions": {
+        "from_contains": [
+          "justetf.com"
         ]
       }
     }
