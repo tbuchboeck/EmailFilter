@@ -184,9 +184,12 @@ jobs:
             const prNumber = '${{ steps.create_pr.outputs.pr_number }}';
             const prUrl = '${{ steps.create_pr.outputs.pr_url }}';
 
-            // Update how-to section based on automation status
-            const howToSection = hasChanges && prUrl
-              ? "## ✅ Action Required\n\n" +
+            // Determine the appropriate message based on state
+            let howToSection;
+
+            if (hasChanges && prUrl) {
+              // State 1: Unfiltered emails + PR created
+              howToSection = "## ✅ Action Required\n\n" +
                 "**🤖 Rules applied automatically!** A Pull Request has been created with the suggested rules.\n\n" +
                 "### 👉 Next Steps:\n" +
                 "**[Review and merge PR #" + prNumber + "](" + prUrl + ")**\n\n" +
@@ -200,10 +203,47 @@ jobs:
                 "### For spam:\n" +
                 "1. Add the domain to spam_rules.json under \"blacklist_domains\"\n" +
                 "2. Commit and push changes\n\n" +
-                "</details>"
-              : "## ✅ All Clear!\n\n" +
-                "All emails are already filtered or no new unique rules were suggested.\n\n" +
+                "</details>";
+            } else if (unfilteredCount > 0) {
+              // State 2: Unfiltered emails but no PR (rules might already exist or need manual creation)
+              howToSection = "## ℹ️ Manual Review Needed\n\n" +
+                "There are unfiltered emails, but no automatic rules were created.\n\n" +
+                "**Possible reasons:**\n" +
+                "- Rules for these senders already exist\n" +
+                "- Emails are from your own domain (review if they should be filtered)\n" +
+                "- The automation couldn't determine the correct folder\n\n" +
+                "### 👉 Next Steps:\n" +
+                "1. **Review the unfiltered emails above**\n" +
+                "2. **For legitimate emails:** Manually add rules to `email_rules_*.json`\n" +
+                "3. **For spam:** Add domains to `spam_rules.json` blacklist\n" +
+                "4. **For your own emails:** Consider if they should be filtered or stay in inbox\n\n" +
+                "<details>\n" +
+                "<summary>📚 How to add rules manually</summary>\n\n" +
+                "### For legitimate senders:\n" +
+                "Edit the appropriate `email_rules_*.json` file and add:\n" +
+                "```json\n" +
+                "{\n" +
+                '  "name": "Folder Name",\n' +
+                '  "folder": "INBOX/FolderName",\n' +
+                '  "conditions": {\n' +
+                '    "from_contains": ["sender@domain.com"]\n' +
+                "  }\n" +
+                "}\n" +
+                "```\n\n" +
+                "### For spam:\n" +
+                "Edit `spam_rules.json` and add to blacklist:\n" +
+                "```json\n" +
+                '"blacklist_domains": [\n' +
+                '  "spam-domain.com"\n' +
+                "]\n" +
+                "```\n" +
+                "</details>";
+            } else {
+              // State 3: No unfiltered emails - all clear!
+              howToSection = "## ✅ All Clear!\n\n" +
+                "All emails are properly filtered! Your inbox is clean. 🎉\n\n" +
                 "This issue will be updated next Sunday with new analysis results.";
+            }
 
             const issueBody = '# Weekly Email Analysis Report\n\n' +
               'Run date: ' + runDate + '\n\n' +

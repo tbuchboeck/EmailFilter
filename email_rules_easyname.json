@@ -831,6 +831,15 @@
       }
     },
     {
+      "name": "0Buchi » System",
+      "folder": "INBOX/0Buchi/System",
+      "conditions": {
+        "from_contains": [
+          "thomas@buchboeck.at"
+        ]
+      }
+    },
+    {
       "name": "0Buchi",
       "folder": "INBOX/0Buchi",
       "conditions": {
