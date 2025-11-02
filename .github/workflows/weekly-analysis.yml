@@ -90,12 +90,15 @@ jobs:
 
           # Commit changes
           git add email_rules_*.json
-          git commit -m "Add email rules from weekly analysis $(date +%Y-%m-%d)
+          git commit -m "$(cat <<'EOF'
+Add email rules from weekly analysis $(date +%Y-%m-%d)
 
 Automatically generated from weekly email analysis.
 
 - Applied suggested rules to appropriate config files
-- Rules are ready for review and merge"
+- Rules are ready for review and merge
+EOF
+)"
 
           # Push to remote
           echo "🚀 Pushing branch: $BRANCH_NAME"
