@@ -67,36 +67,8 @@ def parse_analysis(content):
                 output.append(f"**Subject:** `{subject_matches[0].strip()}`")
             output.append("")
 
-    # Extract rule suggestions
-    suggestions_section = re.search(
-        r'💡 VORSCHLÄGE FÜR NEUE REGELN:.*',
-        content,
-        re.DOTALL
-    )
-
-    if suggestions_section and unfiltered > 0:
-        output.append("## 💡 Suggested Rules\n")
-        output.append("Copy and paste these rules into `email_rules.json`:\n")
-
-        # Extract JSON suggestions
-        json_pattern = r'#[^\n]+\n(.*?)(?=\n#|\n\n|$)'
-        suggestions = re.finditer(json_pattern, suggestions_section.group(0), re.DOTALL)
-
-        output.append("```json")
-        for suggestion in suggestions:
-            json_text = suggestion.group(1).strip()
-            if json_text and '{' in json_text:
-                output.append(json_text)
-        output.append("```\n")
-
-        # Add spam detection advice
-        output.append("### 🚨 Potential Spam Detection\n")
-        output.append("If any domains above look suspicious (random names, weird TLDs, scam keywords), add them to `spam_rules.json` blacklist instead:\n")
-        output.append("```json")
-        output.append('"blacklist_domains": [')
-        output.append('  "suspicious-domain.com"')
-        output.append(']')
-        output.append("```\n")
+    # Note: Rule suggestions are now automatically applied and included in PRs
+    # No need to show them in the issue - see the PR for details
 
     return "\n".join(output)
 

@@ -1,0 +1,62 @@
+name: Close Email Analysis Issue
+
+on:
+  pull_request:
+    types: [closed]
+
+permissions:
+  issues: write
+  pull-requests: read
+
+jobs:
+  close-issue:
+    # Only run if PR was merged and has email-analysis label
+    if: github.event.pull_request.merged == true && contains(github.event.pull_request.labels.*.name, 'email-analysis')
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Close corresponding email-analysis issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const prNumber = context.payload.pull_request.number;
+            const prTitle = context.payload.pull_request.title;
+
+            console.log(`PR #${prNumber} was merged: ${prTitle}`);
+
+            // Find open email-analysis issues
+            const issues = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: ['email-analysis'],
+              per_page: 10
+            });
+
+            if (issues.data.length === 0) {
+              console.log('No open email-analysis issues found');
+              return;
+            }
+
+            // Close all open email-analysis issues with a comment
+            for (const issue of issues.data) {
+              // Add a comment
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                body: `✅ **Resolved!** PR #${prNumber} has been merged.\n\n` +
+                      `The new email filtering rules are now active.\n\n` +
+                      `This issue will be reopened or updated on the next weekly analysis run.`
+              });
+
+              // Close the issue
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                state: 'closed'
+              });
+
+              console.log(`✅ Closed issue #${issue.number}`);
+            }
