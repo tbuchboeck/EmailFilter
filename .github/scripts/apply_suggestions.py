@@ -51,20 +51,71 @@ def parse_rule_suggestions(content):
     return suggestions
 
 
-def detect_account_from_analysis(content):
+def detect_accounts_from_analysis(content):
     """
-    Detect which account the analysis is for based on the output
+    Detect which accounts are in the analysis based on the output
 
     Returns:
-        str: account_id (e.g., 'easyname', 'gmail')
+        list: List of account_ids found (e.g., ['easyname', 'gmail'])
     """
-    # Look for the account name in the analysis header
-    account_match = re.search(r'📧 ANALYZING ACCOUNT:.*?\(([^)]+)\)', content)
-    if account_match:
-        return account_match.group(1)
+    # Look for all account names in the analysis headers
+    account_matches = re.finditer(r'📧 ANALYZING ACCOUNT:.*?\(([^)]+)\)', content)
+    accounts = [match.group(1) for match in account_matches]
 
-    # Default to easyname if not found
-    return 'easyname'
+    # If no accounts found, default to easyname
+    if not accounts:
+        return ['easyname']
+
+    return accounts
+
+
+def extract_suggestions_by_account(content):
+    """
+    Extract rule suggestions grouped by account
+
+    Returns:
+        dict: {account_id: [rules]}
+    """
+    suggestions_by_account = {}
+
+    # Split content by account sections
+    account_sections = re.split(r'={80,}\n📧 ANALYZING ACCOUNT:', content)
+
+    for section in account_sections[1:]:  # Skip first empty section
+        # Extract account ID
+        account_match = re.search(r'^.*?\(([^)]+)\)', section)
+        if not account_match:
+            continue
+
+        account_id = account_match.group(1)
+
+        # Find suggestions section for this account
+        suggestions_section = re.search(
+            r'💡 VORSCHLÄGE FÜR NEUE REGELN:.*?(?=📧 ANALYZING ACCOUNT:|$)',
+            section,
+            re.DOTALL
+        )
+
+        if not suggestions_section:
+            continue
+
+        # Extract rules from this section
+        rule_pattern = r'#[^\n]+\n#[^\n]+\n(\{[\s\S]*?\}),'
+        matches = re.finditer(rule_pattern, suggestions_section.group(0))
+
+        rules = []
+        for match in matches:
+            json_text = match.group(1).strip()
+            try:
+                rule = json.loads(json_text)
+                rules.append(rule)
+            except json.JSONDecodeError:
+                continue
+
+        if rules:
+            suggestions_by_account[account_id] = rules
+
+    return suggestions_by_account
 
 
 def add_rules_to_file(rules_file, new_rules):
@@ -133,40 +184,55 @@ def main():
         with open(analysis_file, 'r', encoding='utf-8') as f:
             content = f.read()
 
-        # Detect account
-        account_id = detect_account_from_analysis(content)
-        print(f"🔍 Detected account: {account_id}")
+        # Detect all accounts in the analysis
+        accounts = detect_accounts_from_analysis(content)
+        print(f"🔍 Detected {len(accounts)} account(s): {', '.join(accounts)}")
 
-        # Map account to rules file
+        # Map accounts to rules files
         rules_file_map = {
             'easyname': 'email_rules_easyname.json',
             'gmail': 'email_rules_gmail.json',
-            'easyname_wife': 'email_rules_easyname.json',  # Wife uses same rules
+            'easyname_wife': None,  # Spam-only, no rules file
         }
 
-        rules_file = rules_file_map.get(account_id, 'email_rules_easyname.json')
-        print(f"📝 Target rules file: {rules_file}")
+        # Extract suggestions grouped by account
+        print(f"\n🔍 Parsing rule suggestions by account...")
+        suggestions_by_account = extract_suggestions_by_account(content)
 
-        # Parse suggestions
-        print(f"\n🔍 Parsing rule suggestions...")
-        suggestions = parse_rule_suggestions(content)
-
-        if not suggestions:
+        if not suggestions_by_account:
             print("\n⚠️  No rule suggestions found in analysis output")
             print("This is normal if all emails are already filtered!")
             sys.exit(0)
 
-        print(f"\n📊 Found {len(suggestions)} suggested rule(s)")
+        total_rules = sum(len(rules) for rules in suggestions_by_account.values())
+        print(f"\n📊 Found {total_rules} suggested rule(s) across {len(suggestions_by_account)} account(s)")
 
-        # Add rules to file
-        print(f"\n📝 Adding rules to {rules_file}...")
-        added_count = add_rules_to_file(rules_file, suggestions)
+        # Apply rules for each account
+        total_added = 0
+        for account_id, suggestions in suggestions_by_account.items():
+            print(f"\n{'='*60}")
+            print(f"📧 Processing account: {account_id}")
+            print(f"{'='*60}")
 
-        if added_count > 0:
-            print(f"\n✅ SUCCESS: Added {added_count} new rule(s)")
+            rules_file = rules_file_map.get(account_id)
+            if not rules_file:
+                print(f"⊘ Skipping {account_id} (spam-only account, no rules file)")
+                continue
+
+            print(f"📝 Target rules file: {rules_file}")
+            print(f"📋 {len(suggestions)} rule(s) to add")
+
+            # Add rules to file
+            added_count = add_rules_to_file(rules_file, suggestions)
+            total_added += added_count
+
+        # Summary
+        print(f"\n{'='*60}")
+        if total_added > 0:
+            print(f"✅ SUCCESS: Added {total_added} new rule(s) in total")
             sys.exit(0)
         else:
-            print(f"\nℹ️  No changes made (no new rules to add)")
+            print(f"ℹ️  No changes made (all rules already exist)")
             sys.exit(0)
 
     except FileNotFoundError:
