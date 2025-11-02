@@ -8,11 +8,14 @@ import os
 import json
 import logging
 import re
+import smtplib
 from datetime import datetime
 from imapclient import IMAPClient
 from email import message_from_bytes
 from email.header import decode_header
 from email.utils import parseaddr
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 
 # Logging konfigurieren
 logging.basicConfig(
@@ -493,6 +496,122 @@ def sort_emails(imap_server, email_user, email_pass, rules_config, dry_run=False
     return stats
 
 
+def send_summary_email(overall_stats, account_stats_list, dry_run=False):
+    """
+    Sends a summary email after processing all accounts
+
+    Args:
+        overall_stats: Dictionary with overall statistics
+        account_stats_list: List of tuples (account_name, stats_dict)
+        dry_run: If True, email sending is simulated
+    """
+    # Get email configuration from environment
+    smtp_server = os.getenv('SUMMARY_EMAIL_SMTP_SERVER')
+    smtp_port = int(os.getenv('SUMMARY_EMAIL_SMTP_PORT', '587'))
+    smtp_user = os.getenv('SUMMARY_EMAIL_USER')
+    smtp_pass = os.getenv('SUMMARY_EMAIL_PASS')
+    recipient = os.getenv('SUMMARY_EMAIL_RECIPIENT', 'thomas@buchboeck.at')
+
+    # Skip if not configured
+    if not all([smtp_server, smtp_user, smtp_pass]):
+        logger.info("Email summary not configured (missing SMTP credentials)")
+        return
+
+    try:
+        # Build email content
+        timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+
+        # Create HTML email
+        html_content = f"""
+        <html>
+        <head>
+            <style>
+                body {{ font-family: Arial, sans-serif; margin: 20px; }}
+                h1 {{ color: #2c3e50; }}
+                h2 {{ color: #34495e; margin-top: 20px; }}
+                table {{ border-collapse: collapse; width: 100%; margin: 10px 0; }}
+                th, td {{ border: 1px solid #ddd; padding: 8px; text-align: left; }}
+                th {{ background-color: #3498db; color: white; }}
+                tr:nth-child(even) {{ background-color: #f2f2f2; }}
+                .summary {{ background-color: #ecf0f1; padding: 15px; border-radius: 5px; margin: 20px 0; }}
+                .success {{ color: #27ae60; }}
+                .warning {{ color: #e67e22; }}
+                .error {{ color: #e74c3c; }}
+            </style>
+        </head>
+        <body>
+            <h1>📧 Email Filter Summary Report</h1>
+            <p><strong>Run Time:</strong> {timestamp}</p>
+            <p><strong>Mode:</strong> {"DRY RUN (no changes made)" if dry_run else "LIVE"}</p>
+
+            <div class="summary">
+                <h2>Overall Statistics</h2>
+                <table>
+                    <tr><th>Metric</th><th>Value</th></tr>
+                    <tr><td>Accounts Processed</td><td class="success">{overall_stats['accounts_processed']}</td></tr>
+                    <tr><td>Accounts Skipped</td><td>{overall_stats['accounts_skipped']}</td></tr>
+                    <tr><td>Total Emails Processed</td><td>{overall_stats['total_processed']}</td></tr>
+                    <tr><td>Total Emails Moved</td><td class="success">{overall_stats['total_moved']}</td></tr>
+                    <tr><td>Total Spam Detected</td><td class="warning">{overall_stats['total_spam_detected']}</td></tr>
+                    <tr><td>Total Errors</td><td class="{'error' if overall_stats['total_errors'] > 0 else 'success'}">{overall_stats['total_errors']}</td></tr>
+                </table>
+            </div>
+        """
+
+        # Add per-account details
+        if account_stats_list:
+            html_content += "<h2>Per-Account Details</h2>"
+
+            for account_name, stats in account_stats_list:
+                html_content += f"""
+                <h3>📁 {account_name}</h3>
+                <table>
+                    <tr><th>Metric</th><th>Value</th></tr>
+                    <tr><td>Processed</td><td>{stats['processed']}</td></tr>
+                    <tr><td>Moved</td><td class="success">{stats['moved']}</td></tr>
+                    <tr><td>Spam Detected</td><td class="warning">{stats['spam_detected']}</td></tr>
+                    <tr><td>Errors</td><td class="{'error' if stats['errors'] > 0 else 'success'}">{stats['errors']}</td></tr>
+                </table>
+                """
+
+                if stats['by_folder']:
+                    html_content += "<h4>Moved to Folders:</h4><table><tr><th>Folder</th><th>Count</th></tr>"
+                    for folder, count in stats['by_folder'].items():
+                        html_content += f"<tr><td>{folder}</td><td>{count}</td></tr>"
+                    html_content += "</table>"
+
+        html_content += """
+            <hr>
+            <p><small>This is an automated email from your Email Filter system.</small></p>
+        </body>
+        </html>
+        """
+
+        # Create email message
+        msg = MIMEMultipart('alternative')
+        msg['Subject'] = f"Email Filter Report - {timestamp}" + (" [DRY RUN]" if dry_run else "")
+        msg['From'] = smtp_user
+        msg['To'] = recipient
+
+        # Attach HTML content
+        html_part = MIMEText(html_content, 'html')
+        msg.attach(html_part)
+
+        # Send email
+        if not dry_run:
+            logger.info(f"Sending summary email to {recipient}...")
+            with smtplib.SMTP(smtp_server, smtp_port) as server:
+                server.starttls()
+                server.login(smtp_user, smtp_pass)
+                server.send_message(msg)
+            logger.info(f"✅ Summary email sent successfully to {recipient}")
+        else:
+            logger.info(f"[DRY RUN] Would send summary email to {recipient}")
+
+    except Exception as e:
+        logger.error(f"Failed to send summary email: {e}")
+
+
 def main():
     """Hauptfunktion - verarbeitet alle konfigurierten Accounts"""
     dry_run = os.getenv('DRY_RUN', 'false').lower() == 'true'
@@ -515,6 +634,9 @@ def main():
         'accounts_processed': 0,
         'accounts_skipped': 0
     }
+
+    # Track account statistics for email summary
+    account_stats_list = []
 
     # Verarbeite jeden Account
     for account in accounts:
@@ -606,6 +728,9 @@ def main():
             overall_stats['total_errors'] += stats['errors']
             overall_stats['accounts_processed'] += 1
 
+            # Save stats for email summary
+            account_stats_list.append((account_name, stats))
+
         except Exception as e:
             logger.error(f"Email sorting failed for account {account_name}: {e}")
             overall_stats['accounts_skipped'] += 1
@@ -621,6 +746,9 @@ def main():
     logger.info(f"  Total spam detected: {overall_stats['total_spam_detected']}")
     logger.info(f"  Total errors: {overall_stats['total_errors']}")
     logger.info("=" * 70)
+
+    # Send summary email
+    send_summary_email(overall_stats, account_stats_list, dry_run)
 
     return 0 if overall_stats['accounts_processed'] > 0 else 1
 
