@@ -502,7 +502,7 @@ def send_summary_email(overall_stats, account_stats_list, dry_run=False):
 
     Args:
         overall_stats: Dictionary with overall statistics
-        account_stats_list: List of tuples (account_name, stats_dict)
+        account_stats_list: List of tuples (account_name, email_address, stats_dict)
         dry_run: If True, email sending is simulated
     """
     # Get email configuration from environment
@@ -562,9 +562,10 @@ def send_summary_email(overall_stats, account_stats_list, dry_run=False):
         if account_stats_list:
             html_content += "<h2>Per-Account Details</h2>"
 
-            for account_name, stats in account_stats_list:
+            for account_name, email_address, stats in account_stats_list:
                 html_content += f"""
                 <h3>📁 {account_name}</h3>
+                <p style="color: #7f8c8d; margin: -10px 0 10px 0;"><strong>Email:</strong> {email_address}</p>
                 <table>
                     <tr><th>Metric</th><th>Value</th></tr>
                     <tr><td>Processed</td><td>{stats['processed']}</td></tr>
@@ -728,8 +729,8 @@ def main():
             overall_stats['total_errors'] += stats['errors']
             overall_stats['accounts_processed'] += 1
 
-            # Save stats for email summary
-            account_stats_list.append((account_name, stats))
+            # Save stats for email summary (include email address)
+            account_stats_list.append((account_name, email_user, stats))
 
         except Exception as e:
             logger.error(f"Email sorting failed for account {account_name}: {e}")
