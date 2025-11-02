@@ -211,17 +211,20 @@ Der Email-Sorter läuft automatisch alle 30 Minuten über GitHub Actions. Nach d
 2. Klicke auf einen Workflow-Run
 3. Sieh dir die Logs an um zu sehen, welche Emails sortiert wurden
 
-## 🤖 Automatische Wartung (NEU!)
+## 🤖 Vollständig Automatisierte Wartung (NEU!)
 
-Das System analysiert **automatisch jeden Sonntag** deine Inbox und erstellt GitHub Issues mit:
-- 📊 Statistiken über ungefilterte Emails
-- 📧 Gruppierte Liste neuer Absender
-- 💡 Fertige Regel-Vorschläge zum Copy & Paste
-- 🚨 Spam-Erkennungs-Empfehlungen
+Das System analysiert **automatisch jeden Sonntag** deine Inbox und erstellt **automatisch Pull Requests** mit neuen Filterregeln!
 
-**Keine Arbeit mehr!** Du bekommst einfach ein GitHub Issue mit allem, was du brauchst.
+### Was passiert automatisch:
+1. 📊 Inbox wird analysiert
+2. 🤖 Neue Regeln werden **automatisch erstellt**
+3. 🔀 **Pull Request wird automatisch erstellt**
+4. ✅ Du musst nur noch **reviewen & mergen**
 
-**➡️ [Komplette Anleitung in AUTOMATION.md](AUTOMATION.md)**
+**Zero-Touch Email Management!** Das System fügt automatisch neue Regeln hinzu - du musst nur noch auf "Merge" klicken.
+
+**➡️ [Komplette Anleitung in AUTOMATED_RULES.md](AUTOMATED_RULES.md)**
+**➡️ [Alte Anleitung (manuell) in AUTOMATION.md](AUTOMATION.md)**
 
 **Quick Setup:**
 1. Repository Secrets setzen (EMAIL_USER, EMAIL_PASS, IMAP_SERVER)
