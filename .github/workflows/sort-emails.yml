@@ -1,4 +1,4 @@
-name: Email Sorter
+name: ⏰ Email Sorter
 
 on:
   # Zeitgesteuerte Ausführung - täglich um 4:00 Uhr morgens (CET/CEST)

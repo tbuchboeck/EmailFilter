@@ -1,11 +1,9 @@
-name: Weekly Email Analysis
+name: ⏰ Weekly Email Analysis
 
 on:
   schedule:
     # Run every Sunday at 9:00 AM UTC
     - cron: '0 9 * * 0'
-    # TEMPORARY: Test runs every 30 minutes (remove after successful test)
-    - cron: '*/30 * * * *'
   workflow_dispatch:  # Allow manual trigger
 
 permissions:
