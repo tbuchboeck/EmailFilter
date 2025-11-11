@@ -80,8 +80,10 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          # Create branch with date
-          BRANCH_NAME="weekly-analysis/$(date +%Y-%m-%d)"
+          # Create branch with proper naming (claude/ prefix + unique ID)
+          # Using date and timestamp to ensure uniqueness
+          TIMESTAMP=$(date +%Y%m%d%H%M%S)
+          BRANCH_NAME="claude/weekly-analysis-${TIMESTAMP}"
           git checkout -b "$BRANCH_NAME"
 
           # Show what changed
@@ -96,9 +98,23 @@ jobs:
                      -m "- Applied suggested rules to appropriate config files" \
                      -m "- Rules are ready for review and merge"
 
-          # Push to remote
+          # Push to remote with retry logic
           echo "🚀 Pushing branch: $BRANCH_NAME"
-          git push -u origin "$BRANCH_NAME"
+          for i in 1 2 3 4; do
+            if git push -u origin "$BRANCH_NAME"; then
+              echo "✅ Successfully pushed on attempt $i"
+              break
+            else
+              if [ $i -lt 4 ]; then
+                DELAY=$((2 ** i))
+                echo "⚠️  Push failed, retrying in ${DELAY}s..."
+                sleep $DELAY
+              else
+                echo "❌ Failed to push after 4 attempts"
+                exit 1
+              fi
+            fi
+          done
 
           # Store branch name for PR creation
           echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
@@ -133,7 +149,7 @@ jobs:
                 repo: context.repo.repo,
                 title: "📧 Add email rules from weekly analysis (" + runDate + ")",
                 head: branchName,
-                base: context.ref.replace('refs/heads/', ''),
+                base: 'main',
                 body: prBody,
                 maintainer_can_modify: true
               });
