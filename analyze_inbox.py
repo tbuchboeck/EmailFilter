@@ -289,9 +289,10 @@ def analyze_inbox_for_account(account_name, imap_server, email_user, email_pass,
                 print("="*80)
 
                 for domain, emails in sorted_domains[:10]:
-                    if len(emails) >= 2:  # Nur wenn mind. 2 E-Mails
+                    if len(emails) >= 1:  # Auch einzelne E-Mails filtern
                         example_from = emails[0]['from']
-                        print(f"\n# {domain} ({len(emails)} E-Mails)")
+                        email_word = "E-Mail" if len(emails) == 1 else "E-Mails"
+                        print(f"\n# {domain} ({len(emails)} {email_word})")
                         print(f"# Beispiel: {example_from[:60]}")
 
                         # Vorschlag für Kategorisierung
@@ -391,9 +392,9 @@ def main():
         account_id = account.get('id', 'unknown')
         account_name = account.get('name', account_id)
 
-        logger.info("\n" + "=" * 80)
-        logger.info(f"📧 ANALYZING ACCOUNT: {account_name} ({account_id})")
-        logger.info("=" * 80)
+        print("\n" + "=" * 80)
+        print(f"📧 ANALYZING ACCOUNT: {account_name} ({account_id})")
+        print("=" * 80)
 
         # Hole Credentials aus Environment Variables
         email_user_secret = account.get('email_user_secret')
@@ -423,7 +424,7 @@ def main():
 
         # Spam filtering only?
         if account.get('spam_filtering_only', False):
-            logger.info("ℹ️  This account is configured for spam filtering only (no rule-based sorting)")
+            print("ℹ️  This account is configured for spam filtering only (no rule-based sorting)")
 
         # Analysiere Inbox
         try:
