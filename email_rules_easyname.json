@@ -1868,6 +1868,96 @@
           "provicell.com"
         ]
       }
+    },
+    {
+      "name": "Finanzen » Communications",
+      "folder": "Finanzen/Communications",
+      "conditions": {
+        "from_contains": [
+          "communications.paypal.com"
+        ]
+      }
+    },
+    {
+      "name": "Newsletter » Futterkoerberl",
+      "folder": "Newsletter/Futterkoerberl",
+      "conditions": {
+        "from_contains": [
+          "futterkoerberl.at"
+        ]
+      }
+    },
+    {
+      "name": "Newsletter » Arenacampsites",
+      "folder": "Newsletter/Arenacampsites",
+      "conditions": {
+        "from_contains": [
+          "arenacampsites.com"
+        ]
+      }
+    },
+    {
+      "name": "Newsletter » Tips",
+      "folder": "Newsletter/Tips",
+      "conditions": {
+        "from_contains": [
+          "tips.at"
+        ]
+      }
+    },
+    {
+      "name": "Newsletter » News",
+      "folder": "Newsletter/News",
+      "conditions": {
+        "from_contains": [
+          "news.koro.com"
+        ]
+      }
+    },
+    {
+      "name": "Finanzen » Dedkbagbanking",
+      "folder": "Finanzen/Dedkbagbanking",
+      "conditions": {
+        "from_contains": [
+          "dedkbagbanking.de"
+        ]
+      }
+    },
+    {
+      "name": "Newsletter » Audible",
+      "folder": "Newsletter/Audible",
+      "conditions": {
+        "from_contains": [
+          "audible.de"
+        ]
+      }
+    },
+    {
+      "name": "Newsletter » Curve",
+      "folder": "Newsletter/Curve",
+      "conditions": {
+        "from_contains": [
+          "curve.com"
+        ]
+      }
+    },
+    {
+      "name": "Newsletter » Starmovie",
+      "folder": "Newsletter/Starmovie",
+      "conditions": {
+        "from_contains": [
+          "starmovie.at"
+        ]
+      }
+    },
+    {
+      "name": "DevOps » Gmail",
+      "folder": "DevOps/Gmail",
+      "conditions": {
+        "from_contains": [
+          "gmail.com"
+        ]
+      }
     }
   ]
 }
