@@ -1778,6 +1778,96 @@
           "justetf.com"
         ]
       }
+    },
+    {
+      "name": "Newsletter » Email",
+      "folder": "Newsletter/Email",
+      "conditions": {
+        "from_contains": [
+          "email.fly.io"
+        ]
+      }
+    },
+    {
+      "name": "Newsletter » Post",
+      "folder": "Newsletter/Post",
+      "conditions": {
+        "from_contains": [
+          "post.at"
+        ]
+      }
+    },
+    {
+      "name": "Newsletter » Dpd",
+      "folder": "Newsletter/Dpd",
+      "conditions": {
+        "from_contains": [
+          "dpd.at"
+        ]
+      }
+    },
+    {
+      "name": "Newsletter » Sports",
+      "folder": "Newsletter/Sports",
+      "conditions": {
+        "from_contains": [
+          "sports.comms.yahoo.net"
+        ]
+      }
+    },
+    {
+      "name": "Newsletter » Bergzeit",
+      "folder": "Newsletter/Bergzeit",
+      "conditions": {
+        "from_contains": [
+          "bergzeit.at"
+        ]
+      }
+    },
+    {
+      "name": "Newsletter » Fly",
+      "folder": "Newsletter/Fly",
+      "conditions": {
+        "from_contains": [
+          "fly.io"
+        ]
+      }
+    },
+    {
+      "name": "Newsletter » Cbtmax",
+      "folder": "Newsletter/Cbtmax",
+      "conditions": {
+        "from_contains": [
+          "cbtmax.com"
+        ]
+      }
+    },
+    {
+      "name": "Newsletter » Iko-Sport",
+      "folder": "Newsletter/Iko-Sport",
+      "conditions": {
+        "from_contains": [
+          "iko-sport.com"
+        ]
+      }
+    },
+    {
+      "name": "Newsletter » Beertasting",
+      "folder": "Newsletter/Beertasting",
+      "conditions": {
+        "from_contains": [
+          "beertasting.com"
+        ]
+      }
+    },
+    {
+      "name": "Newsletter » Provicell",
+      "folder": "Newsletter/Provicell",
+      "conditions": {
+        "from_contains": [
+          "provicell.com"
+        ]
+      }
     }
   ]
 }
