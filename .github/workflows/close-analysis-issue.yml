@@ -1,4 +1,4 @@
-name: Close Email Analysis Issue
+name: 🔗 Close Email Analysis Issue
 
 on:
   pull_request:

@@ -1,4 +1,4 @@
-name: Weekly Email Analysis
+name: ⏰ Weekly Email Analysis
 
 on:
   schedule:
