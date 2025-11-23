@@ -1958,6 +1958,78 @@
           "gmail.com"
         ]
       }
+    },
+    {
+      "name": "Newsletter » Imdgt",
+      "folder": "Newsletter/Imdgt",
+      "conditions": {
+        "from_contains": [
+          "imdgt.net"
+        ]
+      }
+    },
+    {
+      "name": "Newsletter » Supabase",
+      "folder": "Newsletter/Supabase",
+      "conditions": {
+        "from_contains": [
+          "supabase.com"
+        ]
+      }
+    },
+    {
+      "name": "Newsletter » Lunas",
+      "folder": "Newsletter/Lunas",
+      "conditions": {
+        "from_contains": [
+          "lunas.de"
+        ]
+      }
+    },
+    {
+      "name": "Newsletter » Info",
+      "folder": "Newsletter/Info",
+      "conditions": {
+        "from_contains": [
+          "info.ecoflow.com"
+        ]
+      }
+    },
+    {
+      "name": "Newsletter » Literiedamour",
+      "folder": "Newsletter/Literiedamour",
+      "conditions": {
+        "from_contains": [
+          "literiedamour.dz"
+        ]
+      }
+    },
+    {
+      "name": "Newsletter » Entwickler",
+      "folder": "Newsletter/Entwickler",
+      "conditions": {
+        "from_contains": [
+          "entwickler.de"
+        ]
+      }
+    },
+    {
+      "name": "Newsletter » Express",
+      "folder": "Newsletter/Express",
+      "conditions": {
+        "from_contains": [
+          "express.fra1.medallia.eu"
+        ]
+      }
+    },
+    {
+      "name": "Newsletter » Macrium",
+      "folder": "Newsletter/Macrium",
+      "conditions": {
+        "from_contains": [
+          "macrium.com"
+        ]
+      }
     }
   ]
 }
