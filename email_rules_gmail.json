@@ -215,6 +215,42 @@
           "switch-bot.com"
         ]
       }
+    },
+    {
+      "name": "Newsletter » Genspark",
+      "folder": "Newsletter/Genspark",
+      "conditions": {
+        "from_contains": [
+          "genspark.ai"
+        ]
+      }
+    },
+    {
+      "name": "Newsletter » Tradingview",
+      "folder": "Newsletter/Tradingview",
+      "conditions": {
+        "from_contains": [
+          "tradingview.com"
+        ]
+      }
+    },
+    {
+      "name": "Newsletter » Twitch",
+      "folder": "Newsletter/Twitch",
+      "conditions": {
+        "from_contains": [
+          "twitch.tv"
+        ]
+      }
+    },
+    {
+      "name": "Newsletter » K8Slens",
+      "folder": "Newsletter/K8Slens",
+      "conditions": {
+        "from_contains": [
+          "k8slens.dev"
+        ]
+      }
     }
   ]
 }
