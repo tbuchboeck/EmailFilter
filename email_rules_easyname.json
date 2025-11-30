@@ -2030,6 +2030,78 @@
           "gastrosolucionesgt.com"
         ]
       }
+    },
+    {
+      "name": "Newsletter » Info",
+      "folder": "Newsletter/Info",
+      "conditions": {
+        "from_contains": [
+          "info.ecoflow.com"
+        ]
+      }
+    },
+    {
+      "name": "Newsletter » N",
+      "folder": "Newsletter/N",
+      "conditions": {
+        "from_contains": [
+          "n.refurbed.com"
+        ]
+      }
+    },
+    {
+      "name": "Newsletter » Lunas",
+      "folder": "Newsletter/Lunas",
+      "conditions": {
+        "from_contains": [
+          "lunas.de"
+        ]
+      }
+    },
+    {
+      "name": "Contracts » Finanzguru",
+      "folder": "Contracts/Finanzguru",
+      "conditions": {
+        "from_contains": [
+          "finanzguru.de"
+        ]
+      }
+    },
+    {
+      "name": "Newsletter » Naturfreunde",
+      "folder": "Newsletter/Naturfreunde",
+      "conditions": {
+        "from_contains": [
+          "naturfreunde.at"
+        ]
+      }
+    },
+    {
+      "name": "Newsletter » Movilisagt",
+      "folder": "Newsletter/Movilisagt",
+      "conditions": {
+        "from_contains": [
+          "movilisagt.com"
+        ]
+      }
+    },
+    {
+      "name": "Newsletter » Donotreply",
+      "folder": "Newsletter/Donotreply",
+      "conditions": {
+        "from_contains": [
+          "donotreply.oeamtc.at"
+        ]
+      }
+    },
+    {
+      "name": "Streaming » Alerts",
+      "folder": "Streaming/Alerts",
+      "conditions": {
+        "from_contains": [
+          "alerts.spotify.com"
+        ]
+      }
     }
   ]
 }
