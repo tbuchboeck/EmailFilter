@@ -2102,6 +2102,78 @@
           "alerts.spotify.com"
         ]
       }
+    },
+    {
+      "name": "Newsletter » Newsletter",
+      "folder": "Newsletter/Newsletter",
+      "conditions": {
+        "from_contains": [
+          "newsletter.verbund.com"
+        ]
+      }
+    },
+    {
+      "name": "Newsletter » Mail",
+      "folder": "Newsletter/Mail",
+      "conditions": {
+        "from_contains": [
+          "mail.perplexity.ai"
+        ]
+      }
+    },
+    {
+      "name": "Newsletter » Smartrow",
+      "folder": "Newsletter/Smartrow",
+      "conditions": {
+        "from_contains": [
+          "smartrow.fit"
+        ]
+      }
+    },
+    {
+      "name": "Newsletter » Wien-Ticket",
+      "folder": "Newsletter/Wien-Ticket",
+      "conditions": {
+        "from_contains": [
+          "wien-ticket.at"
+        ]
+      }
+    },
+    {
+      "name": "Newsletter » Invest-Strategy-Ai",
+      "folder": "Newsletter/Invest-Strategy-Ai",
+      "conditions": {
+        "from_contains": [
+          "invest-strategy-ai.de"
+        ]
+      }
+    },
+    {
+      "name": "Newsletter » Aeaw",
+      "folder": "Newsletter/Aeaw",
+      "conditions": {
+        "from_contains": [
+          "aeaw.net"
+        ]
+      }
+    },
+    {
+      "name": "Newsletter » Hyperdesign",
+      "folder": "Newsletter/Hyperdesign",
+      "conditions": {
+        "from_contains": [
+          "hyperdesign.in"
+        ]
+      }
+    },
+    {
+      "name": "Newsletter » Bmw",
+      "folder": "Newsletter/Bmw",
+      "conditions": {
+        "from_contains": [
+          "bmw.at"
+        ]
+      }
     }
   ]
 }
