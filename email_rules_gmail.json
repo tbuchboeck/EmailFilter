@@ -251,6 +251,24 @@
           "k8slens.dev"
         ]
       }
+    },
+    {
+      "name": "Newsletter » Ifttt",
+      "folder": "Newsletter/Ifttt",
+      "conditions": {
+        "from_contains": [
+          "ifttt.com"
+        ]
+      }
+    },
+    {
+      "name": "Newsletter » Trello",
+      "folder": "Newsletter/Trello",
+      "conditions": {
+        "from_contains": [
+          "trello.com"
+        ]
+      }
     }
   ]
 }
