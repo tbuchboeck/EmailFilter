@@ -2102,6 +2102,69 @@
           "alerts.spotify.com"
         ]
       }
+    },
+    {
+      "name": "Newsletter » Mail",
+      "folder": "Newsletter/Mail",
+      "conditions": {
+        "from_contains": [
+          "mail.perplexity.ai"
+        ]
+      }
+    },
+    {
+      "name": "Newsletter » Mikron",
+      "folder": "Newsletter/Mikron",
+      "conditions": {
+        "from_contains": [
+          "mikron.in"
+        ]
+      }
+    },
+    {
+      "name": "Finanzen » Mediamarkt",
+      "folder": "Finanzen/Mediamarkt",
+      "conditions": {
+        "from_contains": [
+          "mediamarkt.at"
+        ]
+      }
+    },
+    {
+      "name": "Shopping » Trustedshops",
+      "folder": "Shopping/Trustedshops",
+      "conditions": {
+        "from_contains": [
+          "trustedshops.com"
+        ]
+      }
+    },
+    {
+      "name": "Newsletter » Advanzia",
+      "folder": "Newsletter/Advanzia",
+      "conditions": {
+        "from_contains": [
+          "advanzia.com"
+        ]
+      }
+    },
+    {
+      "name": "Finanzen » Lebensbaum",
+      "folder": "Finanzen/Lebensbaum",
+      "conditions": {
+        "from_contains": [
+          "lebensbaum.de"
+        ]
+      }
+    },
+    {
+      "name": "Newsletter » Status",
+      "folder": "Newsletter/Status",
+      "conditions": {
+        "from_contains": [
+          "status.ravensberger-matratzen.de"
+        ]
+      }
     }
   ]
 }
