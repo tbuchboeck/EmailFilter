@@ -2102,6 +2102,78 @@
           "alerts.spotify.com"
         ]
       }
+    },
+    {
+      "name": "Newsletter » Mikron",
+      "folder": "Newsletter/Mikron",
+      "conditions": {
+        "from_contains": [
+          "mikron.in"
+        ]
+      }
+    },
+    {
+      "name": "Newsletter » Mail",
+      "folder": "Newsletter/Mail",
+      "conditions": {
+        "from_contains": [
+          "mail.perplexity.ai"
+        ]
+      }
+    },
+    {
+      "name": "Newsletter » Wakatime",
+      "folder": "Newsletter/Wakatime",
+      "conditions": {
+        "from_contains": [
+          "wakatime.com"
+        ]
+      }
+    },
+    {
+      "name": "Finanzen » Koro",
+      "folder": "Finanzen/Koro",
+      "conditions": {
+        "from_contains": [
+          "koro.com"
+        ]
+      }
+    },
+    {
+      "name": "Newsletter » Equinestar",
+      "folder": "Newsletter/Equinestar",
+      "conditions": {
+        "from_contains": [
+          "equinestar.net"
+        ]
+      }
+    },
+    {
+      "name": "Finanzen » Mediamarkt",
+      "folder": "Finanzen/Mediamarkt",
+      "conditions": {
+        "from_contains": [
+          "mediamarkt.at"
+        ]
+      }
+    },
+    {
+      "name": "Shopping » Trustedshops",
+      "folder": "Shopping/Trustedshops",
+      "conditions": {
+        "from_contains": [
+          "trustedshops.com"
+        ]
+      }
+    },
+    {
+      "name": "Newsletter » Advanzia",
+      "folder": "Newsletter/Advanzia",
+      "conditions": {
+        "from_contains": [
+          "advanzia.com"
+        ]
+      }
     }
   ]
 }

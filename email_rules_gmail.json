@@ -251,6 +251,51 @@
           "k8slens.dev"
         ]
       }
+    },
+    {
+      "name": "Newsletter » Mail",
+      "folder": "Newsletter/Mail",
+      "conditions": {
+        "from_contains": [
+          "mail.perplexity.ai"
+        ]
+      }
+    },
+    {
+      "name": "Newsletter » Ifttt",
+      "folder": "Newsletter/Ifttt",
+      "conditions": {
+        "from_contains": [
+          "ifttt.com"
+        ]
+      }
+    },
+    {
+      "name": "Newsletter » Trello",
+      "folder": "Newsletter/Trello",
+      "conditions": {
+        "from_contains": [
+          "trello.com"
+        ]
+      }
+    },
+    {
+      "name": "Newsletter » Enpass",
+      "folder": "Newsletter/Enpass",
+      "conditions": {
+        "from_contains": [
+          "enpass.io"
+        ]
+      }
+    },
+    {
+      "name": "Newsletter » Airbnb",
+      "folder": "Newsletter/Airbnb",
+      "conditions": {
+        "from_contains": [
+          "airbnb.com"
+        ]
+      }
     }
   ]
 }
