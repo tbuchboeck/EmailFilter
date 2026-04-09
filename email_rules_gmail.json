@@ -251,6 +251,15 @@
           "k8slens.dev"
         ]
       }
+    },
+    {
+      "name": "Newsletter » Ifttt",
+      "folder": "Newsletter/Ifttt",
+      "conditions": {
+        "from_contains": [
+          "ifttt.com"
+        ]
+      }
     }
   ]
 }
