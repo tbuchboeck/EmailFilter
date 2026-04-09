@@ -2102,6 +2102,60 @@
           "alerts.spotify.com"
         ]
       }
+    },
+    {
+      "name": "Newsletter » Mail",
+      "folder": "Newsletter/Mail",
+      "conditions": {
+        "from_contains": [
+          "mail.perplexity.ai"
+        ]
+      }
+    },
+    {
+      "name": "Newsletter » Advanzia",
+      "folder": "Newsletter/Advanzia",
+      "conditions": {
+        "from_contains": [
+          "advanzia.com"
+        ]
+      }
+    },
+    {
+      "name": "Finanzen » Lebensbaum",
+      "folder": "Finanzen/Lebensbaum",
+      "conditions": {
+        "from_contains": [
+          "lebensbaum.de"
+        ]
+      }
+    },
+    {
+      "name": "Newsletter » Status",
+      "folder": "Newsletter/Status",
+      "conditions": {
+        "from_contains": [
+          "status.ravensberger-matratzen.de"
+        ]
+      }
+    },
+    {
+      "name": "Newsletter » Equinestar",
+      "folder": "Newsletter/Equinestar",
+      "conditions": {
+        "from_contains": [
+          "equinestar.net"
+        ]
+      }
+    },
+    {
+      "name": "Newsletter » Crawvisionsinc",
+      "folder": "Newsletter/Crawvisionsinc",
+      "conditions": {
+        "from_contains": [
+          "crawvisionsinc.net"
+        ]
+      }
     }
   ]
 }
