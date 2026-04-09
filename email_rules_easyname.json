@@ -2102,6 +2102,51 @@
           "alerts.spotify.com"
         ]
       }
+    },
+    {
+      "name": "Newsletter » Mail",
+      "folder": "Newsletter/Mail",
+      "conditions": {
+        "from_contains": [
+          "mail.perplexity.ai"
+        ]
+      }
+    },
+    {
+      "name": "Finanzen » Mediamarkt",
+      "folder": "Finanzen/Mediamarkt",
+      "conditions": {
+        "from_contains": [
+          "mediamarkt.at"
+        ]
+      }
+    },
+    {
+      "name": "Newsletter » Advanzia",
+      "folder": "Newsletter/Advanzia",
+      "conditions": {
+        "from_contains": [
+          "advanzia.com"
+        ]
+      }
+    },
+    {
+      "name": "Newsletter » Crawvisionsinc",
+      "folder": "Newsletter/Crawvisionsinc",
+      "conditions": {
+        "from_contains": [
+          "crawvisionsinc.net"
+        ]
+      }
+    },
+    {
+      "name": "Newsletter » Bmw",
+      "folder": "Newsletter/Bmw",
+      "conditions": {
+        "from_contains": [
+          "bmw.at"
+        ]
+      }
     }
   ]
 }
